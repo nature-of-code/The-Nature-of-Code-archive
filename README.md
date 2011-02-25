@@ -1,6 +1,6 @@
 # The Nature of Code
 
-![Screenshot](http://www.shiffman.net/images/noc/1.jpg) ![Screenshot](http://www.shiffman.net/images/noc/2.jpg) ![Screenshot](http://www.shiffman.net/images/noc/3.jpg) ![Screenshot](http://www.shiffman.net/images/noc/4.jpg) ![Screenshot](http://www.shiffman.net/images/noc/5.jpg) ![Screenshot](http://www.shiffman.net/images/noc/6.jpg) ![Screenshot](http://www.shiffman.net/images/noc/7.jpg) ![Screenshot](http://www.shiffman.net/images/noc/8.jpg)
+![Screenshot](http://www.shiffman.net/images/noc/1.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/2.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/3.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/4.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/5.jpg) ![Screenshot](http://www.shiffman.net/images/noc/6.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/7.jpg)  ![Screenshot](http://www.shiffman.net/images/noc/8.jpg)
 
 # What is this?
 
@@ -8,8 +8,8 @@ This repository contains all of the examples for my ITP course and upcoming book
 
 Relevant links:
 
-[https://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project](Kickstarter project)
+Kickstarter: [https://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project]
 
-[http://www.shiffman.net/teaching/nature/](Online tutorials)
+Online tutorials: [http://www.shiffman.net/teaching/nature/]
 
-[http://itp.nyu.edu/varwiki/Syllabus/Nature-of-Code-S11](2011 Course Syllabus)
+2011: Syllabus: [http://itp.nyu.edu/varwiki/Syllabus/Nature-of-Code-S11]
