@@ -8,6 +8,8 @@ This repository contains all of the examples for my ITP course and upcoming book
 
 Relevant links:
 
-*[Kickstarter](https://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project)
-*[Online tutorials](http://www.shiffman.net/teaching/nature/)
-*[2011 Syllabus](http://itp.nyu.edu/varwiki/Syllabus/Nature-of-Code-S11)
+[Kickstarter](https://www.kickstarter.com/projects/shiffman/the-nature-of-code-book-project)
+
+[Online tutorials](http://www.shiffman.net/teaching/nature/)
+
+[2011 Syllabus](http://itp.nyu.edu/varwiki/Syllabus/Nature-of-Code-S11)
