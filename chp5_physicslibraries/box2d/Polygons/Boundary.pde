@@ -1,6 +1,6 @@
 // The Nature of Code
 // <http://www.shiffman.net/teaching/nature>
-// Spring 2010
+// Spring 2011
 // PBox2D example
 
 // A fixed boundary class
@@ -12,7 +12,6 @@ class Boundary {
   float y;
   float w;
   float h;
-  
   // But we also have to make a body for box2d to know about it
   Body b;
 
@@ -21,11 +20,6 @@ class Boundary {
     y = y_;
     w = w_;
     h = h_;
-
-    // Create the body
-    BodyDef bd = new BodyDef();
-    bd.position.set(box2d.coordPixelsToWorld(center));
-    b = box2d.createBody(bd);
 
     // Figure out the box2d coordinates
     float box2dW = box2d.scalarPixelsToWorld(w/2);
@@ -36,8 +30,12 @@ class Boundary {
     PolygonDef sd = new PolygonDef();
     sd.setAsBox(box2dW, box2dH);
     sd.density = 0;    // No density means it won't move!
-    sd.friction = 0.3;
+    sd.friction = 0.3f;
 
+    // Create the body
+    BodyDef bd = new BodyDef();
+    bd.position.set(box2d.coordPixelsToWorld(center));
+    b = box2d.createBody(bd);
     b.createShape(sd);
   }
 

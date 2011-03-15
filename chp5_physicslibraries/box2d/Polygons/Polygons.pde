@@ -16,7 +16,7 @@ PBox2D box2d;
 // A list we'll use to track fixed objects
 ArrayList<Boundary> boundaries;
 // A list for all of our rectangles
-ArrayList<Box> boxes;
+ArrayList<Lollipop> pops;
 
 void setup() {
   size(400,300);
@@ -29,12 +29,14 @@ void setup() {
   box2d.setGravity(0, -20);
 
   // Create ArrayLists	
-  boxes = new ArrayList<Box>();
+  pops = new ArrayList<Lollipop>();
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
   boundaries.add(new Boundary(width/4,height-5,width/2-50,10));
   boundaries.add(new Boundary(3*width/4,height-50,width/2-50,10));
+  boundaries.add(new Boundary(width-5,height/2,10,height));
+  boundaries.add(new Boundary(5,height/2,10,height));
 }
 
 void draw() {
@@ -43,32 +45,30 @@ void draw() {
   // We must always step through time!
   box2d.step();
 
-  // Boxes fall from the top every so often
-  if (random(1) < 0.2) {
-    Box p = new Box(width/2,30);
-    boxes.add(p);
-  }
-
   // Display all the boundaries
   for (Boundary wall: boundaries) {
     wall.display();
   }
 
-  // Display all the boxes
-  for (Box b: boxes) {
-    b.display();
+  // Display all the people
+  for (Lollipop p: pops) {
+    p.display();
   }
 
-  // Boxes that leave the screen, we delete them
+  // people that leave the screen, we delete them
   // (note they have to be deleted from both the box2d world and our list
-  for (int i = boxes.size()-1; i >= 0; i--) {
-    Box b = boxes.get(i);
-    if (b.done()) {
-      boxes.remove(i);
+  for (int i = pops.size()-1; i >= 0; i--) {
+    Lollipop p = pops.get(i);
+    if (p.done()) {
+      pops.remove(i);
     }
   }
 }
 
+void mousePressed() {
+  Lollipop p = new Lollipop(mouseX,mouseY);
+  pops.add(p);
+}
 
 
 

@@ -7,7 +7,7 @@ class Particle extends VerletParticle2D {
     super (x,y);
     r = 4;
     physics.addParticle(this);
-    physics.addBehavior(new AttractionBehavior(this, 40, -1f));
+    physics.addBehavior(new AttractionBehavior(this, r*4, -5f));
   }
 
   void display () {
