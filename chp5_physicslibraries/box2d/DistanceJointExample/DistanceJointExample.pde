@@ -18,11 +18,12 @@ import org.jbox2d.dynamics.contacts.*;
 // A reference to our box2d world
 PBox2D box2d;
 
-// An object to describe a Bridget (a list of particles with joint connections)
-Bridge bridge;
+// A list we'll use to track fixed objects
+ArrayList<Boundary> boundaries;
+
 
 // A list for all of our rectangles
-ArrayList<Box> boxes;
+ArrayList<Pair> pairs;
 
 void setup() {
   size(400,300);
@@ -32,12 +33,14 @@ void setup() {
   box2d = new PBox2D(this);
   box2d.createWorld();
   
-  
-  // Make the bridge
-  bridge = new Bridge(width,40);
-  
   // Create ArrayLists	
-  boxes = new ArrayList<Box>();
+  pairs = new ArrayList<Pair>();
+  
+  boundaries = new ArrayList<Boundary>();
+
+  // Add a bunch of fixed boundaries
+  boundaries.add(new Boundary(width/4,height-5,width/2-50,10));
+  boundaries.add(new Boundary(3*width/4,height-50,width/2-50,10));
 
 }
 
@@ -47,37 +50,26 @@ void draw() {
   // We must always step through time!
   box2d.step();
 
-
   // When the mouse is clicked, add a new Box object
-  if (mousePressed) {
-    Box p = new Box(mouseX,mouseY);
-    boxes.add(p);
-  }
 
   // Display all the boxes
-  for (Box b: boxes) {
-    b.display();
+  for (Pair p: pairs) {
+    p.display();
   }
 
-  // Boxes that leave the screen, we delete them
-  // (note they have to be deleted from both the box2d world and our list
-  for (int i = boxes.size()-1; i >= 0; i--) {
-    Box b = boxes.get(i);
-    if (b.done()) {
-      boxes.remove(i);
-    }
+  // Display all the boundaries
+  for (Boundary wall: boundaries) {
+    wall.display();
   }
-
-  // Draw the windmill
-  bridge.display();
   
-  
-   fill(0);
-  text("Click mouse to add boxes.",10,290);
-  
- 
+  fill(0);
+  text("Click mouse to add connected particles.",10,20);
 }
 
+void mousePressed() {
+   Pair p = new Pair(mouseX,mouseY);
+   pairs.add(p);
+}
 
 
 

@@ -20,7 +20,7 @@ Mover[] movers = new Mover[25];
 Attractor a;
 
 void setup() {
-  size(400,400);
+  size(400,200);
   smooth();
 
   box2d = new PBox2D(this);

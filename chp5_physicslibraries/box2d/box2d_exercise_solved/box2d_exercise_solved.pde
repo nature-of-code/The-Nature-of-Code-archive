@@ -1,4 +1,7 @@
 import pbox2d.*;
+import org.jbox2d.collision.shapes.*;
+import org.jbox2d.common.*;
+import org.jbox2d.dynamics.*;
 
 // A list for all of our rectangles
 ArrayList<Box> boxes;
@@ -20,6 +23,7 @@ void draw() {
   background(255);
   
   // We must always step through time!
+  if (mousePressed)
   box2d.step();    
 
 

@@ -55,9 +55,9 @@ class Spring {
     // And that's the target
     md.target.set(mp);
     // Some stuff about how strong and bouncy the spring should be
-    md.maxForce = 1000.0f * box.body.m_mass;
-    md.frequencyHz = 5.0f;
-    md.dampingRatio = 0.9f;
+    md.maxForce = 1000.0 * box.body.m_mass;
+    md.frequencyHz = 5.0;
+    md.dampingRatio = 0.9;
 
     // Wake up body!
     box.body.wakeUp();

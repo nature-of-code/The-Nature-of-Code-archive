@@ -36,7 +36,7 @@ class Lollipop  {
     return false;
   }
 
-  // Drawing the box
+  // Drawing the lollipop
   void display() {
     // We look at each body and get its screen position
     Vec2 pos = box2d.getBodyPixelCoord(body);
@@ -56,6 +56,12 @@ class Lollipop  {
 
   // This function adds the rectangle to the box2d world
   void makeBody(Vec2 center, float w_, float h_) {
+    
+    // Define the body and make it from the shape
+    BodyDef bd = new BodyDef();
+    bd.position.set(box2d.coordPixelsToWorld(center));
+    body = box2d.createBody(bd);
+
 
     // Define a polygon (this is what we use for a rectangle)
     PolygonDef sd = new PolygonDef();
@@ -79,11 +85,6 @@ class Lollipop  {
     cd.restitution = 0.5f;
     
 
-    // Define the body and make it from the shape
-    BodyDef bd = new BodyDef();
-    bd.position.set(box2d.coordPixelsToWorld(center));
-
-    body = box2d.createBody(bd);
     // Attach both shapes!
     body.createShape(sd);
     body.createShape(cd);

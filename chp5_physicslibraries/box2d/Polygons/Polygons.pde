@@ -16,7 +16,7 @@ PBox2D box2d;
 // A list we'll use to track fixed objects
 ArrayList<Boundary> boundaries;
 // A list for all of our rectangles
-ArrayList<Lollipop> pops;
+ArrayList<CustomShape> polygons;
 
 void setup() {
   size(400,300);
@@ -29,7 +29,7 @@ void setup() {
   box2d.setGravity(0, -20);
 
   // Create ArrayLists	
-  pops = new ArrayList<Lollipop>();
+  polygons = new ArrayList<CustomShape>();
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
@@ -51,23 +51,23 @@ void draw() {
   }
 
   // Display all the people
-  for (Lollipop p: pops) {
-    p.display();
+  for (CustomShape cs: polygons) {
+    cs.display();
   }
 
   // people that leave the screen, we delete them
   // (note they have to be deleted from both the box2d world and our list
-  for (int i = pops.size()-1; i >= 0; i--) {
-    Lollipop p = pops.get(i);
-    if (p.done()) {
-      pops.remove(i);
+  for (int i = polygons.size()-1; i >= 0; i--) {
+    CustomShape cs = polygons.get(i);
+    if (cs.done()) {
+      polygons.remove(i);
     }
   }
 }
 
 void mousePressed() {
-  Lollipop p = new Lollipop(mouseX,mouseY);
-  pops.add(p);
+  CustomShape cs = new CustomShape(mouseX,mouseY);
+  polygons.add(cs);
 }
 
 

@@ -41,10 +41,10 @@ class Attractor {
   Vec2 attract(Mover m) {
     float G = 100; // Strength of force
     // clone() makes us a copy
-    Vec2 force = body.getMemberWorldCenter().clone();    
-    Vec2 moverLoc = m.body.getMemberWorldCenter();
+    Vec2 pos = body.getMemberWorldCenter();    
+    Vec2 moverPos = m.body.getMemberWorldCenter();
     // Vector pointing from mover to attractor
-    force.subLocal(moverLoc);
+    Vec2 force = pos.sub(moverPos);
     float distance = force.length();
     // Keep force within bounds
     distance = constrain(distance,1,5);

@@ -13,8 +13,8 @@ class Particle {
   
   color col;
 
-  Particle(float x, float y, float r_, boolean fixed) {
-    r = r_;
+  Particle(float x, float y) {
+    r = 8;
     
     // Define a body
     BodyDef bd = new BodyDef();
@@ -25,8 +25,7 @@ class Particle {
     // Make the body's shape a circle
     CircleDef cd = new CircleDef();
     cd.radius = box2d.scalarPixelsToWorld(r);
-    if (fixed) cd.density = 0;
-    else cd.density = 1.0;
+    cd.density = 1.0;
     cd.friction = 0.01;
     cd.restitution = 0.3; // Restitution is bounciness
     body.createShape(cd);
@@ -54,7 +53,6 @@ class Particle {
     return false;
   }
 
-  // 
   void display() {
     // We look at each body and get its screen position
     Vec2 pos = box2d.getBodyPixelCoord(body);
