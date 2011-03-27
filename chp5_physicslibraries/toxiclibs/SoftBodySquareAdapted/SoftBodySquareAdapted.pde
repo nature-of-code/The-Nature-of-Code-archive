@@ -1,11 +1,18 @@
 /**
- * <p>A soft pendulum (series of connected springs)<br/>
- * <a href="http://www.shiffman.net/teaching/nature/toxiclibs/">The Nature of Code</a><br/>
- * Spring 2010</p>
+ * This example is adapted from Karsten Schmidt's SoftBodySquare example
+ * Daniel Shiffman, 2011
+ * The Nature of Code book
+ */
+
+/* <p>Softbody square demo is showing how to create a 2D square mesh out of
+ * verlet particles and make it stable enough to avoid total structural
+ * deformation by including an inner skeleton.</p>
+ *
+ * <p>Usage: move mouse to drag/deform the square</p>
  */
 
 /* 
- * Copyright (c) 2010 Daniel Schiffmann
+ * Copyright (c) 2008-2009 Karsten Schmidt
  * 
  * This demo & library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,50 +30,34 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-import toxi.physics2d.*;
-import toxi.physics2d.behaviors.*;
-import toxi.geom.*;
 
-// Reference to physics "world" (2D)
+
+import toxi.physics2d.behaviors.*;
+import toxi.physics2d.*;
+
+import toxi.geom.*;
+import toxi.math.*;
+
 VerletPhysics2D physics;
 
-// Our "Chain" object
-Chain chain;
+Blanket b;
+
 
 void setup() {
   size(400,300);
   smooth();
-
-  // Initialize the physics world
   physics=new VerletPhysics2D();
   physics.addBehavior(new GravityBehavior(new Vec2D(0,0.1)));
-  physics.setWorldBounds(new Rect(0,0,width,height));
 
-  // Initialize the chain
-  chain = new Chain(200,20,12,0.2);
+  b = new Blanket();
 }
 
 void draw() {
+
   background(255);
 
-  // Update physics
-  if (mousePressed) {
-    physics.update();
-  }
-  // Update chain's tail according to mouse location 
-  chain.updateTail(mouseX,mouseY);
-  // Display chain
-  chain.display();
-}
+  physics.update();
 
-void mousePressed() {
-  // Check to see if we're grabbing the chain
-  chain.contains(mouseX,mouseY);
-}
-
-void mouseReleased() {
-  // Release the chain
-  chain.release();
+  b.display();
 }
 

@@ -81,7 +81,7 @@ void draw() {
     p2.x = mouseX;
     p2.y = mouseY;
     p2.unlock();
-  }
+  } 
 }
 
 
