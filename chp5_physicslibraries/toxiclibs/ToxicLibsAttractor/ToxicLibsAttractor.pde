@@ -24,9 +24,7 @@ void setup () {
 
 void draw () {
   background (255);  
-  if (mousePressed) {
   physics.update ();
-  }
 
   attractor.display();
   for (Particle p: particles) {
