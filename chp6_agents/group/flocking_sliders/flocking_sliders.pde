@@ -26,7 +26,7 @@ void setup() {
   flock = new Flock();
   // Add an initial set of boids into the system
   for (int i = 0; i < 1; i++) {
-    flock.addBoid(new Boid());
+    flock.addBoid(new Boid(width/2,height/2));
   }
   smooth();
 }
