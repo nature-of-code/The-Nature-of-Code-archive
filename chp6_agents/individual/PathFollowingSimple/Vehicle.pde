@@ -1,6 +1,6 @@
 // Path Following
 // Daniel Shiffman <http://www.shiffman.net>
-// The Nature of Code
+// The Nature of Code, Spring 2009
 
 // Vehicle class
 
@@ -42,72 +42,45 @@ class Vehicle {
     predict.mult(25);
     PVector predictLoc = PVector.add(location, predict);
 
-    // Now we must find the normal to the path from the predicted location
-    // We look at the normal for each line segment and pick out the closest one
+    // Look at the line segment
+    PVector a = p.start;
+    PVector b = p.end;
 
-    PVector normal = null;
-    PVector target = null;
-    float worldRecord = 1000000;  // Start with a very high record distance that can easily be beaten
+    // Get the normal point to that line
+    PVector normalPoint = getNormalPoint(predictLoc, a, b);
 
-    // Loop through all points of the path
-    for (int i = 0; i < p.points.size()-1; i++) {
+    // Find target point a little further ahead of normal
+    PVector dir = PVector.sub(b, a);
+    dir.normalize();
+    dir.mult(10);  // This could be based on velocity instead of just an arbitrary 10 pixels
+    PVector target = PVector.add(normalPoint, dir);
 
-      // Look at a line segment
-      PVector a = p.points.get(i);
-      PVector b = p.points.get(i+1);
-
-      // Get the normal point to that line
-      PVector normalPoint = getNormalPoint(predictLoc, a, b);
-      // This only works because we know our path goes from left to right
-      // We could have a more sophisticated test to tell if the point is in the line segment or not
-      if (normalPoint.x < a.x || normalPoint.x > b.x) {
-        // This is something of a hacky solution, but if it's not within the line segment
-        // consider the normal to just be the end of the line segment (point b)
-        normalPoint = b.get();
-      }
-
-      // How far away are we from the path?
-      float distance = PVector.dist(predictLoc, normalPoint);
-      // Did we beat the record and find the closest line segment?
-      if (distance < worldRecord) {
-        worldRecord = distance;
-        // If so the target we want to steer towards is the normal
-        normal = normalPoint;
-
-        // Look at the direction of the line segment so we can seek a little bit ahead of the normal
-        PVector dir = PVector.sub(b, a);
-        dir.normalize();
-        // This is an oversimplification
-        // Should be based on distance to path & velocity
-        dir.mult(10);
-        target = normalPoint.get();
-        target.add(dir);
-      }
-    }
-
+    // How far away are we from the path?
+    float distance = PVector.dist(predictLoc, normalPoint);
     // Only if the distance is greater than the path's radius do we bother to steer
-    if (worldRecord > p.radius) {
+    if (distance > p.radius) {
       seek(target);
     }
 
 
     // Draw the debugging stuff
     if (debug) {
-      // Draw predicted future location
-      stroke(0);
       fill(0);
+      stroke(0);
       line(location.x, location.y, predictLoc.x, predictLoc.y);
       ellipse(predictLoc.x, predictLoc.y, 4, 4);
 
       // Draw normal location
-      stroke(0);
       fill(0);
-      ellipse(normal.x, normal.y, 4, 4);
+      noStroke();
+      line(predictLoc.x, predictLoc.y, target.x, target.y);
+      ellipse(target.x, target.y, 4, 4);
+      stroke(0);
       // Draw actual target (red if steering towards it)
       line(predictLoc.x, predictLoc.y, target.x, target.y);
-      if (worldRecord > p.radius) fill(255, 0, 0);
+      if (distance > p.radius) fill(255, 0, 0);
       noStroke();
-      ellipse(target.x, target.y, 8, 8);
+      ellipse(target.x+dir.x, target.y+dir.y, 8, 8);
     }
   }
 

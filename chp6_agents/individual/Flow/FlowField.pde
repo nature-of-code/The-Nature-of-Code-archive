@@ -25,7 +25,6 @@ class FlowField {
     for (int i = 0; i < cols; i++) {
       float yoff = 0;
       for (int j = 0; j < rows; j++) {
-        // Use perlin noise to get an angle between 0 and 2 PI
         float theta = map(noise(xoff,yoff),0,1,0,TWO_PI);
         // Polar to cartesian coordinate transformation to get x and y components of the vector
         field[i][j] = new PVector(cos(theta),sin(theta));
@@ -51,7 +50,7 @@ class FlowField {
     float arrowsize = 4;
     // Translate to location to render vector
     translate(x,y);
-    stroke(100,100);
+    stroke(175);
     // Call vector heading function to get direction (note that pointing up is a heading of 0) and rotate
     rotate(v.heading2D());
     // Calculate length of vector & scale it to be bigger or smaller if necessary
@@ -64,9 +63,9 @@ class FlowField {
   }
 
   PVector lookup(PVector lookup) {
-    int i = (int) constrain(lookup.x/resolution,0,cols-1);
-    int j = (int) constrain(lookup.y/resolution,0,rows-1);
-    return field[i][j].get();
+    int column = int(constrain(lookup.x/resolution,0,cols-1));
+    int row = int(constrain(lookup.y/resolution,0,rows-1));
+    return field[column][row].get();
   }
 
 

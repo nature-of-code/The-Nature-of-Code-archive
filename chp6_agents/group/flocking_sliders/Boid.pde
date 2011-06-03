@@ -69,10 +69,6 @@ class Boid {
   PVector seek(PVector target) {
     PVector desired = PVector.sub(target,loc);  // A vector pointing from the location to the target
 
-    // If the magnitude of desired equals 0, skip out of here
-    // (We could optimize this to check if x and y are 0 to avoid mag() square root
-    if (desired.mag() == 0) return new PVector(0,0);
-
     // Normalize desired and scale to maximum speed
     desired.normalize();
     desired.mult(maxspeed);
@@ -110,8 +106,8 @@ class Boid {
   // Separation
   // Method checks for nearby boids and steers away
   PVector separate (ArrayList<Boid> boids) {
-    float desiredseparation = 25.0f;
-    PVector steer = new PVector(0,0,0);
+    float desiredseparation = 25.0;
+    PVector steer = new PVector(0,0);
     int count = 0;
     // For every boid in the system, check if it's too close
     for (Boid other : boids) {
@@ -129,10 +125,6 @@ class Boid {
     // Average -- divide by how many
     if (count > 0) {
       steer.div((float)count);
-    }
-
-    // As long as the vector is greater than 0
-    if (steer.mag() > 0) {
       // Implement Reynolds: Steering = Desired - Velocity
       steer.normalize();
       steer.mult(maxspeed);
@@ -146,7 +138,7 @@ class Boid {
   // For every nearby boid in the system, calculate the average velocity
   PVector align (ArrayList<Boid> boids) {
     float neighbordist = 50.0;
-    PVector steer = new PVector(0,0,0);
+    PVector steer = new PVector();
     int count = 0;
     for (Boid other : boids) {
       float d = PVector.dist(loc,other.loc);
@@ -157,10 +149,6 @@ class Boid {
     }
     if (count > 0) {
       steer.div((float)count);
-    }
-
-    // As long as the vector is greater than 0
-    if (steer.mag() > 0) {
       // Implement Reynolds: Steering = Desired - Velocity
       steer.normalize();
       steer.mult(maxspeed);

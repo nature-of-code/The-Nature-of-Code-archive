@@ -13,7 +13,7 @@ boolean debug = true;
 
 void setup() {
   size(200,200);
-  wanderer = new Vehicle(new PVector(width/2,height/2),3.0,0.1);
+  wanderer = new Vehicle(width/2,height/2);
   smooth();
 }
 

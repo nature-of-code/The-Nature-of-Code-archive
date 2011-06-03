@@ -1,4 +1,3 @@
-import processing.opengl.*;
 
 // Flocking
 // Daniel Shiffman <http://www.shiffman.net>
@@ -9,9 +8,10 @@ import processing.opengl.*;
 
 // Click mouse to add boids into the system
 
+import processing.opengl.*;
+
 
 Flock flock;
-int scl;
 PVector center;
 
 boolean showvalues = true;
@@ -25,7 +25,7 @@ void setup() {
   colorMode(RGB,255,255,255,100);
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 120; i++) {
     flock.addBoid(new Boid(width/2,height/2));
   }
   smooth();

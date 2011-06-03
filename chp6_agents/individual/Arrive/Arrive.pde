@@ -9,34 +9,27 @@
 // One vehicle "arrives"
 // See: http://www.red3d.com/cwr/
 
-Vehicle seeker;
-Vehicle arriver;
+Vehicle v;
 
 void setup() {
-  size(200,200);
-  seeker = new Vehicle(width/2,height/2);
-  arriver = new Vehicle(width/2,height/2);
+  size(200, 200);
+  v = new Vehicle(width/2, height/2);
   smooth();
 }
 
 void draw() {
   background(255);
-  
+
+  PVector mouse = new PVector(mouseX, mouseY);
+
   // Draw an ellipse at the mouse location
-  int mx = mouseX;
-  int my = mouseY;
   fill(175);
   stroke(0);
-  ellipse(mx,my,30,30);
-  
-  // Call the appropriate steering behaviors for our agents
-  seeker.seek(new PVector(mx,my));
-  seeker.update();
-  seeker.display();
-  
-  arriver.arrive(new PVector(mx,my));
-  arriver.update();
-  arriver.display();
-}
+  ellipse(mouse.x, mouse.y, 30, 30);
 
+  // Call the appropriate steering behaviors for our agents
+  v.arrive(mouse);
+  v.update();
+  v.display();
+}
 

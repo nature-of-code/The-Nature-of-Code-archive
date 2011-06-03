@@ -1,79 +1,48 @@
 // Path Following
 // Daniel Shiffman <http://www.shiffman.net>
-// The Nature of Code, Spring 2009
+// The Nature of Code
 
 class Path {
 
   // A Path is an arraylist of points (PVector objects)
-  ArrayList points;
+  ArrayList<PVector> points;
   // A path has a radius, i.e how far is it ok for the boid to wander off
   float radius;
 
   Path() {
     // Arbitrary radius of 20
     radius = 20;
-    points = new ArrayList();
+    points = new ArrayList<PVector>();
   }
 
   // Add a point to the path
   void addPoint(float x, float y) {
-    PVector point = new PVector(x,y);
+    PVector point = new PVector(x, y);
     points.add(point);
   }
 
   // Draw the path
   void display() {
-
-    // Draw the radius as thick lines and circles
-    if (debug) {
-      // Draw end points
-      for (int i = 0; i < points.size(); i++) {
-        PVector point = (PVector) points.get(i);
-        fill(175);
-        noStroke();
-        ellipse(point.x,point.y,radius*2,radius*2);
-      }
-
-      // Draw Polygon around path
-      for (int i = 0; i < points.size()-1; i++) {
-        PVector start = (PVector) points.get(i);
-        PVector end = (PVector) points.get(i+1);
-        PVector line = PVector.sub(end,start);
-        PVector normal = new PVector(line.y,-line.x);
-        normal.normalize();
-        normal.mult(radius);
-
-        // Polygon has four vertices
-        PVector a = PVector.add(start, normal);
-        PVector b = PVector.add(end, normal);
-        PVector c = PVector.sub(end, normal);
-        PVector d = PVector.sub(start, normal);
-
-        fill(175);
-        noStroke();
-        beginShape();
-        vertex(a.x,a.y);
-        vertex(b.x,b.y);
-        vertex(c.x,c.y);
-        vertex(d.x,d.y);
-        endShape();
-      }
-    }
-
-    // Draw Regular Line
-    stroke(0);
+    // Draw thick line for radius
+    stroke(175);
+    strokeWeight(radius*2);
     noFill();
     beginShape();
-    for (int i = 0; i < points.size(); i++) {
-      PVector loc = (PVector) points.get(i);
-      vertex(loc.x,loc.y);
+    for (PVector v : points) {
+      vertex(v.x, v.y);
     }
     endShape();
-
+    // Draw thin line for center of path
+    stroke(0);
+    strokeWeight(1);
+    noFill();
+    beginShape();
+    for (PVector v : points) {
+      vertex(v.x, v.y);
+    }
+    endShape();
   }
-
 }
-
 
 
 

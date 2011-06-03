@@ -1,6 +1,6 @@
 // Flow Field Following
 // Daniel Shiffman <http://www.shiffman.net>
-// The Nature of Code, Spring 2011
+// The Nature of Code
 
 // Via Reynolds: http://www.red3d.com/cwr/steer/FlowFollow.html
 
@@ -36,7 +36,7 @@ void draw() {
 
   // Instructions
   fill(0);
-  text("Hit space bar to toggle debugging lines.\nClick the mouse to generate a new path.",10,height-30);
+  text("Hit space bar to toggle debugging lines.\nClick the mouse to generate a new flow field.",10,height-30);
 
 }
 

@@ -1,6 +1,6 @@
 // Flocking
 // Daniel Shiffman <http://www.shiffman.net>
-// The Nature of Code, Spring 2009
+// The Nature of Code
 
 // Boid class
 // Methods for Separation, Cohesion, Alignment added
@@ -9,20 +9,19 @@ class Boid {
 
   // We need to keep track of a Body and a width and height
   Body body;
-  float r;
+  float w;
+  float h;
   
   float maxforce;    // Maximum steering force
   float maxspeed;    // Maximum speed
 
   Boid(PVector loc) {
-    r = 8;
+    w = 12;
+    h = 12;
     // Add the box to the box2d world
-    makeBody(new Vec2(loc.x,loc.y),r,new Vec2(0,0),0);
-    
-    // These values are box2d world units
-    // maxspeed does not actually limit the speed, but is used for desired speed
-    maxspeed = 50;
-    maxforce = 20;
+    makeBody(new Vec2(loc.x,loc.y),w,h,new Vec2(0,0),0);
+    maxspeed = 20;
+    maxforce = 10;
   }
   
   // This function removes the particle from the box2d world
@@ -42,11 +41,10 @@ class Boid {
     Vec2 ali = align(boids);      // Alignment
     Vec2 coh = cohesion(boids);   // Cohesion
     // Arbitrarily weight these forces
-    sep.mulLocal(2.5);
+    sep.mulLocal(1.5);
     ali.mulLocal(1);
     coh.mulLocal(1);
-    
-    // Apply the forces to the Box2D body
+    // Add the force vectors to acceleration
     Vec2 loc = body.getMemberWorldCenter();
     body.applyForce(sep,loc);
     body.applyForce(ali,loc);
@@ -94,11 +92,9 @@ class Boid {
     translate(pos.x,pos.y);
     rotate(-a);
     fill(175);
-    stroke(0);
     strokeWeight(2);
-    ellipse(0,0,r*2,r*2);
-    strokeWeight(1);
-    line(0,0,r,0);
+    stroke(0);
+    rect(0,0,w,h);
     popMatrix();
   }
 
@@ -107,29 +103,25 @@ class Boid {
     Vec2 loc = box2d.getBodyPixelCoord(body); 
     Vec2 vel = body.getLinearVelocity();
     float a = body.getAngularVelocity();
-    
-    // This is something of a wacky solution.  If they are offscreen
-    // destroy them and recreate them on the other side
-    // Keep velocity and angular velocity
-    if (loc.x < -r*2) {
+    if (loc.x < -w) {
        killBody();
-       makeBody(new Vec2(width+r*2,loc.y),r,vel,a);
-    } else if (loc.y < -r*2) {
+       makeBody(new Vec2(width+w,loc.y),w,h,vel,a);
+    } else if (loc.y < -w) {
        killBody();
-       makeBody(new Vec2(loc.x,height+r*2),r,vel,a);
-    } else if (loc.x > width+r*2) {
+       makeBody(new Vec2(loc.x,height+w),w,h,vel,a);
+    } else if (loc.x > width+w) {
        killBody();
-       makeBody(new Vec2(-r*2,loc.y),r,vel,a);
-    } else if (loc.y > height+r*2) {
+       makeBody(new Vec2(-w,loc.y),w,h,vel,a);
+    } else if (loc.y > height+w) {
        killBody();
-       makeBody(new Vec2(loc.x,-r*2),r,vel,a);  
+       makeBody(new Vec2(loc.x,-w),w,h,vel,a);  
     }
   }
 
   // Separation
   // Method checks for nearby boids and steers away
   Vec2 separate (ArrayList<Boid> boids) {
-    float desiredseparation = box2d.scalarPixelsToWorld(25);
+    float desiredseparation = box2d.scalarPixelsToWorld(30);
     
     Vec2 steer = new Vec2(0,0);
     int count = 0;
@@ -229,27 +221,29 @@ class Boid {
   }
   
   // This function adds the rectangle to the box2d world
-  void makeBody(Vec2 center, float r, Vec2 vel, float a) {
+  void makeBody(Vec2 center, float w_, float h_, Vec2 vel, float avel) {
 
     // Define a polygon (this is what we use for a rectangle)
-    CircleDef cd = new CircleDef();
-    cd.radius = box2d.scalarPixelsToWorld(r);
+    PolygonDef sd = new PolygonDef();
+    float box2dW = box2d.scalarPixelsToWorld(w_/2);
+    float box2dH = box2d.scalarPixelsToWorld(h_/2);
+    sd.setAsBox(box2dW, box2dH);
 
     // Parameters that affect physics
-    cd.density = 1.0;
-    cd.friction = 0.3;
-    cd.restitution = 0.5;
+    sd.density = 1.0;
+    sd.friction = 0.3;
+    sd.restitution = 0.5;
 
     // Define the body and make it from the shape
     BodyDef bd = new BodyDef();
     bd.position.set(box2d.coordPixelsToWorld(center));
 
     body = box2d.createBody(bd);
-    body.createShape(cd);
+    body.createShape(sd);
     body.setMassFromShapes();
     
     body.setLinearVelocity(vel);
-    body.setAngularVelocity(a);
+    body.setAngularVelocity(avel);
 
   }
   

@@ -4,6 +4,8 @@
 // The "Vehicle" class
 
 class Vehicle {
+  
+  ArrayList<PVector> history = new ArrayList<PVector>();
 
   PVector location;
   PVector velocity;
@@ -30,6 +32,11 @@ class Vehicle {
     location.add(velocity);
     // Reset accelerationelertion to 0 each cycle
     acceleration.mult(0);
+    
+    history.add(location.get());
+    if (history.size() > 100) {
+      history.remove(0);
+    }
   }
 
   void applyForce(PVector force) {
@@ -45,44 +52,38 @@ class Vehicle {
     // Normalize desired and scale to maximum speed
     desired.normalize();
     desired.mult(maxspeed);
-    // Steering = Desired minus Velocity
+    // Steering = Desired minus velocity
     PVector steer = PVector.sub(desired,velocity);
     steer.limit(maxforce);  // Limit to maximum steering force
     
-    applyForce(steer);
-  }
-  
-  // A method that calculates a steering force towards a target, slowing down as target approaches
-  // STEER = DESIRED MINUS VELOCITY
-  void arrive(PVector target) {
-    PVector desired = PVector.sub(target,location);  // A vector pointing from the location to the target
-    float d = desired.mag();
-    
-    // Normalize desired and scale with arbitrary damping within 100 pixels
-    desired.normalize();
-    if (d < 100) desired.mult(maxspeed*(d/100));
-    else desired.mult(maxspeed);
-
-    // Steering = Desired minus Velocity
-    PVector steer = PVector.sub(desired,velocity);
-    steer.limit(maxforce);  // Limit to maximum steering force
     applyForce(steer);
   }
     
   void display() {
+    
+    beginShape();
+    stroke(0);
+    noFill();
+    for(PVector v: history) {
+      vertex(v.x,v.y);
+    }
+    endShape();
+    
     // Draw a triangle rotated in the direction of velocity
-    float theta = velocity.heading2D() + radians(90);
+    float theta = velocity.heading2D() + PI/2;
     fill(175);
     stroke(0);
     pushMatrix();
     translate(location.x,location.y);
     rotate(theta);
-    beginShape(TRIANGLES);
+    beginShape();
     vertex(0, -r*2);
     vertex(-r, r*2);
     vertex(r, r*2);
-    endShape();
+    endShape(CLOSE);
     popMatrix();
+    
+    
   }
 }
 

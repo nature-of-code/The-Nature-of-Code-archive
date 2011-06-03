@@ -35,7 +35,7 @@ void draw() {
 
   for (Vehicle v : vehicles) {
     // Path following and separation are worked on in this function
-    v.applyForces(vehicles,path);
+    v.applyBehaviors(vehicles,path);
     // Call the generic run method (update, borders, display, etc.)
     v.run();
   }
