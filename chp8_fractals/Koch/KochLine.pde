@@ -1,55 +1,73 @@
 // Koch Curve
 // Daniel Shiffman <http://www.shiffman.net>
+// Nature of Code, Chapter 8
 
 // A class to describe one line segment in the fractal
-// Includes methods to calculate midpoints along the line according to the Koch algorithm
+// Includes methods to calculate midPVectors along the line according to the Koch algorithm
 
 class KochLine {
-  
-  // Two points,
-  // a is the "left" point and 
-  // b is the "right point
-  Point a,b;
-  
-  KochLine(Point a_, Point b_) {
-     a = a_.copy();
-     b = b_.copy();
+
+  // Two PVectors,
+  // a is the "left" PVector and 
+  // b is the "right PVector
+  PVector a;
+  PVector b;
+
+  KochLine(PVector start, PVector end) {
+    a = start.get();
+    b = end.get();
   }
-  
-  void render() {
+
+  void display() {
     stroke(0);
-    line(a.x,a.y,b.x,b.y);
+    line(a.x, a.y, b.x, b.y);
   }
-  
-  Point start() {
-    return a.copy();
+
+  PVector start() {
+    return a.get();
   }
-  
-  Point end() {
-    return b.copy();
+
+  PVector end() {
+    return b.get();
   }
-      
+
   // This is easy, just 1/3 of the way
-  Point kochleft() {
-    float x = a.x + (b.x - a.x) / 3;
-    float y = a.y + (b.y - a.y) / 3;
-    return new Point(x,y);
+  PVector kochleft() {
+    PVector v = PVector.sub(b, a);
+    v.div(3);
+    v.add(a);
+    return v;
   }    
-  
-  // More complicated, have to use a little trig to figure out where this point is!
-  Point kochmiddle() {
-    float x = a.x + 0.5 * (b.x - a.x) + (sin(radians(60))*(b.y-a.y)) / 3;
-    float y = a.y + 0.5 * (b.y - a.y) - (sin(radians(60))*(b.x-a.x)) / 3;
-    return new Point(x,y);
+
+  // More complicated, have to use a little trig to figure out where this PVector is!
+  PVector kochmiddle() {
+    PVector v = PVector.sub(b, a);
+    v.div(3);
+    
+    PVector p = a.get();
+    p.add(v);
+    
+    rotate(v,-radians(60));
+    p.add(v);
+    
+    return p;
   }    
-  
+
 
   // Easy, just 2/3 of the way
-  Point kochright() {
-    float x = a.x + 2*(b.x - a.x) / 3;
-    float y = a.y + 2*(b.y - a.y) / 3;
-    return new Point(x,y);
-  }    
-   
-
+  PVector kochright() {
+    PVector v = PVector.sub(a, b);
+    v.div(3);
+    v.add(b);
+    return v;
+  }
 }
+
+  public void rotate(PVector v, float theta) {
+    float xTemp = v.x;
+    // Might need to check for rounding errors like with angleBetween function?
+    v.x = v.x*PApplet.cos(theta) - v.y*PApplet.sin(theta);
+    v.y = xTemp*PApplet.sin(theta) + v.y*PApplet.cos(theta);
+  }
+
+

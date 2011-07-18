@@ -1,3 +1,10 @@
+// Recursive Tree (w/ ArrayList)
+// Daniel Shiffman <http://www.shiffman.net>
+// Nature of Code, Chapter 8
+
+// A class for a leaf that gets placed at the end of 
+// the last branches
+
 class Leaf {
   PVector loc;
 

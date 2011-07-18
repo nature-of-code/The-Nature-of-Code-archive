@@ -20,7 +20,7 @@ double xmin = -2.5; double ymin = -2; double wh = 4;
 // double xmin = -1.5; double ymin = -.1; double wh = 0.15;
 
 void setup() {
-  size(200,200,P2D);
+  size(400,400);
 }
 
 void draw() {

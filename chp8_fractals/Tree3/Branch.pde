@@ -1,9 +1,8 @@
 // Recursive Tree (w/ ArrayList)
 // Daniel Shiffman <http://www.shiffman.net>
+// Nature of Code, Chapter 8
 
 // A class for one branch in the system
-
-// Created 2 May 2005
 
 class Branch {
   // Each has a location, velocity, and timer 

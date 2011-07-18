@@ -1,17 +1,18 @@
 // Koch Curve
 // Daniel Shiffman <http://www.shiffman.net>
+// Nature of Code, Chapter 8
 
 // A class to manage the list of line segments in the snowflake pattern
 
 class KochFractal {
-  Point start;       // A point for the start
-  Point end;         // A point for the end
+  PVector start;       // A PVector for the start
+  PVector end;         // A PVector for the end
   ArrayList<KochLine> lines;   // A list to keep track of all the lines
   int count;
   
   public KochFractal() {
-    start = new Point(0,height/2 + height/4);
-    end = new Point(width,height/2  + height/4);
+    start = new PVector(0,height/2 + height/4);
+    end = new PVector(width,height/2  + height/4);
     lines = new ArrayList<KochLine>();
     restart();
   }
@@ -26,7 +27,7 @@ class KochFractal {
   void restart() { 
     count = 0;      // Reset count
     lines.clear();  // Empty the array list
-    lines.add(new KochLine(start,end));  // Add the initial line (from one end point to the other)
+    lines.add(new KochLine(start,end));  // Add the initial line (from one end PVector to the other)
   }
   
   int getCount() {
@@ -36,7 +37,7 @@ class KochFractal {
   // This is easy, just draw all the lines
   void render() {
     for(KochLine l : lines) {
-      l.render();
+      l.display();
     }
   }
 
@@ -51,13 +52,13 @@ class KochFractal {
   ArrayList iterate(ArrayList<KochLine> before) {
     ArrayList now = new ArrayList<KochLine>();    // Create emtpy list
     for(KochLine l : before) {
-      // Calculate 5 koch points (done for us by the line object)
-      Point a = l.start();                 
-      Point b = l.kochleft();
-      Point c = l.kochmiddle();
-      Point d = l.kochright();
-      Point e = l.end();
-      // Make line segments between all the points and add them
+      // Calculate 5 koch PVectors (done for us by the line object)
+      PVector a = l.start();                 
+      PVector b = l.kochleft();
+      PVector c = l.kochmiddle();
+      PVector d = l.kochright();
+      PVector e = l.end();
+      // Make line segments between all the PVectors and add them
       now.add(new KochLine(a,b));
       now.add(new KochLine(b,c));
       now.add(new KochLine(c,d));

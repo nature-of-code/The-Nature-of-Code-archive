@@ -45,7 +45,7 @@ class Box {
     rectMode(PConstants.CENTER);
     pushMatrix();
     translate(pos.x,pos.y);
-    rotate(a);
+    rotate(-a);
     fill(175);
     stroke(0);
     rect(0,0,w,h);
