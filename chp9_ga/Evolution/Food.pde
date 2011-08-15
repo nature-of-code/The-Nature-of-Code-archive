@@ -1,11 +1,10 @@
 // Evolution EcoSystem
 // Daniel Shiffman <http://www.shiffman.net>
-// Spring 2007, The Nature of Code
 
 // A collection of food in the world
 
 class Food {
-  ArrayList food;
+  ArrayList<PVector> food;
  
   Food(int num) {
     // Start with some food
@@ -22,11 +21,11 @@ class Food {
   
   // Display the food
   void run() {
-    for (int i = 0; i < food.size(); i++) {
-       PVector loc = (PVector) food.get(i);
+    for (PVector f : food) {
        rectMode(CENTER);
-       fill(199,218,236);
-       rect(loc.x,loc.y,8,8);
+       stroke(0);
+       fill(175);
+       rect(f.x,f.y,8,8);
     } 
     
     // There's a small chance food will appear randomly

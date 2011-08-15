@@ -21,7 +21,7 @@ void setup() {
 }
 
 void draw() {
-  background(56,37,19);
+  background(255);
   world.run();
 }
 

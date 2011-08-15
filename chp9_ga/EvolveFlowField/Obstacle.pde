@@ -16,8 +16,7 @@ class Obstacle {
     r = new Rectangle(x,y,w,h);
   }
 
-  void render() {
-    smooth();
+  void display() {
     stroke(0);
     fill(175);
     rectMode(CORNER);

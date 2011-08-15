@@ -1,39 +1,39 @@
-// Interactive Selection
-// http://www.genarts.com/karl/papers/siggraph91.html
+// Pathfinding w/ Genetic Algorithms
 // Daniel Shiffman <http://www.shiffman.net>
 
-// A class to describe a population of faces
-// this hasn't changed very much from example to example
+// A class to describe a population of "creatures"
 
 class Population {
 
-  float mutationRate;           // Mutation rate
-  Face[] population;            // array to hold the current population
-  ArrayList<Face> matingPool;   // ArrayList which we will use for our "mating pool"
-  int generations;              // Number of generations
+  float mutationRate;          // Mutation rate
+  Rocket[] population;         // Array to hold the current population
+  ArrayList<Rocket> matingPool;    // ArrayList which we will use for our "mating pool"
+  int generations;             // Number of generations
 
-    // Create the population
-  Population(float m, int num) {
+   // Initialize the population
+   Population(float m, int num) {
     mutationRate = m;
-    population = new Face[num];
-    matingPool = new ArrayList<Face>();
+    population = new Rocket[num];
+    matingPool = new ArrayList<Rocket>();
     generations = 0;
+    //make a new set of creatures
     for (int i = 0; i < population.length; i++) {
-      population[i] = new Face(new DNA(), 50+i*75, 60);
+      PVector location = new PVector(width/2,height+20);
+      population[i] = new Rocket(location, new DNA());
     }
   }
 
-  // Display all faces
-  void display() {
+  void live () {
+    // Run every rocket
     for (int i = 0; i < population.length; i++) {
-      population[i].display();
+      population[i].run();
     }
   }
 
-  // Are we rolling over any of the faces?
-  void rollover(int mx, int my) {
+  // Calculate fitness for each creature
+  void fitness() {
     for (int i = 0; i < population.length; i++) {
-      population[i].rollover(mx, my);
+      population[i].fitness();
     }
   }
 
@@ -50,13 +50,13 @@ class Population {
     // A higher fitness = more entries to mating pool = more likely to be picked as a parent
     // A lower fitness = fewer entries to mating pool = less likely to be picked as a parent
     for (int i = 0; i < population.length; i++) {
-      float fitnessNormal = map(population[i].getFitness(), 0, maxFitness, 0, 1);
+      float fitnessNormal = map(population[i].getFitness(),0,maxFitness,0,1);
       int n = (int) (fitnessNormal * 100);  // Arbitrary multiplier
       for (int j = 0; j < n; j++) {
         matingPool.add(population[i]);
       }
     }
-  }  
+  }
 
   // Making the next generation
   void reproduction() {
@@ -66,8 +66,8 @@ class Population {
       int m = int(random(matingPool.size()));
       int d = int(random(matingPool.size()));
       // Pick two parents
-      Face mom = matingPool.get(m);
-      Face dad = matingPool.get(d);
+      Rocket mom = matingPool.get(m);
+      Rocket dad = matingPool.get(d);
       // Get their genes
       DNA momgenes = mom.getDNA();
       DNA dadgenes = dad.getDNA();
@@ -76,7 +76,8 @@ class Population {
       // Mutate their genes
       child.mutate(mutationRate);
       // Fill the new population with the new child
-      population[i] = new Face(child, 50+i*75, 60);
+      PVector location = new PVector(width/2,height+20);
+      population[i] = new Rocket(location, child);
     }
     generations++;
   }
@@ -89,11 +90,11 @@ class Population {
   float getMaxFitness() {
     float record = 0;
     for (int i = 0; i < population.length; i++) {
-      if (population[i].getFitness() > record) {
-        record = population[i].getFitness();
-      }
+       if(population[i].getFitness() > record) {
+         record = population[i].getFitness();
+       }
     }
     return record;
   }
-}
 
+}

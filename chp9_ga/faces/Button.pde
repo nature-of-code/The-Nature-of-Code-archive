@@ -2,19 +2,21 @@
 // http://www.genarts.com/karl/papers/siggraph91.html
 // Daniel Shiffman <http://www.shiffman.net>
 
+import java.awt.Rectangle;
+
 class Button {
-  Rectangle r;  //button's rectangle
-  String txt;   //button's text
-  boolean clicked;  //did i click on it?
-  boolean rollover; //did i rollover it?
+  Rectangle r;  // Button's rectangle
+  String txt;   // Button's text
+  boolean clicked;  // Did i click on it?
+  boolean rollover; // Did i rollover it?
 
   Button(int x, int y, int w, int h, String s) {
     r = new Rectangle(x,y,w,h);
     txt = s;
   }
 
-  void render() {
-    //draw rectangle and text based on whether rollover or clicked
+  void display() {
+    // Draw rectangle and text based on whether rollover or clicked
     rectMode(CORNER);
     stroke(0); noFill();
     if (rollover) fill(0.5);
@@ -31,8 +33,8 @@ class Button {
   }
   
   
-  //methods to check rollover, clicked, or released (must be called from appropriate
-  //places in draw, mousePressed, mouseReleased
+  // Methods to check rollover, clicked, or released (must be called from appropriate
+  // Places in draw, mousePressed, mouseReleased
   boolean rollover(int mx, int my) {
     if (r.contains(mx,my)) rollover = true;
     else rollover = false;

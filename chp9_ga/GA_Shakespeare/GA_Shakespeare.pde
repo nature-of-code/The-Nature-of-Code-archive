@@ -26,22 +26,22 @@
 //   # Rinse and repeat
 
 
-PFont f,fb;
+PFont f, fb;
 String phrase;
 int popmax;
 float mutationRate;
 Population popul;
 
 void setup() {
-  size(400,200);
-  fb = createFont("Courier",32,true);
-  f = createFont("Arial",12,true);
+  size(400, 200);
+  fb = createFont("Courier", 32, true);
+  f = createFont("Arial", 12, true);
   phrase = "To be or not to be.";
   popmax = 150;
-  mutationRate = 0.01f;
+  mutationRate = 0.01;
 
   // Create a population with a target phrase, mutation rate, and population max
-  popul = new Population(phrase,mutationRate,popmax);
+  popul = new Population(phrase, mutationRate, popmax);
 }
 
 void draw() {
@@ -52,7 +52,7 @@ void draw() {
   // Calculate fitness
   popul.calcFitness();
   displayInfo();
-  
+
   // If we found the target phrase, stop
   if (popul.finished()) {
     noLoop();
@@ -66,14 +66,15 @@ void displayInfo() {
   textFont(fb);
   textAlign(LEFT);
   fill(0);
-  text(answer,20,100);
-  
-  textFont(f);
-  text("total generations: " + popul.getGenerations(),20,140);
-  text("average fitness: " + nf(popul.getAverageFitness(),0,2),20,155);
-  text("total population: " + popmax,20,170);
-  text("mutation rate: " + int(mutationRate * 100) + "%",20,185);
-}
+  text(answer, 20, 100);
 
+  textFont(f);
+  text("total generations: " + popul.getGenerations(), 20, 140);
+  text("average fitness: " + nf(popul.getAverageFitness(), 0, 2), 20, 155);
+  text("total population: " + popmax, 20, 170);
+  text("mutation rate: " + int(mutationRate * 100) + "%", 20, 185);
+
+  text(population.allPhrases(), 10, 10);
+}
 
 
