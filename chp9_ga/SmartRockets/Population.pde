@@ -69,7 +69,7 @@ class Population {
   }
 
   // Making the next generation
-  void generate() {
+  void reproduction() {
     // Refill the population with children from the mating pool
     for (int i = 0; i < population.length; i++) {
       // Sping the wheel of fortune to pick two parents

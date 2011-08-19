@@ -66,7 +66,7 @@ void draw() {
     lifecycle = 0;
     population.fitness();
     population.selection();
-    population.generate();
+    population.reproduction();
   }
 
   // Draw the obstacles
