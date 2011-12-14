@@ -63,9 +63,9 @@ class Box  {
     sd.setAsBox(box2dW, box2dH);
 
     // Parameters that affect physics
-    sd.density = 1.0f;
-    sd.friction = 0.3f;
-    sd.restitution = 0.5f;
+    sd.density = 1.0;
+    sd.friction = 0.3;
+    sd.restitution = 0.5;
 
     // Define the body and make it from the shape
     BodyDef bd = new BodyDef();

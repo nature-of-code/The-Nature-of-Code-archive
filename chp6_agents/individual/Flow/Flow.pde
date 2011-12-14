@@ -20,7 +20,7 @@ void setup() {
   vehicles = new ArrayList<Vehicle>();
   // Make a whole bunch of vehicles with random maxspeed and maxforce values
   for (int i = 0; i < 120; i++) {
-    vehicles.add(new Vehicle(new PVector(random(width),random(height)),random(2,5),random(0.1f,0.5f)));
+    vehicles.add(new Vehicle(new PVector(random(width),random(height)),random(2,5),random(0.1,0.5)));
   }
 }
 

@@ -16,7 +16,6 @@ void setup() {
 void draw() {
   background(255);
   text("Click mouse to generate a new tree", 10, height-20);
-  noLoop();
 
   stroke(0);
   // Start the tree from the bottom of the screen

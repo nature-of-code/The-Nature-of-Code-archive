@@ -59,13 +59,13 @@ class Vehicle {
 
   void display() {
     // Draw a triangle rotated in the direction of velocity
-    float theta = velocity.heading2D() + PApplet.radians(90);
+    float theta = velocity.heading2D() + radians(90);
     fill(175);
     stroke(0);
     pushMatrix();
     translate(location.x,location.y);
     rotate(theta);
-    beginShape(PConstants.TRIANGLES);
+    beginShape(TRIANGLES);
     vertex(0, -r*2);
     vertex(-r, r*2);
     vertex(r, r*2);

@@ -54,8 +54,8 @@ class Windmill {
 
 
   void display() {
-    box1.display();
     box2.display();
+    box1.display();
   }
 }
 

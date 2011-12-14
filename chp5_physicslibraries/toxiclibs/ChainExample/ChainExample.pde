@@ -5,7 +5,7 @@
  */
 
 /* 
- * Copyright (c) 2010 Daniel Schiffmann
+ * Copyright (c) 2010 Daniel Shiffmann
  * 
  * This demo & library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
