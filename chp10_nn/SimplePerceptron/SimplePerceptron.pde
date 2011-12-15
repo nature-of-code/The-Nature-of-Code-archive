@@ -14,7 +14,7 @@ Perceptron ptron;
 // We will train the perceptron with one "Point" object at a time
 int count = 0;
 
-// Scale (note we are living in a space -2 < y < 2, -2 < x < 2)
+// Coordinate space
 float xmin = -200;
 float ymin = -200;
 float xmax =  200;

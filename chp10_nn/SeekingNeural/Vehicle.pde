@@ -5,6 +5,7 @@
 
 class Vehicle {
   
+  // Vehicle now has a brain!
   Perceptron brain;
   
   PVector location;
@@ -43,23 +44,28 @@ class Vehicle {
     acceleration.add(force);
   }
   
+  // Here is where the brain processes everything
   void steer(ArrayList<PVector> targets) {
+    // Make an array of forces
     PVector[] forces = new PVector[targets.size()];
     
+    // Steer towards all targets
     for (int i = 0; i < forces.length; i++) {
       forces[i] = seek(targets.get(i));
     }
+    
+    // That array of forces is the input to the brain
     PVector result = brain.feedforward(forces);
     
+    // Use the result to steer the vehicle
     applyForce(result);
     
-    PVector desired = new PVector(width/2,height/2);
+    // Train the brain according to the error
     PVector error = PVector.sub(desired, location);
     brain.train(forces,error);
     
   }
   
-
   // A method that calculates a steering force towards a target
   // STEER = DESIRED MINUS VELOCITY
   PVector seek(PVector target) {

@@ -21,7 +21,7 @@ class Perceptron {
   }
 
   // Function to train the Perceptron
-  // Weights are adjusted based on vehicle's happiness
+  // Weights are adjusted based on vehicle's error
   void train(PVector[] forces, PVector error) {
     for (int i = 0; i < weights.length; i++) {
       weights[i] += c*error.x*forces[i].x;         

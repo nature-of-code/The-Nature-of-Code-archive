@@ -1,7 +1,15 @@
+// A static drawing of a Neural Network
+// Daniel Shiffman <http://www.shiffman.net>
+// Nature of Code
+
 class Connection {
-  float weight;
+
+  // Connection is from Neuron A to B
   Neuron a;
   Neuron b;
+  
+  // Connection has a weight
+  float weight;
 
   Connection(Neuron from, Neuron to,float w) {
     weight = w;
@@ -9,6 +17,7 @@ class Connection {
     b = to;
   }
 
+  // Drawn as a line
   void display() {
     stroke(0);
     strokeWeight(weight*4);

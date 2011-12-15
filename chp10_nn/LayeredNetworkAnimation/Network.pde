@@ -33,9 +33,13 @@ class Network {
   
   // Sending an input to the first Neuron
   // We should do something better to track multiple inputs
-  void feedforward(float input) {
-    Neuron start = neurons.get(0);
-    start.feedforward(input);
+  void feedforward(float input1, float input2) {
+    Neuron n1 = neurons.get(0);
+    n1.feedforward(input1);
+    
+    Neuron n2 = neurons.get(1);
+    n2.feedforward(input2);
+    
   }
   
   // Update the animation
