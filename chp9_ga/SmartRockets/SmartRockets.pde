@@ -25,7 +25,7 @@ Obstacle target;        // Target location
 ArrayList<Obstacle> obstacles;  //an array list to keep track of all the obstacles!
 
 void setup() {
-  size(640, 480);
+  size(640, 360);
   smooth();
 
   // The number of cycles we will allow a generation to live

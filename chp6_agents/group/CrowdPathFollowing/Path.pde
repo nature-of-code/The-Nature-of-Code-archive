@@ -23,6 +23,8 @@ class Path {
 
   // Draw the path
   void display() {
+    strokeJoin(ROUND);
+    
     // Draw thick line for radius
     stroke(175);
     strokeWeight(radius*2);

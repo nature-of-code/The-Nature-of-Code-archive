@@ -9,12 +9,13 @@ int seed = 5;
 
 
 void setup() {
-  size(600, 400);
+  size(640, 360);
   smooth();
 }
 
 void draw() {
   background(255);
+  fill(0);
   text("Click mouse to generate a new tree", 10, height-20);
 
   stroke(0);
@@ -24,7 +25,7 @@ void draw() {
   yoff += 0.005;
   randomSeed(seed);
   // Start the recursive branching!
-  branch(120, 0);
+  branch(100, 0);
 }
 
 
@@ -37,7 +38,7 @@ void mousePressed() {
 
 void branch(float h, float xoff) {
   // thickness of the branch is mapped to its length
-  float sw = map(h, 2, 120, 1, 5);
+  float sw = map(h, 2, 100, 1, 5);
   strokeWeight(sw);
   // Draw the branch
   line(0, 0, 0, -h);
@@ -45,12 +46,12 @@ void branch(float h, float xoff) {
   translate(0, -h);
 
   // Each branch will be 2/3rds the size of the previous one
-  h *= 0.66f;
+  h *= 0.7f;
   
   // Move along through noise space
   xoff += 0.1;
 
-  if (h > 2) {
+  if (h > 4) {
     // Random number of branches
     int n = int(random(1, 4));
     for (int i = 0; i < n; i++) {

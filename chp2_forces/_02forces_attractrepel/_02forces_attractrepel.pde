@@ -5,7 +5,7 @@ Attractor a;
 float g = 1;
 
 void setup() {
-  size(400,400);
+  size(640,360);
   smooth();
   background(255);
   a = new Attractor();
@@ -15,9 +15,7 @@ void setup() {
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
 
   a.display();
 
@@ -32,9 +30,7 @@ void draw() {
 
     PVector force = a.attract(movers[i]);
     movers[i].applyForce(force);
-
     movers[i].update();
-    //movers[i].checkEdges();
     movers[i].display();
   }
 

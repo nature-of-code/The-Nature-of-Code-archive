@@ -15,9 +15,8 @@ Path path;
 ArrayList<Vehicle> vehicles;
 
 void setup() {
-  size(640,480);
+  size(640,360);
   smooth();
-
   // Call a function to generate new Path object
   newPath();
 

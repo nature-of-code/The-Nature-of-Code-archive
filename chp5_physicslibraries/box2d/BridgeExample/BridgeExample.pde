@@ -25,7 +25,7 @@ Bridge bridge;
 ArrayList<Box> boxes;
 
 void setup() {
-  size(400,300);
+  size(640,360);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -34,7 +34,7 @@ void setup() {
   
   
   // Make the bridge
-  bridge = new Bridge(width,40);
+  bridge = new Bridge(width,width/10);
   
   // Create ArrayLists	
   boxes = new ArrayList<Box>();

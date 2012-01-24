@@ -3,7 +3,7 @@ Mover[] movers = new Mover[10];
 Attractor a;
 
 void setup() {
-  size(400,400);
+  size(640,360);
   smooth();
   background(255);
   for (int i = 0; i < movers.length; i++) {
@@ -13,9 +13,7 @@ void setup() {
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
 
   a.display();
 

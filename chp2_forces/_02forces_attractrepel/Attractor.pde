@@ -33,7 +33,7 @@ class Attractor {
     if (dragging) fill (50);
     else if (rollover) fill(100);
     else fill(0);
-    ellipse(location.x,location.y,mass*2,mass*2);
+    ellipse(location.x,location.y,mass*6,mass*6);
   }
 
   // The methods below are for mouse interaction
