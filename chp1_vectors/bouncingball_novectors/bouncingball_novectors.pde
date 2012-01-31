@@ -9,15 +9,13 @@ float xspeed = 2.5;
 float yspeed = 2;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
   background(255);
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
   
 
   // Add the current speed to the location.

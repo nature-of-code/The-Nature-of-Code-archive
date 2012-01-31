@@ -1,16 +1,14 @@
 Mover mover;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
   background(255);
   mover = new Mover(); 
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
   
   mover.update();
   mover.checkEdges();

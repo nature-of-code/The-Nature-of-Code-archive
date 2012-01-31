@@ -3,18 +3,16 @@ Mover[] movers = new Mover[20];
 float g = 0.4;
 
 void setup() {
-  size(400,400);
+  size(640,360);
   smooth();
-  background(255);
   for (int i = 0; i < movers.length; i++) {
     movers[i] = new Mover(random(0.1,2),random(width),random(height)); 
   }
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
+
 
   for (int i = 0; i < movers.length; i++) {
     for (int j = 0; j < movers.length; j++) {

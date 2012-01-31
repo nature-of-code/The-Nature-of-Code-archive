@@ -1,16 +1,13 @@
 Mover m;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
-  background(255);
   m = new Mover(); 
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
 
   if (mousePressed) {
     PVector wind = new PVector(random(0,0.1),0);

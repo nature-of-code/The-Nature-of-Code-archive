@@ -1,18 +1,16 @@
-Mover[] movers = new Mover[100];
+Mover[] movers = new Mover[10];
 
 void setup() {
-  size(600,200);
+  size(640,360);
   smooth();
-  background(255);
   for (int i = 0; i < movers.length; i++) {
     movers[i] = new Mover(random(0.1,5),0,0); 
   }
 }
 
 void draw() {
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
+
 
   PVector wind = new PVector(0.001,0);
   PVector gravity = new PVector(0,0.1);
