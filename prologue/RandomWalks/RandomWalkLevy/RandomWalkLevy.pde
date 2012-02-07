@@ -5,7 +5,7 @@
 Walker w;
 
 void setup() {
-  size(200,200);
+  size(640,480);
   // Create a walker object
   w = new Walker();
   background(0);
@@ -13,7 +13,7 @@ void setup() {
 
 void draw() {
   // Run the walker object
-  w.walk();
+  w.step();
   w.render();
 }
 
