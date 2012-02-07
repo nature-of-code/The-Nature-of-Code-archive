@@ -24,7 +24,7 @@ class Pendulum  {
     origin = origin_.get();
     location = new PVector();
     r = r_;
-    angle = PI/4;
+    angle = 0;
     
     aVelocity = 0.0;
     aAcceleration = 0.0;
@@ -77,6 +77,7 @@ void display() {
 
   // This tells us we are not longer clicking on the ball
   void stopDragging() {
+    aVelocity = 0; // No velocity once you let go
     dragging = false;
   }
 

@@ -1,8 +1,8 @@
 float theta = 0;
-float thetaVel = 0.2;
+float thetaVel = 0.1;
 float amplitude = 100;
 
-size(400,200);
+size(640,360);
 background(255);
 smooth();
 

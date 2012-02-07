@@ -4,7 +4,7 @@ float thetaVel = 0.1;
 float amplitude = 100;
 
 void setup() {
-  size(400,200);
+  size(640,360);
   smooth();
 }
 

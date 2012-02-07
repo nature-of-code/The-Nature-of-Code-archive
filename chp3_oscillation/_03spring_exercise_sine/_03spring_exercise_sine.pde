@@ -2,7 +2,7 @@ float angle = 0;
 float aVelocity = 0.05;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
 }
 
@@ -10,7 +10,7 @@ void draw() {
   background(255);
   
   float x = width/2;
-  float y = map(sin(angle),-1,1,50,150);
+  float y = map(sin(angle),-1,1,50,250);
   angle += aVelocity;
   
   ellipseMode(CENTER);
