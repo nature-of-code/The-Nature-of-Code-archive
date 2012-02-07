@@ -7,7 +7,7 @@
 Spaceship ship;
 
 void setup() {
-  size(500, 200);
+  size(640, 360);
   smooth();
   ship = new Spaceship();
 }
