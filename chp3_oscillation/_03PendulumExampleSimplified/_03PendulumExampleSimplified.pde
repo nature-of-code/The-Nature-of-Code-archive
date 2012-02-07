@@ -19,10 +19,10 @@
 Pendulum p;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
   // Make a new Pendulum with an origin location and armlength
-  p = new Pendulum(new PVector(width/2,10),125);
+  p = new Pendulum(new PVector(width/2,10),250);
 }
 
 void draw() {

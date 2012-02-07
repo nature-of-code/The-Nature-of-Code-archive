@@ -8,13 +8,14 @@ void setup() {
 
 void draw() {
   background(255);
+<<<<<<< HEAD
+=======
+
+>>>>>>> fixing up chapter 3 examples for class
   
   mover.update();
   mover.checkEdges();
   mover.display(); 
 }
 
-void mousePressed() {
-  noLoop();
-}
 

@@ -1,7 +1,6 @@
 
 float startTheta = 0;
-float thetaVel = 0.1;
-float amplitude = 100;
+float thetaVel = 0.04;
 
 void setup() {
   size(640,360);

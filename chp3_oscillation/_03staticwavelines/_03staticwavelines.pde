@@ -1,8 +1,13 @@
 float theta = 0;
 float thetaVel = 0.1;
+<<<<<<< HEAD
 float amplitude = 100;
 
 size(640,360);
+=======
+
+  size(640,360);
+>>>>>>> fixing up chapter 3 examples for class
 background(255);
 smooth();
 

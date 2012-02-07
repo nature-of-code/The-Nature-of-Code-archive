@@ -3,16 +3,13 @@ float aVelocity = 0;
 float aAcceleration = 0.0001;
 
 void setup() {
-  size(200,200);
-  background(255);
+  size(640,360);
   smooth();
 }
 
 void draw() {
-  rectMode(CORNER);
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
+
 
   fill(175);
   stroke(0);
@@ -20,9 +17,9 @@ void draw() {
   translate(width/2,height/2);
   rectMode(CENTER);
   rotate(angle);
-  line(-50,0,50,0);
-  ellipse(50,0,8,8);
-  ellipse(-50,0,8,8);
+  line(-150,0,150,0);
+  ellipse(150,0,16,16);
+  ellipse(-150,0,16,16);
 
   angle += aVelocity;
   aVelocity += aAcceleration;

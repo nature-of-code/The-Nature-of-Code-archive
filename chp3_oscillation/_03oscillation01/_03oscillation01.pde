@@ -1,19 +1,16 @@
 float angle = 0;
-float aVelocity = 0.05;
+float aVelocity = 0.03;
 
 void setup() {
-  size(200,200);
-  background(255);
+  size(640,360);
+
   smooth();
 }
 
 void draw() {
-  rectMode(CORNER);
-  noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  background(255);
   
-  float amplitude = 100;
+  float amplitude = 300;
   float x = amplitude * cos(angle);
   angle += aVelocity;
   
