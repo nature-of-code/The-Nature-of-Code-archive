@@ -13,7 +13,7 @@ FlowField flowfield;
 ArrayList<Vehicle> vehicles;
 
 void setup() {
-  size(640,320);
+  size(640,360);
   smooth();
   // Make a new flow field with "resolution" of 16
   flowfield = new FlowField(16);
@@ -36,7 +36,7 @@ void draw() {
 
   // Instructions
   fill(0);
-  text("Hit space bar to toggle debugging lines.\nClick the mouse to generate a new flow field.",10,height-30);
+  //text("Hit space bar to toggle debugging lines.\nClick the mouse to generate a new flow field.",10,height-30);
 
 }
 

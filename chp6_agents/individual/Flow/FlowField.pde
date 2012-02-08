@@ -50,7 +50,7 @@ class FlowField {
     float arrowsize = 4;
     // Translate to location to render vector
     translate(x,y);
-    stroke(175);
+    stroke(0);
     // Call vector heading function to get direction (note that pointing up is a heading of 0) and rotate
     rotate(v.heading2D());
     // Calculate length of vector & scale it to be bigger or smaller if necessary

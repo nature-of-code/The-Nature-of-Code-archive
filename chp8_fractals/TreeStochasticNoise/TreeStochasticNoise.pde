@@ -53,12 +53,12 @@ void branch(float h, float xoff) {
 
   if (h > 4) {
     // Random number of branches
-    int n = int(random(1, 4));
+    int n = int(random(0, 5));
     for (int i = 0; i < n; i++) {
       
       // Here the angle is controlled by perlin noise
       // This is a totally arbitrary way to do it, try others!
-      float theta = map(noise(xoff+i, yoff), 0, 1, -PI/2, PI/2);
+      float theta = map(noise(xoff+i, yoff), 0, 1, -PI/3, PI/3);
       if (n%2==0) theta *= -1;
       
       pushMatrix();      // Save the current state of transformation (i.e. where are we now)
