@@ -40,8 +40,31 @@ class Mover {
     return force;
   }
 
+  void boundaries() {
 
+    float d = 50;
+
+    PVector force = new PVector(0, 0);
+
+    if (location.x < d) {
+      force.x = 1;
+    } 
+    else if (location.x > width -d) {
+      force.x = -1;
+    } 
+
+    if (location.y < d) {
+      force.y = 1;
+    } 
+    else if (location.y > height-d) {
+      force.y = -1;
+    } 
+
+    force.normalize();
+    force.mult(0.1);
+
+    applyForce(force);
+  }
 }
-
 
 

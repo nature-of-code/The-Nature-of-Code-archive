@@ -21,7 +21,7 @@ void draw() {
       movers[i].applyForce(drag);
     }
 
-
+    // Gravity is scaled by mass here!
     PVector gravity = new PVector(0, 0.1*movers[i].mass);
     movers[i].applyForce(gravity);
 
@@ -29,6 +29,9 @@ void draw() {
     movers[i].display();
     movers[i].checkEdges();
   }
+  
+  fill(0);
+  text("click mouse to reset",10,30);
 }
 
 void mousePressed() {
@@ -37,7 +40,7 @@ void mousePressed() {
 
 void reset() {
   for (int i = 0; i < movers.length; i++) {
-    movers[i] = new Mover(random(1, 5), random(width), 0);
+    movers[i] = new Mover(random(1, 5), 100+ i*100, 0);
   }
 }
 
