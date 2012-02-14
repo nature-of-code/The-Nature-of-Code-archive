@@ -1,7 +1,7 @@
 ArrayList<Particle> particles;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   particles = new ArrayList<Particle>();
   smooth();
 }

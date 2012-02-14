@@ -9,7 +9,7 @@
 ParticleSystem ps;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   ps = new ParticleSystem(1,new PVector(width/2,50));
   smooth();
 }

@@ -2,14 +2,14 @@ ParticleSystem ps;
 Repeller repeller;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   smooth();
   ps = new ParticleSystem(new PVector(width/2,50));
   repeller = new Repeller(width/2-20,height/2);
 }
 
 void draw() {
-  background(100);
+  background(255);
   ps.addParticle();
   
   // Apply gravity force to all Particles

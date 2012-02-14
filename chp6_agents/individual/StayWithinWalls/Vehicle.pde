@@ -13,7 +13,7 @@ class Vehicle {
 
   float maxspeed;
   float maxforce;
-
+  
   Vehicle(float x, float y) {
     acceleration = new PVector(0, 0);
     velocity = new PVector(3, -2);

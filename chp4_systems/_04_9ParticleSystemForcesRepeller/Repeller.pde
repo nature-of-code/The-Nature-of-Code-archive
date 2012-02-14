@@ -15,8 +15,8 @@ class Repeller {
   }
 
   void display() {
-    stroke(255);
-    fill(255);
+    stroke(0);
+    fill(127);
     ellipse(location.x,location.y,r*2,r*2);
   }
 

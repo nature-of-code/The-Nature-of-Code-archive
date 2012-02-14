@@ -15,12 +15,12 @@ GL gl;
 PImage img;
 
 void setup() {
-  size(200,200,OPENGL);
+  size(640, 360, OPENGL);
 
   // Create an alpha masked image to be applied as the particle's texture
   img = loadImage("texture.png");
 
-  ps = new ParticleSystem(0,new PVector(width/2,50));
+  ps = new ParticleSystem(0, new PVector(width/2, 50));
   smooth();
 
   pgl = (PGraphicsOpenGL) g;
@@ -32,12 +32,14 @@ void draw() {
   pgl.beginGL();
   //gl.glDisable(GL.GL_DEPTH_TEST);
   gl.glEnable(GL.GL_BLEND);
-  gl.glBlendFunc(GL.GL_SRC_ALPHA,GL.GL_ONE);
-  pgl.endGL();
+  gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE);
+
 
   background(0);
 
   ps.run();
   ps.addParticle();
+
+  pgl.endGL();
 }
 

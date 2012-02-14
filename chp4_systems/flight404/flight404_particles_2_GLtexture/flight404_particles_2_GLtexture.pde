@@ -3,8 +3,8 @@
 // Uses advanced openGL direct calls that use display lists
 // Thank you to Jeff Gentes for helping with this!
 
-// It's my intention to redo this example using GlGraphics (http://glgraphics.sourceforge.net/)
-// But for now, just want to make sure it works in principal
+// This only works with Processing 1.5.1 as of now
+// To be updated for Processing 2.0 soon!
 
 // February 28 2011
 // Daniel Shiffman

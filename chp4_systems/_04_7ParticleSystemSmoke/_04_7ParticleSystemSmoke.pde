@@ -8,10 +8,10 @@ ParticleSystem ps;
 Random generator;
 
 void setup() {
-  size(200,200);
+  size(640,360);
   generator = new Random();
   PImage img = loadImage("texture.png");
-  ps = new ParticleSystem(0,new PVector(width/2,height-20),img);
+  ps = new ParticleSystem(0,new PVector(width/2,height-100),img);
   smooth();
 }
 
