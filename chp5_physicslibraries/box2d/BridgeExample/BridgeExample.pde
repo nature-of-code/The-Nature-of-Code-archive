@@ -73,7 +73,7 @@ void draw() {
   
   
    fill(0);
-  text("Click mouse to add boxes.",10,290);
+  text("Click mouse to add boxes.",10,height-10);
   
  
 }

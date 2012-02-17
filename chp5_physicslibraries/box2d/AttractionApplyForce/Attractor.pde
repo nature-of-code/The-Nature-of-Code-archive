@@ -17,20 +17,16 @@ class Attractor {
     r = r_;
     // Define a body
     BodyDef bd = new BodyDef();
+    bd.type = BodyType.STATIC;
     // Set its position
     bd.position = box2d.coordPixelsToWorld(x,y);
     body = box2d.world.createBody(bd);
 
     // Make the body's shape a circle
-    CircleDef cd = new CircleDef();
-    cd.radius = box2d.scalarPixelsToWorld(r);
-    cd.density = 0;
-    cd.friction = 0.01;
-    cd.restitution = 0.5; // Restitution is bounciness
-    body.createShape(cd);
-
-    // Always do this at the end
-    body.setMassFromShapes();
+    CircleShape cs = new CircleShape();
+    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    
+    body.createFixture(cs,1);
 
   }
 
@@ -41,8 +37,8 @@ class Attractor {
   Vec2 attract(Mover m) {
     float G = 100; // Strength of force
     // clone() makes us a copy
-    Vec2 pos = body.getMemberWorldCenter();    
-    Vec2 moverPos = m.body.getMemberWorldCenter();
+    Vec2 pos = body.getWorldCenter();    
+    Vec2 moverPos = m.body.getWorldCenter();
     // Vector pointing from mover to attractor
     Vec2 force = pos.sub(moverPos);
     float distance = force.length();

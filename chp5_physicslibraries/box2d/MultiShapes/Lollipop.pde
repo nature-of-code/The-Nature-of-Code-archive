@@ -4,19 +4,21 @@
 // PBox2D example
 
 // A rectangular box
-class Lollipop  {
+class Lollipop {
 
   // We need to keep track of a Body and a width and height
   Body body;
   float w;
   float h;
+  float r;
 
   // Constructor
   Lollipop(float x, float y) {
-    w = random(2,6);
-    h = w*3;
+    w = 8;
+    h = 24;
+    r = 8;
     // Add the box to the box2d world
-    makeBody(new Vec2(x,y),w,h);
+    makeBody(new Vec2(x, y));
   }
 
   // This function removes the particle from the box2d world
@@ -45,58 +47,42 @@ class Lollipop  {
 
     rectMode(CENTER);
     pushMatrix();
-    translate(pos.x,pos.y);
+    translate(pos.x, pos.y);
     rotate(-a);
     fill(175);
     stroke(0);
+
     rect(0,0,w,h);
-    ellipse(0,-h,h,h);
+    ellipse(0, h/2, r*2, r*2);
     popMatrix();
   }
 
   // This function adds the rectangle to the box2d world
-  void makeBody(Vec2 center, float w_, float h_) {
-    
+  void makeBody(Vec2 center) {
+
     // Define the body and make it from the shape
     BodyDef bd = new BodyDef();
+    bd.type = BodyType.DYNAMIC;
     bd.position.set(box2d.coordPixelsToWorld(center));
     body = box2d.createBody(bd);
 
+    CircleShape circle = new CircleShape();
+    circle.m_radius = box2d.scalarPixelsToWorld(r);
+    Vec2 offset = new Vec2(0,h/2);
+    offset = box2d.vectorPixelsToWorld(offset);
+    circle.m_p.set(offset.x,offset.y);
 
-    // Define a polygon (this is what we use for a rectangle)
-    PolygonDef sd = new PolygonDef();
-    float box2dW = box2d.scalarPixelsToWorld(w_/2);
-    float box2dH = box2d.scalarPixelsToWorld(h_/2);
+    PolygonShape sd = new PolygonShape();
+    float box2dW = box2d.scalarPixelsToWorld(w/2);
+    float box2dH = box2d.scalarPixelsToWorld(h/2);
     sd.setAsBox(box2dW, box2dH);
 
-    // Parameters that affect physics
-    sd.density = 1.0f;
-    sd.friction = 0.3f;
-    sd.restitution = 0.5f;
-    
-    // Define a circle
-    CircleDef cd = new CircleDef();
-    // Offset its "local position" (relative to 0,0)
-    Vec2 offset = new Vec2(0,-h);
-    cd.localPosition = box2d.vectorPixelsToWorld(offset);
-    cd.radius = box2d.scalarPixelsToWorld(h_/2);
-    cd.density = 1.0f;
-    cd.friction = 0.3f;
-    cd.restitution = 0.5f;
-    
-
-    // Attach both shapes!
-    body.createShape(sd);
-    body.createShape(cd);
-    body.setMassFromShapes();
+    body.createFixture(sd,1.0);
+    body.createFixture(circle, 1.0);
 
     // Give it some initial random velocity
-    body.setLinearVelocity(new Vec2(random(-5,5),random(2,5)));
-    body.setAngularVelocity(random(-5,5));
-
+    body.setLinearVelocity(new Vec2(random(-5, 5), random(2, 5)));
+    body.setAngularVelocity(random(-5, 5));
   }
-
 }
-
-
 

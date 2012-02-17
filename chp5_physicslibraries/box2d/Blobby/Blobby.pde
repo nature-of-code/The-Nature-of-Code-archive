@@ -1,11 +1,13 @@
 // The Nature of Code
 // <http://www.shiffman.net/teaching/nature>
-// Spring 2010
+// Spring 2012
 // PBox2D example
 
 // A blob skeleton
 // Could be used to create blobbly characters a la Nokia Friends
 // http://postspectacular.com/work/nokia/friends/start
+
+// This seems to be broken with the Box2D 2.1.2 version I'm using
 
 import pbox2d.*;
 
@@ -56,11 +58,7 @@ Blob blob;
     wall.display();
   }
 
-  // Here we create a dynamic gravity vector based on the location of our mouse
-  PVector g = new PVector(mouseX-width/2,mouseY-height/2);
-  g.normalize();
-  g.mult(10);
-  box2d.setGravity(g.x, -g.y);
+
 }
 
 

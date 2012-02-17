@@ -11,21 +11,28 @@ class Box {
 
     // Build Body
     BodyDef bd = new BodyDef();			
+    bd.type = BodyType.DYNAMIC;
     bd.position.set(box2d.coordPixelsToWorld(x,y));
     body = box2d.createBody(bd);
 
-    // Build Shape
-    PolygonDef sd = new PolygonDef();			
+
+   // Define a polygon (this is what we use for a rectangle)
+    PolygonShape sd = new PolygonShape();
     float box2dW = box2d.scalarPixelsToWorld(w/2);
     float box2dH = box2d.scalarPixelsToWorld(h/2);	// Box2D considers the width and height of a
     sd.setAsBox(box2dW, box2dH);		        // rectangle to be the distance from the
-    sd.density = 1.0;					// center to the edge (so half of what we
-    sd.friction = 0.3;					// normally think of as width or height.) 
+                 					// center to the edge (so half of what we
+                					// normally think of as width or height.) 
+    // Define a fixture
+    FixtureDef fd = new FixtureDef();
+    fd.shape = sd;
+    // Parameters that affect physics
+    fd.density = 1;
+    fd.friction = 0.3;
+    fd.restitution = 0.5;
 
-    sd.restitution = 0.5; 				
-    // Attach Shape to Body						   
-    body.createShape(sd);					
-    body.setMassFromShapes();
+    // Attach Fixture to Body						   
+    body.createFixture(fd);
   }
 
   void display() {

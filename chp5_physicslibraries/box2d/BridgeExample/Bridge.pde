@@ -39,8 +39,8 @@ class Bridge {
          DistanceJointDef djd = new DistanceJointDef();
          Particle previous = particles.get(i-1);
          // Connection between previous particle and this one
-         djd.body1 = previous.body;
-         djd.body2 = p.body;
+         djd.bodyA = previous.body;
+         djd.bodyB = p.body;
          // Equilibrium length
          djd.length = box2d.scalarPixelsToWorld(len);
          // These properties affect how springy the joint is 

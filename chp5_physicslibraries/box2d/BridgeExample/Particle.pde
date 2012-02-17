@@ -18,21 +18,26 @@ class Particle {
     
     // Define a body
     BodyDef bd = new BodyDef();
+    if (fixed) bd.type = BodyType.STATIC;
+    else bd.type = BodyType.DYNAMIC;
+
     // Set its position
     bd.position = box2d.coordPixelsToWorld(x,y);
     body = box2d.world.createBody(bd);
 
     // Make the body's shape a circle
-    CircleDef cd = new CircleDef();
-    cd.radius = box2d.scalarPixelsToWorld(r);
-    if (fixed) cd.density = 0;
-    else cd.density = 1.0;
-    cd.friction = 0.01;
-    cd.restitution = 0.3; // Restitution is bounciness
-    body.createShape(cd);
-
-    // Always do this at the end
-    body.setMassFromShapes();
+    // Make the body's shape a circle
+    CircleShape cs = new CircleShape();
+    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    
+    FixtureDef fd = new FixtureDef();
+    fd.shape = cs;
+    // Parameters that affect physics
+    fd.density = 1;
+    fd.friction = 0.3;
+    fd.restitution = 0.5;
+    
+    body.createFixture(fd);
 
     col = color(175);
   }

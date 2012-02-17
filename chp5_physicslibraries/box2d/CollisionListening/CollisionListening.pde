@@ -24,7 +24,7 @@ ArrayList<Particle> particles;
 Boundary wall;
 
 void setup() {
-  size(400,300);
+  size(400, 300);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -36,18 +36,16 @@ void setup() {
 
   // Create the empty list
   particles = new ArrayList<Particle>();
-  
-  wall = new Boundary(width/2,height-5,width,10);
 
-
+  wall = new Boundary(width/2, height-5, width, 10);
 }
 
 void draw() {
   background(255);
 
   if (random(1) < 0.1) {
-    float sz = random(4,8);
-    particles.add(new Particle(random(width),20,sz));
+    float sz = random(4, 8);
+    particles.add(new Particle(random(width), 20, sz));
   }
 
 
@@ -64,49 +62,36 @@ void draw() {
       particles.remove(i);
     }
   }
-  
-  wall.display();
 
+  wall.display();
 }
 
 
 // Collision event functions!
-void addContact(ContactPoint cp) {
-  // Get both shapes
-  Shape s1 = cp.shape1;
-  Shape s2 = cp.shape2;
+void beginContact(Contact cp) {
+  // Get both fixtures
+  Fixture f1 = cp.getFixtureA();
+  Fixture f2 = cp.getFixtureB();
   // Get both bodies
-  Body b1 = s1.getBody();
-  Body b2 = s2.getBody();
-  
+  Body b1 = f1.getBody();
+  Body b2 = f2.getBody();
+
   // Get our objects that reference these bodies
   Object o1 = b1.getUserData();
   Object o2 = b2.getUserData();
-  
-  if (o1.getClass() == Particle.class) {
-    Particle p = (Particle) o1;
-    p.delete();
-  }
-  
-    if (o2.getClass() == Particle.class) {
-    Particle p = (Particle) o2;
-    p.change();
-  }
-}
 
+  if (o1.getClass() == Particle.class && o2.getClass() == Particle.class) {
+    Particle p1 = (Particle) o1;
+    p1.change();
+    Particle p2 = (Particle) o2;
+    p2.change();
+  }
 
-// Contacts continue to collide - i.e. resting on each other
-void persistContact(ContactPoint cp) {
 }
 
 // Objects stop touching each other
-void removeContact(ContactPoint cp) {
+void endContact(Contact cp) {
 }
-
-// Contact point is resolved into an add, persist etc
-void resultContact(ContactResult cr) {
-}
-
 
 
 

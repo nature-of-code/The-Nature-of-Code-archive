@@ -14,7 +14,7 @@ class Surface {
     surface = new ArrayList<Vec2>();
 
     // This is what box2d uses to put the surface in its world
-    EdgeChainDef edges = new EdgeChainDef();
+    ChainShape chain = new ChainShape();
 
     // Perlin noise argument
     float xoff = 0.0;
@@ -33,28 +33,32 @@ class Surface {
         y = 100 + x*1.1 + map(noise(xoff),0,1,-80,80);
       }
 
-      // The edge point in our window
-      Vec2 screenEdge = new Vec2(x,y);
-      // We store it for rendering
-      surface.add(screenEdge);
-
-      // Convert it to the box2d world and add it to our EdgeChainDef
-      Vec2 edge = box2d.coordPixelsToWorld(screenEdge);
-      edges.addVertex(edge);
+      // Store the vertex in screen coordinates
+      surface.add(new Vec2(x,y));
 
       // Move through perlin noise
       xoff += 0.1;
 
     }
-    edges.setIsLoop(false);   // We could make the edge a full loop
-    edges.friction = 2.0;    // How much friction
-    edges.restitution = 0.3; // How bouncy
-
-    // The edge chain is now a body!
+    
+    // Build an array of vertices in Box2D coordinates
+    // from the ArrayList we made
+    Vec2[] vertices = new Vec2[surface.size()];
+    for (int i = 0; i < vertices.length; i++) {
+      Vec2 edge = box2d.coordPixelsToWorld(surface.get(i));
+      vertices[i] = edge;
+    }
+    
+    // Create the chain!
+    chain.createChain(vertices,vertices.length);
+    
+    // The edge chain is now attached to a body via a fixture
     BodyDef bd = new BodyDef();
     bd.position.set(0.0f,0.0f);
-    Body body = box2d.world.createBody(bd);
-    body.createShape(edges);
+    Body body = box2d.createBody(bd);
+    // Shortcut, we could define a fixture if we
+    // want to specify frictions, restitution, etc.
+    body.createFixture(chain,1);
 
   }
 

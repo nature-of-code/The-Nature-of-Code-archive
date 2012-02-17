@@ -27,9 +27,9 @@ class Spring {
   void display() {
     if (mouseJoint != null) {
       // We can get the two anchor points
-      Vec2 v1 = null;
+      Vec2 v1 = new Vec2(0,0);
       mouseJoint.getAnchorA(v1);
-      Vec2 v2 = null;
+      Vec2 v2 = new Vec2(0,0);
       mouseJoint.getAnchorB(v2);
       // Convert them to screen coordinates
       v1 = box2d.coordWorldToPixels(v1);
@@ -58,9 +58,9 @@ class Spring {
     // And that's the target
     md.target.set(mp);
     // Some stuff about how strong and bouncy the spring should be
-    md.maxForce = 1000.0f * box.body.m_mass;
-    md.frequencyHz = 5.0f;
-    md.dampingRatio = 0.9f;
+    md.maxForce = 1000.0 * box.body.m_mass;
+    md.frequencyHz = 5.0;
+    md.dampingRatio = 0.9;
 
     // Wake up body!
     //box.body.wakeUp();

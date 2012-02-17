@@ -47,7 +47,7 @@ void mousePressed() {
 void draw() {
   background(255);
 
-  if (random(1) < 0.05) {
+  if (random(1) < 0.1) {
     float sz = random(4,8);
     particles.add(new Particle(random(150,250),-20,sz));
   }
@@ -75,6 +75,8 @@ void draw() {
   
   fill(0);
   text("Click mouse to toggle motor.\nMotor: " + status,10,270);
+  
+
 }
 
 

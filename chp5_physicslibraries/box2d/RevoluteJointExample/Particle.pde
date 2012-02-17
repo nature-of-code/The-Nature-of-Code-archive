@@ -10,15 +10,15 @@ class Particle {
   // We need to keep track of a Body and a radius
   Body body;
   float r;
-  
+
   color col;
 
   Particle(float x, float y, float r_) {
     r = r_;
     // This function puts the particle in the Box2d world
-    makeBody(x,y,r);
+    makeBody(x, y, r);
     body.setUserData(this);
-    
+
     col = color(175);
   }
 
@@ -26,10 +26,10 @@ class Particle {
   void killBody() {
     box2d.destroyBody(body);
   }
-  
+
   // Change color when hit
   void change() {
-    col = color(255,0,0); 
+    col = color(255, 0, 0);
   }
 
   // Is the particle ready for deletion?
@@ -51,14 +51,15 @@ class Particle {
     // Get its angle of rotation
     float a = body.getAngle();
     pushMatrix();
-    translate(pos.x,pos.y);
-    rotate(a);
+    translate(pos.x, pos.y);
+
+    rotate(-a);
     fill(col);
     stroke(0);
     strokeWeight(1);
-    ellipse(0,0,r*2,r*2);
+    ellipse(0, 0, r*2, r*2);
     // Let's add a line so we can see the rotation
-    line(0,0,r,0);
+    line(0, 0, r, 0);
     popMatrix();
   }
 
@@ -67,30 +68,27 @@ class Particle {
     // Define a body
     BodyDef bd = new BodyDef();
     // Set its position
-    bd.position = box2d.coordPixelsToWorld(x,y);
+    bd.position = box2d.coordPixelsToWorld(x, y);
+    bd.type = BodyType.DYNAMIC;
+
     body = box2d.world.createBody(bd);
 
     // Make the body's shape a circle
-    CircleDef cd = new CircleDef();
-    cd.radius = box2d.scalarPixelsToWorld(r);
-    cd.density = 2.0;
-    cd.friction = 0.01;
-    cd.restitution = 0.3; // Restitution is bounciness
-    body.createShape(cd);
+    CircleShape cs = new CircleShape();
+    cs.m_radius = box2d.scalarPixelsToWorld(r);
 
-    // Always do this at the end
-    body.setMassFromShapes();
+    FixtureDef fd = new FixtureDef();
+    fd.shape = cs;
+
+    fd.density = 2.0;
+    fd.friction = 0.01;
+    fd.restitution = 0.3; // Restitution is bounciness
+
+    body.createFixture(fd);
 
     // Give it a random initial velocity (and angular velocity)
     //body.setLinearVelocity(new Vec2(random(-10f,10f),random(5f,10f)));
-    body.setAngularVelocity(random(-10,10));
+    body.setAngularVelocity(random(-10, 10));
   }
-
-
-
-
-
-
 }
-
 

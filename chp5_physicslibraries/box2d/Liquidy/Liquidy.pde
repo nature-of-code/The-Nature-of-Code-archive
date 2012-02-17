@@ -37,8 +37,8 @@ void setup() {
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
-  boundaries.add(new Boundary(50,100,300,5,-0.3f));
-  boundaries.add(new Boundary(250,175,300,5,0.5f));
+  boundaries.add(new Boundary(50,100,300,5,-0.3));
+  boundaries.add(new Boundary(250,175,300,5,0.5));
 
 }
 

@@ -26,7 +26,7 @@ Box box;
 Spring spring;
 
 void setup() {
-  size(400,300);
+  size(640,360);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -41,10 +41,10 @@ void setup() {
 
   // Add a bunch of fixed boundaries
   boundaries = new ArrayList();
-  boundaries.add(new Boundary(width/2,height-5,width,10));
-  boundaries.add(new Boundary(width/2,5,width,10));
-  boundaries.add(new Boundary(width-5,height/2,10,height));
-  boundaries.add(new Boundary(5,height/2,10,height));
+  boundaries.add(new Boundary(width/2,height-5,width,10,0));
+  boundaries.add(new Boundary(width/2,5,width,10,0));
+  boundaries.add(new Boundary(width-5,height/2,10,height,0));
+  boundaries.add(new Boundary(5,height/2,10,height,0));
 }
 
 // When the mouse is released we're done with the spring

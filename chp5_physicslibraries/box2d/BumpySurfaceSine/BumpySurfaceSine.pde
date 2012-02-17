@@ -28,7 +28,7 @@ void setup() {
   box2d = new PBox2D(this);
   box2d.createWorld();
   // We are setting a custom gravity
-  box2d.setGravity(0, -20);
+  box2d.setGravity(0, -10);
 
   // Create the empty list
   particles = new ArrayList<Particle>();

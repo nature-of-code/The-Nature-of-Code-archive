@@ -1,6 +1,6 @@
 // The Nature of Code
 // <http://www.shiffman.net/teaching/nature>
-// Spring 2010
+// Spring 2012
 // PBox2D example
 
 // A Particle
@@ -70,28 +70,30 @@ class Particle {
   void makeBody(Vec2 center, float r) {
     // Define and create the body
     BodyDef bd = new BodyDef();
+        bd.type = BodyType.DYNAMIC;
+
     bd.position.set(box2d.coordPixelsToWorld(center));
     body = box2d.createBody(bd);
 
     // Give it some initial random velocity
     body.setLinearVelocity(new Vec2(random(-1,1),random(-1,1)));
 
-    // We'll make the shape a circle I guess (though we could have done rectangle, maybe faster?)
-    CircleDef cd = new CircleDef();
-    r = box2d.scalarPixelsToWorld(r);
-    cd.radius = r;
-
-    // Parameters that affect physics
-    cd.density = 0.1f;
-    cd.friction = 0.0f;    // Slippery when wet!
-    cd.restitution = 0.5f;
+    // Make the body's shape a circle
+    CircleShape cs = new CircleShape();
+    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    
+    FixtureDef fd = new FixtureDef();
+    fd.shape = cs;
+  
+    fd.density = 1;
+    fd.friction = 0;  // Slippery when wet!
+    fd.restitution = 0.5;
 
     // We could use this if we want to turn collisions off
     //cd.filter.groupIndex = -10;
 
-    // Attach that shape to our body!
-    body.createShape(cd);
-    body.setMassFromShapes();
+    // Attach fixture to body
+    body.createFixture(fd);
 
   }
 

@@ -80,6 +80,7 @@ void draw() {
   // Instead update the spring which pulls the mouse along
   if (mousePressed) {
     spring.update(mouseX,mouseY);
+    spring.display();
   } else {
     spring.update(x,y);
   }
@@ -105,47 +106,34 @@ void draw() {
 
 
 // Collision event functions!
-void addContact(ContactPoint cp) {
-  // Get both shapes
-  Shape s1 = cp.shape1;
-  Shape s2 = cp.shape2;
+void beginContact(Contact cp) {
+  // Get both fixtures
+  Fixture f1 = cp.getFixtureA();
+  Fixture f2 = cp.getFixtureB();
   // Get both bodies
-  Body b1 = s1.getBody();
-  Body b2 = s2.getBody();
+  Body b1 = f1.getBody();
+  Body b2 = f2.getBody();
   // Get our objects that reference these bodies
   Object o1 = b1.getUserData();
   Object o2 = b2.getUserData();
 
-  // What class are they?  Box or Particle?
-  String c1 = o1.getClass().getName();
-  String c2 = o2.getClass().getName();
-
   // If object 1 is a Box, then object 2 must be a particle
   // Note we are ignoring particle on particle collisions
-  if (c1.contains("Box")) {
+  if (o1.getClass() == Box.class) {
     Particle p = (Particle) o2;
     p.change();
   } 
   // If object 2 is a Box, then object 1 must be a particle
-  else if (c2.contains("Box")) {
+  else if (o2.getClass() == Box.class) {
     Particle p = (Particle) o1;
     p.change();
   }
 }
 
 
-// Contacts continue to collide - i.e. resting on each other
-void persistContact(ContactPoint cp) {
-}
-
 // Objects stop touching each other
-void removeContact(ContactPoint cp) {
+void endContact(Contact cp) {
 }
-
-// Contact point is resolved into an add, persist etc
-void resultContact(ContactResult cr) {
-}
-
 
 
 

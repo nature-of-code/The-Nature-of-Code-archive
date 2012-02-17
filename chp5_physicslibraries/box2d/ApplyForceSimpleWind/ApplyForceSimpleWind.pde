@@ -19,7 +19,7 @@ ArrayList<Boundary> boundaries;
 ArrayList<Box> boxes;
 
 void setup() {
-  size(400,300);
+  size(640,360);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -33,8 +33,8 @@ void setup() {
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
-  boundaries.add(new Boundary(width/4,height-5,width/2-50,10));
-  boundaries.add(new Boundary(3*width/4,height-5,width/2-50,10));
+  boundaries.add(new Boundary(width/4,height-5,width/2-100,10));
+  boundaries.add(new Boundary(3*width/4,height-5,width/2-100,10));
   boundaries.add(new Boundary(width-5,height/2,10,height));
   boundaries.add(new Boundary(5,height/2,10,height));
 }
@@ -78,7 +78,7 @@ void draw() {
   }
   
   fill(0);
-  text("Click mouse to attract boxes",20,20);
+  text("Click mouse to apply a wind force.",20,20);
 }
 
 

@@ -20,22 +20,26 @@ class Box {
     // Define and create the body
     BodyDef bd = new BodyDef();
     bd.position.set(box2d.coordPixelsToWorld(new Vec2(x,y)));
+    if (lock) bd.type = BodyType.STATIC;
+    else bd.type = BodyType.DYNAMIC;
+
     body = box2d.createBody(bd);
 
-    // Define the shape -- a polygon (this is what we use for a rectangle)
-    PolygonDef sd = new PolygonDef();
+    // Define the shape -- a  (this is what we use for a rectangle)
+    PolygonShape sd = new PolygonShape();
     float box2dW = box2d.scalarPixelsToWorld(w/2);
     float box2dH = box2d.scalarPixelsToWorld(h/2);
     sd.setAsBox(box2dW, box2dH);
-    // Parameters that affect physics
-    if (lock) sd.density = 0;
-    else sd.density = 1.0;
-    sd.friction = 0.3;
-    sd.restitution = 0.5;
 
-    // Attach that shape to our body!
-    body.createShape(sd);
-    body.setMassFromShapes();
+    // Define a fixture
+    FixtureDef fd = new FixtureDef();
+    fd.shape = sd;
+    // Parameters that affect physics
+    fd.density = 1;
+    fd.friction = 0.3;
+    fd.restitution = 0.5;
+
+    body.createFixture(fd);
 
     // Give it some initial random velocity
     body.setLinearVelocity(new Vec2(random(-5,5),random(2,5)));

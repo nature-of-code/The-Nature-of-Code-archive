@@ -23,9 +23,7 @@ void draw() {
   background(255);
   
   // We must always step through time!
-  if (mousePressed)
   box2d.step();    
-
 
   // When the mouse is clicked, add a new Box object
   if (mousePressed) {

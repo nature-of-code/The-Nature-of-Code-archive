@@ -12,7 +12,7 @@ class CustomShape {
   // Constructor
   CustomShape(float x, float y) {
     // Add the box to the box2d world
-    makeBody(new Vec2(x,y));
+    makeBody(new Vec2(x, y));
   }
 
   // This function removes the particle from the box2d world
@@ -38,23 +38,23 @@ class CustomShape {
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Get its angle of rotation
     float a = body.getAngle();
-   
-    // Ask for the shape
-    PolygonShape ps = (PolygonShape) body.getShapeList();
-    // Get the array of vertices
-    Vec2[] vertices = ps.m_vertices;
+
+    Fixture f = body.getFixtureList();
+    PolygonShape ps = (PolygonShape) f.getShape();
+
 
     rectMode(CENTER);
     pushMatrix();
-    translate(pos.x,pos.y);
+    translate(pos.x, pos.y);
     rotate(-a);
     fill(175);
     stroke(0);
     beginShape();
+    //println(vertices.length);
     // For every vertex, convert to pixel vector
-    for (int i = 0; i < vertices.length; i++) {
-      Vec2 v = box2d.vectorWorldToPixels(vertices[i]);
-      vertex(v.x,v.y);
+    for (int i = 0; i < ps.getVertexCount(); i++) {
+      Vec2 v = box2d.vectorWorldToPixels(ps.getVertex(i));
+      vertex(v.x, v.y);
     }
     endShape(CLOSE);
     popMatrix();
@@ -64,31 +64,28 @@ class CustomShape {
   void makeBody(Vec2 center) {
 
     // Define a polygon (this is what we use for a rectangle)
-    PolygonDef sd = new PolygonDef();
-    sd.addVertex(box2d.vectorPixelsToWorld(new Vec2(-15,25)));
-    sd.addVertex(box2d.vectorPixelsToWorld(new Vec2(10,5)));
-    sd.addVertex(box2d.vectorPixelsToWorld(new Vec2(15,0)));
-    sd.addVertex(box2d.vectorPixelsToWorld(new Vec2(20,-15)));
-    sd.addVertex(box2d.vectorPixelsToWorld(new Vec2(-10,-10)));
+    PolygonShape sd = new PolygonShape();
 
+    Vec2[] vertices = new Vec2[4];
+    vertices[0] = box2d.vectorPixelsToWorld(new Vec2(-15, 25));
+    vertices[1] = box2d.vectorPixelsToWorld(new Vec2(15, 0));
+    vertices[2] = box2d.vectorPixelsToWorld(new Vec2(20, -15));
+    vertices[3] = box2d.vectorPixelsToWorld(new Vec2(-10, -10));
 
-    // Parameters that affect physics
-    sd.density = 1.0f;
-    sd.friction = 0.3f;
-    sd.restitution = 0.5f;
+    sd.set(vertices, vertices.length);
 
     // Define the body and make it from the shape
     BodyDef bd = new BodyDef();
+    bd.type = BodyType.DYNAMIC;
     bd.position.set(box2d.coordPixelsToWorld(center));
-
     body = box2d.createBody(bd);
-    body.createShape(sd);
-    body.setMassFromShapes();
+
+    body.createFixture(sd, 1.0);
+
 
     // Give it some initial random velocity
-    body.setLinearVelocity(new Vec2(random(-5,5),random(2,5)));
-    body.setAngularVelocity(random(-5,5));
+    body.setLinearVelocity(new Vec2(random(-5, 5), random(2, 5)));
+    body.setAngularVelocity(random(-5, 5));
   }
 }
-
 

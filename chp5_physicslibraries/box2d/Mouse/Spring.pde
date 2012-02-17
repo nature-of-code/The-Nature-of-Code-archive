@@ -27,8 +27,10 @@ class Spring {
   void display() {
     if (mouseJoint != null) {
       // We can get the two anchor points
-      Vec2 v1 = mouseJoint.getAnchor1();
-      Vec2 v2 = mouseJoint.getAnchor2();
+      Vec2 v1 = new Vec2(0,0);
+      mouseJoint.getAnchorA(v1);
+      Vec2 v2 = new Vec2(0,0);
+      mouseJoint.getAnchorB(v2);
       // Convert them to screen coordinates
       v1 = box2d.coordWorldToPixels(v1);
       v2 = box2d.coordWorldToPixels(v2);
@@ -46,10 +48,10 @@ class Spring {
   void bind(float x, float y, Box box) {
     // Define the joint
     MouseJointDef md = new MouseJointDef();
-    // Body 1 is just a fake ground body for simplicity (there isn't anything at the mouse)
-    md.body1 = box2d.world.getGroundBody();
+    // Body A is just a fake ground body for simplicity (there isn't anything at the mouse)
+    md.bodyA = box2d.getGroundBody();
     // Body 2 is the box's boxy
-    md.body2 = box.body;
+    md.bodyB = box.body;
     // Get the mouse location in world coordinates
     Vec2 mp = box2d.coordPixelsToWorld(x,y);
     // And that's the target
@@ -58,9 +60,6 @@ class Spring {
     md.maxForce = 1000.0 * box.body.m_mass;
     md.frequencyHz = 5.0;
     md.dampingRatio = 0.9;
-
-    // Wake up body!
-    box.body.wakeUp();
 
     // Make the joint!
     mouseJoint = (MouseJoint) box2d.world.createJoint(md);

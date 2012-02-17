@@ -15,27 +15,32 @@ class Mover {
     r = r_;
     // Define a body
     BodyDef bd = new BodyDef();
+    bd.type = BodyType.DYNAMIC;
+
     // Set its position
     bd.position = box2d.coordPixelsToWorld(x,y);
     body = box2d.world.createBody(bd);
 
     // Make the body's shape a circle
-    CircleDef cd = new CircleDef();
-    cd.radius = box2d.scalarPixelsToWorld(r);
-    cd.density = 1.0;
-    cd.friction = 0.01f;
-    cd.restitution = 0.5; // Restitution is bounciness
-    body.createShape(cd);
+    CircleShape cs = new CircleShape();
+    cs.m_radius = box2d.scalarPixelsToWorld(r);
+    
+    // Define a fixture
+    FixtureDef fd = new FixtureDef();
+    fd.shape = cs;
+    // Parameters that affect physics
+    fd.density = 1;
+    fd.friction = 0.3;
+    fd.restitution = 0.5;
 
-    // Always do this at the end
-    body.setMassFromShapes();
+    body.createFixture(fd);
 
     body.setLinearVelocity(new Vec2(random(-5,5),random(-5,-5)));
     body.setAngularVelocity(random(-1,1));
   }
 
   void applyForce(Vec2 v) {
-    body.applyForce(v, body.getMemberWorldCenter());
+    body.applyForce(v, body.getWorldCenter());
   }
 
 

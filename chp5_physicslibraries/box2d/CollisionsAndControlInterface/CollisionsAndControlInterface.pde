@@ -83,7 +83,7 @@ void draw() {
   } else {
     spring.update(x,y);
   }
-  box.body.setAngularVelocity(0);
+  //box.body.setAngularVelocity(0);
 
   // Look at all particles
   for (int i = particles.size()-1; i >= 0; i--) {

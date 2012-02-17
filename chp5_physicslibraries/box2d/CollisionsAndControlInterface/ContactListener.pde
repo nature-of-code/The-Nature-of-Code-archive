@@ -5,23 +5,27 @@
 
 // ContactListener to listen for collisions!
 
-class CustomListener implements ContactListener {
-  CustomListener(){
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.collision.Manifold;
+import org.jbox2d.dynamics.contacts.Contact;
 
+ class CustomListener implements ContactListener {
+  CustomListener() {
   }
 
   // This function is called when a new collision occurs
-  void add(ContactPoint cp) {
-    // Get both shapes
-    Shape s1 = cp.shape1;
-    Shape s2 = cp.shape2;
+   void beginContact(Contact cp) {
+    // Get both fixtures
+    Fixture f1 = cp.getFixtureA();
+    Fixture f2 = cp.getFixtureB();
     // Get both bodies
-    Body b1 = s1.getBody();
-    Body b2 = s2.getBody();
+    Body b1 = f1.getBody();
+    Body b2 = f2.getBody();
     // Get our objects that reference these bodies
     Object o1 = b1.getUserData();
     Object o2 = b2.getUserData();
-    
+
     // If object 1 is a Box, then object 2 must be a particle
     // Note we are ignoring particle on particle collisions
     if (o1.getClass() == Box.class) {
@@ -35,22 +39,18 @@ class CustomListener implements ContactListener {
     }
   }
 
-
-  // Contacts continue to collide - i.e. resting on each other
-  void persist(ContactPoint cp)  {
+   void endContact(Contact contact) {
+    // TODO Auto-generated method stub
   }
 
-  // Objects stop touching each other
-  void remove(ContactPoint cp)  {
+   void preSolve(Contact contact, Manifold oldManifold) {
+    // TODO Auto-generated method stub
   }
 
-  // Contact point is resolved into an add, persist etc
-  void result(ContactResult cr) {
-
+   void postSolve(Contact contact, ContactImpulse impulse) {
+    // TODO Auto-generated method stub
   }
 }
-
-
 
 
 
