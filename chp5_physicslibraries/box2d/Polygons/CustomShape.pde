@@ -64,7 +64,7 @@ class CustomShape {
   void makeBody(Vec2 center) {
 
     // Define a polygon (this is what we use for a rectangle)
-    PolygonShape sd = new PolygonShape();
+    PolygonShape ps = new PolygonShape();
 
     Vec2[] vertices = new Vec2[4];
     vertices[0] = box2d.vectorPixelsToWorld(new Vec2(-15, 25));
@@ -72,7 +72,7 @@ class CustomShape {
     vertices[2] = box2d.vectorPixelsToWorld(new Vec2(20, -15));
     vertices[3] = box2d.vectorPixelsToWorld(new Vec2(-10, -10));
 
-    sd.set(vertices, vertices.length);
+    ps.set(vertices, vertices.length);
 
     // Define the body and make it from the shape
     BodyDef bd = new BodyDef();
@@ -80,7 +80,7 @@ class CustomShape {
     bd.position.set(box2d.coordPixelsToWorld(center));
     body = box2d.createBody(bd);
 
-    body.createFixture(sd, 1.0);
+    body.createFixture(ps, 1.0);
 
 
     // Give it some initial random velocity

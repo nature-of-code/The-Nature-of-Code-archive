@@ -21,14 +21,14 @@ ArrayList<Particle> particles;
 Surface surface;
 
 void setup() {
-  size(500,300);
+  size(640,360);
   smooth();
 
   // Initialize box2d physics and create the world
   box2d = new PBox2D(this);
   box2d.createWorld();
   // We are setting a custom gravity
-  box2d.setGravity(0, -20);
+  box2d.setGravity(0, -10);
 
   // Create the empty list
   particles = new ArrayList<Particle>();
