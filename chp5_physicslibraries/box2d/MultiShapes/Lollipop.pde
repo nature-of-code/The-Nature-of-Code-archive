@@ -53,7 +53,7 @@ class Lollipop {
     stroke(0);
 
     rect(0,0,w,h);
-    ellipse(0, h/2, r*2, r*2);
+    ellipse(0, -h/2, r*2, r*2);
     popMatrix();
   }
 
@@ -68,16 +68,16 @@ class Lollipop {
 
     CircleShape circle = new CircleShape();
     circle.m_radius = box2d.scalarPixelsToWorld(r);
-    Vec2 offset = new Vec2(0,h/2);
+    Vec2 offset = new Vec2(0,-h/2);
     offset = box2d.vectorPixelsToWorld(offset);
     circle.m_p.set(offset.x,offset.y);
 
-    PolygonShape sd = new PolygonShape();
+    PolygonShape ps = new PolygonShape();
     float box2dW = box2d.scalarPixelsToWorld(w/2);
     float box2dH = box2d.scalarPixelsToWorld(h/2);
-    sd.setAsBox(box2dW, box2dH);
+    ps.setAsBox(box2dW, box2dH);
 
-    body.createFixture(sd,1.0);
+    body.createFixture(ps,1.0);
     body.createFixture(circle, 1.0);
 
     // Give it some initial random velocity

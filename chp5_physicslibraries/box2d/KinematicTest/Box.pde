@@ -75,20 +75,20 @@ class Box {
   void makeBody(Vec2 center, float w_, float h_) {
     // Define and create the body
     BodyDef bd = new BodyDef();
-    bd.type = BodyType.DYNAMIC;
+    bd.type = BodyType.KINEMATIC;
     bd.position.set(box2d.coordPixelsToWorld(center));
     bd.fixedRotation = true;
     body = box2d.createBody(bd);
 
     // Define a polygon (this is what we use for a rectangle)
-    PolygonShape sd = new PolygonShape();
+    PolygonShape ps = new PolygonShape();
     float box2dW = box2d.scalarPixelsToWorld(w_/2);
     float box2dH = box2d.scalarPixelsToWorld(h_/2);
-    sd.setAsBox(box2dW, box2dH);
+    ps.setAsBox(box2dW, box2dH);
 
     // Define a fixture
     FixtureDef fd = new FixtureDef();
-    fd.shape = sd;
+    fd.shape = ps;
     // Parameters that affect physics
     fd.density = 1;
     fd.friction = 0.3;

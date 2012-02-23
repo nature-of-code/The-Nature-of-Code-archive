@@ -63,15 +63,14 @@ class CustomShape {
   // This function adds the rectangle to the box2d world
   void makeBody(Vec2 center) {
 
-    // Define a polygon (this is what we use for a rectangle)
-    PolygonShape ps = new PolygonShape();
-
     Vec2[] vertices = new Vec2[4];
     vertices[0] = box2d.vectorPixelsToWorld(new Vec2(-15, 25));
     vertices[1] = box2d.vectorPixelsToWorld(new Vec2(15, 0));
     vertices[2] = box2d.vectorPixelsToWorld(new Vec2(20, -15));
     vertices[3] = box2d.vectorPixelsToWorld(new Vec2(-10, -10));
 
+    // Define a polygon (this is what we use for a rectangle)
+    PolygonShape ps = new PolygonShape();
     ps.set(vertices, vertices.length);
 
     // Define the body and make it from the shape

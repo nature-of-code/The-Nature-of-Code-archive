@@ -74,7 +74,7 @@ class Box {
   void makeBody(Vec2 center, float w_, float h_) {
     // Define and create the body
     BodyDef bd = new BodyDef();
-    bd.type = BodyType.DYNAMIC;
+    bd.type = BodyType.KINEMATIC;
     bd.position.set(box2d.coordPixelsToWorld(center));
     body = box2d.createBody(bd);
 

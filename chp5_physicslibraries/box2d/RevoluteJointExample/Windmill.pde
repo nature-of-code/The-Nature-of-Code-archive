@@ -22,18 +22,17 @@ class Windmill {
     // Define joint as between two bodies
     RevoluteJointDef rjd = new RevoluteJointDef();
 
-    Vec2 offset = box2d.vectorPixelsToWorld(new Vec2(0, 60));
-
     rjd.initialize(box1.body, box2.body, box1.body.getWorldCenter());
 
     // Turning on a motor (optional)
     rjd.motorSpeed = PI*2;       // how fast?
     rjd.maxMotorTorque = 1000.0; // how powerful?
-    rjd.enableMotor = true;      // is it on?
+    rjd.enableMotor = false;      // is it on?
 
     // There are many other properties you can set for a Revolute joint
     // For example, you can limit its angle between a minimum and a maximum
     // See box2d manual for more
+    
 
       // Create the joint
     joint = (RevoluteJoint) box2d.world.createJoint(rjd);

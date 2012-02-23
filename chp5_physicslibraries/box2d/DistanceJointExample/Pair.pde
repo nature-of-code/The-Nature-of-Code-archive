@@ -18,7 +18,6 @@ class Pair {
     p1 = new Particle(x,y);
     p2 = new Particle(x+random(-1,1),y+random(-1,1));
 
-
     DistanceJointDef djd = new DistanceJointDef();
     // Connection between previous particle and this one
     djd.bodyA = p1.body;
@@ -35,9 +34,6 @@ class Pair {
     DistanceJoint dj = (DistanceJoint) box2d.world.createJoint(djd);
   }
 
-
-
-  // Draw the bridge
   void display() {
     Vec2 pos1 = box2d.getBodyPixelCoord(p1.body);
     Vec2 pos2 = box2d.getBodyPixelCoord(p2.body);
