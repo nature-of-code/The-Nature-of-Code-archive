@@ -23,11 +23,7 @@ void setup() {
   smooth();
  
   // Make a new Pendulum with an origin location and armlength
-<<<<<<< HEAD
-  p = new Pendulum(new PVector(width/2,10),175);
-=======
   p = new Pendulum(new PVector(width/2,10),250);
->>>>>>> fixing up chapter 3 examples for class
 
 }
 

@@ -13,11 +13,7 @@ Bob bob;
 Spring spring;
 
 void setup() {
-<<<<<<< HEAD
-  size(640, 360);
-=======
   size(640,360);
->>>>>>> fixing up chapter 3 examples for class
   smooth();
   // Create objects at starting location
   // Note third argument in Spring constructor is "rest length"
