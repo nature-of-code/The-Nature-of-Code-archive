@@ -5,7 +5,7 @@
 float[] heights;
 
 void setup() {
-  size(640, 360);
+  size(400, 200);
   smooth();
 }
 
@@ -25,6 +25,7 @@ void draw() {
 
   // a little for loop that draws a line between each point on the graph
   stroke(0);
+  strokeWeight(2);
   noFill();
   beginShape();
   for (int i = 0; i < heights.length-1; i++) {

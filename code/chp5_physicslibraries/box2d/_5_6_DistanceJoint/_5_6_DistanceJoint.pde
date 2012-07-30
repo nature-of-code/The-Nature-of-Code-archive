@@ -26,7 +26,7 @@ ArrayList<Boundary> boundaries;
 ArrayList<Pair> pairs;
 
 void setup() {
-  size(400,300);
+  size(800,200);
   smooth();
 
   // Initialize box2d physics and create the world

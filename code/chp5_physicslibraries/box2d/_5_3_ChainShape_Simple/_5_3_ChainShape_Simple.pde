@@ -21,7 +21,7 @@ ArrayList<Particle> particles;
 Surface surface;
 
 void setup() {
-  size(640,360);
+  size(800,200);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -39,7 +39,7 @@ void setup() {
 void draw() {
   // If the mouse is pressed, we make new particles
   if (random(1) < 0.5) {
-    float sz = random(2,6);
+    float sz = random(4,8);
     particles.add(new Particle(width/2,10,sz));
   }
 
@@ -64,10 +64,6 @@ void draw() {
       particles.remove(i);
     }
   }
-
-  // Just drawing the framerate to see how many particles it can handle
-  fill(0);
-  text("framerate: " + (int)frameRate,12,16);
 }
 
 

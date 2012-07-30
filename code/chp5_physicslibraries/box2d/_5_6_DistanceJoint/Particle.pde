@@ -11,8 +11,6 @@ class Particle {
   Body body;
   float r;
   
-  color col;
-  
   Particle(float x, float y) {
     r = 8;
     
@@ -37,8 +35,6 @@ class Particle {
     // Attach fixture to body
     body.createFixture(fd);
     body.setLinearVelocity(new Vec2(random(-5, 5), random(2, 5)));
-
-    col = color(175);
   }
 
   // This function removes the particle from the box2d world
@@ -66,9 +62,9 @@ class Particle {
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(a);
-    fill(col);
+    fill(127);
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(2);
     ellipse(0,0,r*2,r*2);
     // Let's add a line so we can see the rotation
     line(0,0,r,0);

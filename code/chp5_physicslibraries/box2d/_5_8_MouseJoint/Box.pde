@@ -45,8 +45,9 @@ class Box {
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(a);
-    fill(175);
+    fill(127);
     stroke(0);
+    strokeWeight(2);
     rect(0,0,w,h);
     popMatrix();
   }

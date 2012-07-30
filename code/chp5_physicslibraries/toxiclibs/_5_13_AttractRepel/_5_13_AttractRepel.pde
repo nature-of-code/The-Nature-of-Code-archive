@@ -8,7 +8,7 @@ Attractor attractor;
 VerletPhysics2D physics;
 
 void setup () {
-  size (400, 400);
+  size (800, 200);
   smooth();
   physics = new VerletPhysics2D ();
   physics.setDrag (0.01);

@@ -93,6 +93,7 @@ class Chain {
     // Draw line connecting all points
     beginShape();
     stroke(0);
+    strokeWeight(2);
     noFill();
     for (Particle p : particles) {
       vertex(p.x,p.y);

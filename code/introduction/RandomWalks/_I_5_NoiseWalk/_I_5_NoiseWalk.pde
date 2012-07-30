@@ -11,11 +11,15 @@ void setup() {
 
   // Create a walker object
   w = new Walker();
+  background(255);
 
 }
 
 void draw() {
-  background(255);
+  noStroke();
+  fill(255,5);
+  rect(0,0,width,height);
+
   // Run the walker object
   w.walk();
   w.display();

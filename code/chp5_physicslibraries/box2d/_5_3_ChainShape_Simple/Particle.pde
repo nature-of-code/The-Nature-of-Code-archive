@@ -43,9 +43,9 @@ class Particle {
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(-a);
-    fill(175);
+    fill(127);
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(2);
     ellipse(0,0,r*2,r*2);
     // Let's add a line so we can see the rotation
     line(0,0,r,0);

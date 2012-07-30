@@ -35,7 +35,7 @@ VerletPhysics2D physics;
 Chain chain;
 
 void setup() {
-  size(400, 300);
+  size(800, 200);
   smooth();
 
   // Initialize the physics world
@@ -44,7 +44,7 @@ void setup() {
   physics.setWorldBounds(new Rect(0, 0, width, height));
 
   // Initialize the chain
-  chain = new Chain(200, 20, 12, 0.2);
+  chain = new Chain(180, 20, 16, 0.2);
 }
 
 void draw() {

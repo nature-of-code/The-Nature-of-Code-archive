@@ -14,9 +14,9 @@ class Vehicle {
 
   Vehicle(float x, float y) {
     acceleration = new PVector(0,0);
-    velocity = new PVector(0,0);
+    velocity = new PVector(0,-2);
     location = new PVector(x,y);
-    r = 3.0;
+    r = 6;
     maxspeed = 4;
     maxforce = 0.1;
   }
@@ -55,8 +55,9 @@ class Vehicle {
   void display() {
     // Draw a triangle rotated in the direction of velocity
     float theta = velocity.heading2D() + PI/2;
-    fill(175);
+    fill(127);
     stroke(0);
+    strokeWeight(1);
     pushMatrix();
     translate(location.x,location.y);
     rotate(theta);
