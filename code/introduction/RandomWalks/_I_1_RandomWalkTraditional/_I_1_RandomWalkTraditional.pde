@@ -13,8 +13,10 @@ void setup() {
 
 void draw() {
   // Run the walker object
+  for (int i = 0; i < 50; i++) {
   w.step();
   w.render();
+  }
 }
 
 

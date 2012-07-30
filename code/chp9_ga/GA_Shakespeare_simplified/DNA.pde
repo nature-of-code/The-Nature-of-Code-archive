@@ -31,7 +31,7 @@ class DNA {
   }
   
   // Fitness function (returns floating point % of "correct" characters)
-  void fitness (String target) {
+  void calcFitness (String target) {
      int score = 0;
      for (int i = 0; i < genes.length; i++) {
         if (genes[i] == target.charAt(i)) {

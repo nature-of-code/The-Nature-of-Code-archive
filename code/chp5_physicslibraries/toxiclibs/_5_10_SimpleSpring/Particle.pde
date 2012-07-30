@@ -10,8 +10,9 @@ class Particle extends VerletParticle2D {
 
   // All we're doing really is adding a display() function to a VerletParticle
   void display() {
-    fill(175);
+    fill(127);
     stroke(0);
-    ellipse(x,y,16,16);
+    strokeWeight(2);
+    ellipse(x,y,32,32);
   }
 }

@@ -16,6 +16,7 @@ class Walker {
 
   void display() {
     strokeWeight(2);
+    stroke(0);
     fill(127);
     ellipse(location.x, location.y, 48, 48);
   }

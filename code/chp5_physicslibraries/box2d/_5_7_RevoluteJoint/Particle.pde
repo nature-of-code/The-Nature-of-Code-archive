@@ -11,25 +11,16 @@ class Particle {
   Body body;
   float r;
 
-  color col;
-
   Particle(float x, float y, float r_) {
     r = r_;
     // This function puts the particle in the Box2d world
     makeBody(x, y, r);
     body.setUserData(this);
-
-    col = color(175);
   }
 
   // This function removes the particle from the box2d world
   void killBody() {
     box2d.destroyBody(body);
-  }
-
-  // Change color when hit
-  void change() {
-    col = color(255, 0, 0);
   }
 
   // Is the particle ready for deletion?
@@ -54,9 +45,9 @@ class Particle {
     translate(pos.x, pos.y);
 
     rotate(-a);
-    fill(col);
+    fill(127);
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(2);
     ellipse(0, 0, r*2, r*2);
     // Let's add a line so we can see the rotation
     line(0, 0, r, 0);

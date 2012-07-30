@@ -14,8 +14,9 @@ class Box  {
 
   // Drawing the box
   void display() {
-    fill(175);
+    fill(127);
     stroke(0);
+    strokeWeight(2);
     rectMode(CENTER);
     rect(x,y,w,h);
   }

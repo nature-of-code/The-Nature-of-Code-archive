@@ -9,7 +9,7 @@ float theta = 0.0;
 
 void setup() {
 
-  size(640,360,P3D);
+  size(800,200,P3D);
 
   // Create a landscape object
   land = new Landscape(20,800,400);

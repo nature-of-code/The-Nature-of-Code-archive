@@ -43,8 +43,9 @@ class Box {
     pushMatrix();
     translate(pos.x,pos.y);		// Using the Vec2 position and float angle to
     rotate(-a);			        // translate and rotate the rectangle
-    fill(175);
+    fill(127);
     stroke(0);
+    strokeWeight(2);
     rectMode(CENTER);
     rect(0,0,w,h);
     popMatrix();

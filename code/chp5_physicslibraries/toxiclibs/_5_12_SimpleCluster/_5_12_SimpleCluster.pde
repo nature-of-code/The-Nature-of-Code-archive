@@ -5,26 +5,6 @@
  * Spring 2010</p>
  */
 
-/* 
- * Copyright (c) 2010 Daniel Schiffmann
- * 
- * This demo & library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * http://creativecommons.org/licenses/LGPL/2.1/
- * 
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 import toxi.geom.*;
 import toxi.physics2d.*;
 
@@ -42,18 +22,17 @@ boolean showParticles = true;
 PFont f;
 
 void setup() {
-  size(300,300);
+  size(800, 200);
   smooth();
   frameRate(30);
-  f = createFont("Georgia",12,true);
+  f = createFont("Georgia", 12, true);
 
   // Initialize the physics
   physics=new VerletPhysics2D();
-  physics.setWorldBounds(new Rect(10,10,width-20,height-20));
+  physics.setWorldBounds(new Rect(10, 10, width-20, height-20));
 
   // Spawn a new random graph
-  cluster = new Cluster(8,100,new Vec2D(width/2,height/2));
-
+  cluster = new Cluster(8, 100, new Vec2D(width/2, height/2));
 }
 
 void draw() {
@@ -70,7 +49,7 @@ void draw() {
 
   // If we want to see the physics
   if (showPhysics) {
-      cluster.showConnections();
+    cluster.showConnections();
   }
 
   // Instructions
@@ -90,8 +69,8 @@ void keyPressed() {
     if (!showParticles) showPhysics = true;
   } 
   else if (key == 'n') {
-      physics.clear();
-      cluster = new Cluster(int(random(2,20)),random(10,width/2),new Vec2D(width/2,height/2));
-
+    physics.clear();
+    cluster = new Cluster(int(random(2, 20)), random(10, width/2), new Vec2D(width/2, height/2));
   }
 }
+

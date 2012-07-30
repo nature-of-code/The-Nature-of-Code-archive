@@ -54,9 +54,9 @@ class Windmill {
 
     // Draw anchor just for debug
     Vec2 anchor = box2d.coordWorldToPixels(box1.body.getWorldCenter());
-    fill(255, 0, 0);
-    stroke(0);
-    ellipse(anchor.x, anchor.y, 4, 4);
+    fill(0);
+    noStroke();
+    ellipse(anchor.x, anchor.y, 8, 8);
   }
 }
 

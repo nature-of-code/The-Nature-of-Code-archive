@@ -47,8 +47,9 @@ class CustomShape {
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(-a);
-    fill(175);
+    fill(127);
     stroke(0);
+    strokeWeight(2);
     beginShape();
     //println(vertices.length);
     // For every vertex, convert to pixel vector

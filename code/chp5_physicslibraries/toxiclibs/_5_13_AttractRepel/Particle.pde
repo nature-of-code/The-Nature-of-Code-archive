@@ -5,14 +5,15 @@ class Particle extends VerletParticle2D {
 
   Particle (Vec2D loc) {
     super(loc);
-    r = 4;
+    r = 8;
     physics.addParticle(this);
     physics.addBehavior(new AttractionBehavior(this, r*4, -1));
   }
 
   void display () {
-    fill (175);
+    fill (127);
     stroke (0);
+    strokeWeight(2);
     ellipse (x, y, r*2, r*2);
   }
 }

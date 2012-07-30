@@ -19,7 +19,7 @@ ArrayList<Boundary> boundaries;
 ArrayList<Lollipop> pops;
 
 void setup() {
-  size(640,360);
+  size(800,200);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -43,7 +43,7 @@ void draw() {
   background(255);
 
   // We must always step through time!
-  box2d.step();
+  if (mousePressed) box2d.step();
 
   // Display all the boundaries
   for (Boundary wall: boundaries) {

@@ -26,7 +26,7 @@ Box box;
 Spring spring;
 
 void setup() {
-  size(640,360);
+  size(800,200);
   smooth();
 
   // Initialize box2d physics and create the world

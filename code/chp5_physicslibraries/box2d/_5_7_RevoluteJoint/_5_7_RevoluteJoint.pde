@@ -24,7 +24,7 @@ Windmill windmill;
 ArrayList<Particle> particles;
 
 void setup() {
-  size(400,300);
+  size(800,200);
   smooth();
 
   // Initialize box2d physics and create the world
@@ -32,7 +32,7 @@ void setup() {
   box2d.createWorld();
 
   // Make the windmill at an x,y location
-  windmill = new Windmill(200,200);
+  windmill = new Windmill(width/2,175);
 
   // Create the empty list
   particles = new ArrayList<Particle>();
@@ -49,7 +49,7 @@ void draw() {
 
   if (random(1) < 0.1) {
     float sz = random(4,8);
-    particles.add(new Particle(random(150,250),-20,sz));
+    particles.add(new Particle(random(width/2-100,width/2+100),-20,sz));
   }
 
 
@@ -74,7 +74,7 @@ void draw() {
   if (windmill.motorOn()) status = "ON";
   
   fill(0);
-  text("Click mouse to toggle motor.\nMotor: " + status,10,270);
+  text("Click mouse to toggle motor.\nMotor: " + status,10,height-30);
   
 
 }

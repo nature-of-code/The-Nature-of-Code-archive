@@ -38,6 +38,7 @@ class Pair {
     Vec2 pos1 = box2d.getBodyPixelCoord(p1.body);
     Vec2 pos2 = box2d.getBodyPixelCoord(p2.body);
     stroke(0);
+    strokeWeight(2);
     line(pos1.x,pos1.y,pos2.x,pos2.y);
 
     p1.display();

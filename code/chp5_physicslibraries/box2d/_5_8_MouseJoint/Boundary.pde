@@ -44,7 +44,8 @@ class Boundary {
   // Draw the boundary, if it were at an angle we'd have to do something fancier
   void display() {
     noFill();
-    stroke(0);
+    stroke(127);
+    fill(127);
     strokeWeight(1);
     rectMode(CENTER);
 

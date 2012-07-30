@@ -13,13 +13,12 @@ class Particle {
 
   color col;
 
-
   Particle(float x, float y, float r_) {
     r = r_;
     // This function puts the particle in the Box2d world
     makeBody(x, y, r);
     body.setUserData(this);
-    col = color(175);
+    col = color(127);
   }
 
   // This function removes the particle from the box2d world
@@ -56,7 +55,7 @@ class Particle {
     rotate(a);
     fill(col);
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(2);
     ellipse(0, 0, r*2, r*2);
     // Let's add a line so we can see the rotation
     line(0, 0, r, 0);
