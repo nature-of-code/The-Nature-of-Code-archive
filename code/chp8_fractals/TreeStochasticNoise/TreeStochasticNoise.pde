@@ -9,14 +9,14 @@ int seed = 5;
 
 
 void setup() {
-  size(640, 360);
+  size(800, 200);
   smooth();
 }
 
 void draw() {
   background(255);
   fill(0);
-  text("Click mouse to generate a new tree", 10, height-20);
+  //text("Click mouse to generate a new tree", 10, height-20);
 
   stroke(0);
   // Start the tree from the bottom of the screen
@@ -25,7 +25,7 @@ void draw() {
   yoff += 0.005;
   randomSeed(seed);
   // Start the recursive branching!
-  branch(100, 0);
+  branch(60, 0);
 }
 
 
