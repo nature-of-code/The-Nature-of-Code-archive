@@ -5,7 +5,7 @@
 // Using the dot product to compute the angle between two vectors
 
 void setup() {
-  size(200, 200);
+  size(383, 200);
   smooth();
 }
 
