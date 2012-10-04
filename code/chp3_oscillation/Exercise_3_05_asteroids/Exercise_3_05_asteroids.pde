@@ -24,7 +24,7 @@ void draw() {
    
 
   fill(0);
-  text("left right arrows to turn, z to thrust",10,height-5);
+  //text("left right arrows to turn, z to thrust",10,height-5);
 
   // Turn or thrust the ship depending on what key is pressed
   if (keyPressed) {
