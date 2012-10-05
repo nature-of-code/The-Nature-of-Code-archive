@@ -37,7 +37,7 @@ PFont f;
 
 void setup() {
   size(800, 200);
-  target = "To be or not to be.";
+  target = "to be or not to be";
 
   population = new DNA[totalPopulation];
 
@@ -76,7 +76,7 @@ void draw() {
   fill(0);
   String everything = "";
   for (int i = 0; i < population.length; i++) {
-    everything += population[i].getPhrase() + "    ";
+    everything += population[i].getPhrase() + "     ";
   }
   textFont(f,12);
   text(everything,10,10,width,height);
