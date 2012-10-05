@@ -11,12 +11,15 @@ class Parse {
 
 		String filename = path + args[0];
 
+		// Reading the file
 		BufferedReader br = new BufferedReader(new FileReader(filename));
  		String line;
 
+ 		// Clearning the output file
     	BufferedWriter clear = new BufferedWriter(new FileWriter("output.asc"));
     	clear.close();
 
+    	// Getting ready to append
     	BufferedWriter out = new BufferedWriter(new FileWriter("output.asc", true));
 		
     	boolean source = false;
@@ -45,8 +48,5 @@ class Parse {
 			}
 		}
 		out.close();
-
-
 	}
-
 }
