@@ -7,20 +7,21 @@ class Parse {
 	public static void main(String[] args) throws IOException {
 
 
-		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/";
+		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/chapters/";
+		String filename = args[0];
 
-		String filename = path + args[0];
+		String fullpath = path + filename;
 
 		// Reading the file
-		BufferedReader br = new BufferedReader(new FileReader(filename));
+		BufferedReader br = new BufferedReader(new FileReader(fullpath));
  		String line;
 
  		// Clearning the output file
-    	BufferedWriter clear = new BufferedWriter(new FileWriter("output.asc"));
+    	BufferedWriter clear = new BufferedWriter(new FileWriter(filename));
     	clear.close();
 
     	// Getting ready to append
-    	BufferedWriter out = new BufferedWriter(new FileWriter("output.asc", true));
+    	BufferedWriter out = new BufferedWriter(new FileWriter(filename, true));
 		
     	boolean source = false;
 
@@ -46,6 +47,8 @@ class Parse {
 				line = line.replaceAll("([^*])PVector([^*])","$1[klass]*PVector*$2");
 				System.out.println(line);
 			}
+			out.write(line + "\n");
+
 		}
 		out.close();
 	}
