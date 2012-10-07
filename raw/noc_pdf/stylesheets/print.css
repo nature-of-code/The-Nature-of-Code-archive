@@ -83,11 +83,20 @@ strong em {
 }
 
 
+div#front-matter {
+  page: frontmatter;
+}
+
+/* Reset page numbers at Chapter 1 */
+div#book-contents {
+  counter-reset: page 1;
+  page: main;
+}
 
 /* Define Left Headers and Footers
 _____________________________________________________________________________ */
 
-@page :left {
+@page:left {
   @top-left {
     font: 8pt "ProximaNova-Regular", serif;
     content: "The Nature of Code";
@@ -105,10 +114,16 @@ _____________________________________________________________________________ */
   }
 }
 
+@page main {
+  @bottom {
+    content: counter(page, lower-roman);
+  }
+}
+
 /* Define Right Headers and Footers
 _____________________________________________________________________________ */
 
-@page :right {
+@page:right {
   @top-right {
     font: 8pt "ProximaNova-Regular", serif;
     content: string(doctitle);
