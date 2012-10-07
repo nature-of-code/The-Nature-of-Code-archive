@@ -24,6 +24,7 @@ class Parse {
     	BufferedWriter out = new BufferedWriter(new FileWriter(filename, true));
 		
     	boolean source = false;
+    	boolean ignore = false;
 
 
     	int counter = 0;
@@ -42,10 +43,16 @@ class Parse {
 				  //System.out.println("SOURCE OFF: " + line);
 				}
 			} 
+
+			if (line.trim().equals("++++")) {
+				ignore = !ignore;
+			}
 			
-			if (line.contains("PVector") && !source) {
+			if (line.contains("PVector") && !source && !ignore) {
 				line = line.replaceAll("([^*])PVector([^*])","$1[klass]*PVector*$2");
+				System.out.println("-------------------------------------");
 				System.out.println(line);
+				System.out.println("-------------------------------------");
 			}
 			out.write(line + "\n");
 
