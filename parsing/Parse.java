@@ -8,7 +8,11 @@ class Parse {
 
 
 		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/chapters/";
+		String output = "output/";
 
+		// ArrayList
+		String find = "([^*/_\\[])ArrayList([^*])";
+		String replace = "$1[klass]*ArrayList*$2";
 
 		String[] filenames;
 		if (args.length < 1) {
@@ -17,25 +21,39 @@ class Parse {
 			filenames = args;
 		}
 
-		for (int i = 0; i < filenames; i++) {
+
+
+		System.out.println("Find    " + find);
+		System.out.println("Replace " + replace);
+
+ 		// Clearning the output file
+    	BufferedWriter clearDebug = new BufferedWriter(new FileWriter("debug.txt"));
+    	clearDebug.close();
+    	// Getting ready to append
+    	BufferedWriter debug = new BufferedWriter(new FileWriter("debug.txt", true));
+		
+		for (int i = 0; i < filenames.length; i++) {
+			String filename = filenames[i];
 			String fullpath = path + filename;
+
+			debug.write(filename + "\n-------------------------------\n");
 
 			// Reading the file
 			BufferedReader br = new BufferedReader(new FileReader(fullpath));
 	 		String line;
 
  			// Clearning the output file
-    		BufferedWriter clear = new BufferedWriter(new FileWriter(filename));
+    		BufferedWriter clear = new BufferedWriter(new FileWriter(output+filename));
     		clear.close();
-
     		// Getting ready to append
-    		BufferedWriter out = new BufferedWriter(new FileWriter(filename, true));
+    		BufferedWriter out = new BufferedWriter(new FileWriter(output+filename, true));
 		
 	    	boolean source = false;
     		boolean ignore = false;
 
-
     		int counter = 0;
+
+    		int totallines = 0;
 
 			while ((line = br.readLine()) != null) {
 
@@ -55,19 +73,39 @@ class Parse {
 				if (line.trim().equals("++++")) {
 					ignore = !ignore;
 				}
-			
-				if (line.contains("PVector") && !source && !ignore) {
-					line = line.replaceAll("([^*])PVector([^*])","$1[klass]*PVector*$2");
-					System.out.println("-------------------------------------");
-					System.out.println(line);
-					System.out.println("-------------------------------------");
+				
+
+				Pattern p = Pattern.compile(find);
+				Matcher m = p.matcher(line);
+
+				// Making sure we ignore headers
+				Pattern header  = Pattern.compile("^=+");
+				Matcher headerM = header.matcher(line); 
+
+				//if (line.contains("PVector") && !source && !ignore) {
+				if (m.find() && !headerM.find() && !source && !ignore) {
+					debug.write("------------------------------ORIGINAL------------------------------\n");
+					debug.write(line + "\n");
+					debug.write("------------------------------CHANGED-------------------------------\n");
+					line = line.replaceAll(find,replace);
+					debug.write(line + "\n");
+					debug.write("------------------------------------------------------------------\n\n");
+					totallines++;
 				}
 				out.write(line + "\n");
-
 			}
 			out.close();
 
+			System.out.println(filename + " " + totallines);
+			if (totallines == 0) {
+				File del = new File(output + filename);
+  				boolean success = del.delete();
+  				if (success) System.out.println("Deleted: " + filename);
+  				else System.out.println("problem deleting: " + filename);
+			}
 		}
+		debug.close();
+
 
 	}
 
