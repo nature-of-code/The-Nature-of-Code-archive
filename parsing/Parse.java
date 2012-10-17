@@ -10,9 +10,11 @@ class Parse {
 		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/chapters/";
 		String output = "output/";
 
-		// PVector
-		String find = "([^*/_\\[])ParticleSystem([^*])";
-		String replace = "$1[klass]*ParticleSystem*$2";
+		//String find = "([^*/_\\[])ParticleSystem([^*])";
+		//String replace = "$1[klass]*ParticleSystem*$2";
+
+		String find = "([^*/_\\[])TWO_PI([^*])";
+		String replace = "$1[var]*TWO_PI*$2";
 
 		String[] filenames;
 		if (args.length < 1) {
@@ -101,12 +103,12 @@ class Parse {
 			}
 			out.close();
 
-			System.out.println(filename + " " + totallines);
+			if (totallines != 0) System.out.println(filename + " " + totallines);
 			if (totallines == 0) {
 				File del = new File(output + filename);
   				boolean success = del.delete();
-  				if (success) System.out.println("Deleted: " + filename);
-  				else System.out.println("problem deleting: " + filename);
+  				//if (success) System.out.println("Deleted: " + filename);
+  				//else System.out.println("problem deleting: " + filename);
 			}
 		}
 		debug.close();

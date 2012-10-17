@@ -12,80 +12,50 @@
 -------------------------------
 01_vectors.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------767
-If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the [klass]*PVector* class.  The [klass]*PVector* class is the template for making the location object and the velocity xobject.  So what are they doing inside of yet another object, the [klass]*Mover* object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <<chapter04_section1, Chapter 4>> we’ll write a class to describe a system of particles.  That ParticleSystem object will have as its data a list of Particle objects. . .and each Particle object will have as its data several [klass]*PVector* objects!
-------------------------------CHANGED-------------------------------
-If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the [klass]*PVector* class.  The [klass]*PVector* class is the template for making the location object and the velocity xobject.  So what are they doing inside of yet another object, the [klass]*Mover* object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <<chapter04_section1, Chapter 4>> we’ll write a class to describe a system of particles.  That [klass]*ParticleSystem* object will have as its data a list of Particle objects. . .and each Particle object will have as its data several [klass]*PVector* objects!
-------------------------------------------------------------------
-
 02_forces.asc
 -------------------------------
 03_oscillation.asc
 -------------------------------
+------------------------------ORIGINAL------------------------------499
+|frameCount	|frameCount / period	|TWO_PI * frameCount / period
+------------------------------CHANGED-------------------------------
+|frameCount	|frameCount / period	|[var]*TWO_PI* * frameCount / period
+------------------------------------------------------------------
+
+------------------------------ORIGINAL------------------------------503
+|240	|2	|2 * TWO_PI (or 4* PI)
+------------------------------CHANGED-------------------------------
+|240	|2	|2 * [var]*TWO_PI* (or 4* PI)
+------------------------------------------------------------------
+
+------------------------------ORIGINAL------------------------------609
+[formula]*period = TWO_PI / angular velocity*
+------------------------------CHANGED-------------------------------
+[formula]*period = [var]*TWO_PI* / angular velocity*
+------------------------------------------------------------------
+
 04_particles.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------126
-With the addition of the lifespan variable, we’ll also need one additional function —a function that can be queried (for a true or false answer) as to whether the particle is alive or dead.  This will come in handy when we are writing the ParticleSystem class, whose task will be to manage the list of particles themselves.  Writing this function is pretty easy; we just need to check and see if the value of lifespan is less than zero.  If it is we [var]*return true*, if not we [var]*return false*.
+------------------------------ORIGINAL------------------------------1003
+We know a particle has an x location somewhere between 0 and the width of the window.   What if we said: when the particle’s x location is 0, its rotation should be 0; when its x location is equal to the width, its rotation should be equal to TWO_PI?  Does this ring a bell?  Whenever we have a value with one range that we want to map to another range, we can use Processing’s [function]*map()* function!  (See <<intro_section6, Introduction>>.)
 ------------------------------CHANGED-------------------------------
-With the addition of the lifespan variable, we’ll also need one additional function —a function that can be queried (for a true or false answer) as to whether the particle is alive or dead.  This will come in handy when we are writing the [klass]*ParticleSystem* class, whose task will be to manage the list of particles themselves.  Writing this function is pretty easy; we just need to check and see if the value of lifespan is less than zero.  If it is we [var]*return true*, if not we [var]*return false*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------648
-Whenever the mouse is pressed, a new ParticleSystem object is created and placed into the [klass]*ArrayList*.
-------------------------------CHANGED-------------------------------
-Whenever the mouse is pressed, a new [klass]*ParticleSystem* object is created and placed into the [klass]*ArrayList*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------657
-And in [function]*draw()*, instead of referencing a single ParticleSystem object, we now look through all the systems in the [klass]*ArrayList* and call [function]*run()* on each of them.
-------------------------------CHANGED-------------------------------
-And in [function]*draw()*, instead of referencing a single [klass]*ParticleSystem* object, we now look through all the systems in the [klass]*ArrayList* and call [function]*run()* on each of them.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------710
-This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our particle system.   The ParticleSystem constructor could then have some code to pick randomly from the three classes when filling the [klass]*ArrayList*.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
-------------------------------CHANGED-------------------------------
-This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our particle system.   The [klass]*ParticleSystem* constructor could then have some code to pick randomly from the three classes when filling the [klass]*ArrayList*.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------1363
-Well, it seems that we have a small problem.  [function]*applyForce()* is a method written inside the Particle class, but we don’t have any reference to the individual particles themselves, only the ParticleSystem object: the variable ps.
-------------------------------CHANGED-------------------------------
-Well, it seems that we have a small problem.  [function]*applyForce()* is a method written inside the Particle class, but we don’t have any reference to the individual particles themselves, only the [klass]*ParticleSystem* object: the variable ps.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------1380
-Of course, if we call a new function on the ParticleSystem object in [function]*draw()*, well, we have to write that function in the ParticleSystem class.   Let’s describe the job that function needs to perform: receive a force as a [klass]*PVector* and apply that force to all the particles.
-------------------------------CHANGED-------------------------------
-Of course, if we call a new function on the [klass]*ParticleSystem* object in [function]*draw()*, well, we have to write that function in the [klass]*ParticleSystem* class.   Let’s describe the job that function needs to perform: receive a force as a [klass]*PVector* and apply that force to all the particles.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------1393
-It almost seems silly to write this function.   What we’re saying is “apply a force to a particle system so that the system can apply that force to all of the individual particles.”   Nevertheless, it’s really quite reasonable.  After all, the ParticleSystem object is in charge of managing the particles, so if we want to talk to the particles, we’ve got to talk to them through their manager.  (Also, here’s a chance for the enhanced loop since we aren’t deleting particles!)
-------------------------------CHANGED-------------------------------
-It almost seems silly to write this function.   What we’re saying is “apply a force to a particle system so that the system can apply that force to all of the individual particles.”   Nevertheless, it’s really quite reasonable.  After all, the [klass]*ParticleSystem* object is in charge of managing the particles, so if we want to talk to the particles, we’ve got to talk to them through their manager.  (Also, here’s a chance for the enhanced loop since we aren’t deleting particles!)
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------1473
-. A function that passes the [klass]*Repeller* object into the ParticleSystem so that it can apply a force to each particle object.
-------------------------------CHANGED-------------------------------
-. A function that passes the [klass]*Repeller* object into the [klass]*ParticleSystem* so that it can apply a force to each particle object.
+We know a particle has an x location somewhere between 0 and the width of the window.   What if we said: when the particle’s x location is 0, its rotation should be 0; when its x location is equal to the width, its rotation should be equal to [var]*TWO_PI*?  Does this ring a bell?  Whenever we have a value with one range that we want to map to another range, we can use Processing’s [function]*map()* function!  (See <<intro_section6, Introduction>>.)
 ------------------------------------------------------------------
 
 05_physicslib.asc
 -------------------------------
-06_steering.asc
--------------------------------
-------------------------------ORIGINAL------------------------------1268
-A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a ParticleSystem class.   There, we stored a list of particles in an [klass]*ArrayList*.  We’ll do the same thing here: store a bunch of Vehicle objects in an [klass]*ArrayList*.
+------------------------------ORIGINAL------------------------------1410
+Finally, the ability for a RevoluteJoint to spin can be constrained between two angles. (By default, it can rotate a full 360 degrees, or TWO_PI radians.)
 ------------------------------CHANGED-------------------------------
-A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a [klass]*ParticleSystem* class.   There, we stored a list of particles in an [klass]*ArrayList*.  We’ll do the same thing here: store a bunch of Vehicle objects in an [klass]*ArrayList*.
+Finally, the ability for a RevoluteJoint to spin can be constrained between two angles. (By default, it can rotate a full 360 degrees, or [var]*TWO_PI* radians.)
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------1760
-It’s also worth taking the time to write a class called Flock, which will be virtually identical to the ParticleSystem class we wrote in Chapter 4 with only one tiny change:  When we call [function]*run()* on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire [klass]*ArrayList* of boids.
+06_steering.asc
+-------------------------------
+------------------------------ORIGINAL------------------------------1975
+Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to TWO_PI and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.
 ------------------------------CHANGED-------------------------------
-It’s also worth taking the time to write a class called Flock, which will be virtually identical to the [klass]*ParticleSystem* class we wrote in Chapter 4 with only one tiny change:  When we call [function]*run()* on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire [klass]*ArrayList* of boids.
+Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to [var]*TWO_PI* and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.
 ------------------------------------------------------------------
 
 07_ca.asc
@@ -94,12 +64,6 @@ It’s also worth taking the time to write a class called Flock, which will be v
 -------------------------------
 09_ga.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------1608
-So far, what we have is just a rehashing of our ParticleSystem example from Chapter 5.  We have an entity (Bloop) that moves around the window and a class (World) that manages a variable quantity of these entities.   To turn this into a system that evolves, we need to add two additional features to our world:
-------------------------------CHANGED-------------------------------
-So far, what we have is just a rehashing of our [klass]*ParticleSystem* example from Chapter 5.  We have an entity (Bloop) that moves around the window and a class (World) that manages a variable quantity of these entities.   To turn this into a system that evolves, we need to add two additional features to our world:
-------------------------------------------------------------------
-
 10_nn.asc
 -------------------------------
 math.asc
