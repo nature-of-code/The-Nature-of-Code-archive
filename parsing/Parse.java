@@ -10,9 +10,9 @@ class Parse {
 		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/chapters/";
 		String output = "output/";
 
-		// ArrayList
-		String find = "([^*/_\\[])ArrayList([^*])";
-		String replace = "$1[klass]*ArrayList*$2";
+		// PVector
+		String find = "([^*/_\\[])ParticleSystem([^*])";
+		String replace = "$1[klass]*ParticleSystem*$2";
 
 		String[] filenames;
 		if (args.length < 1) {
@@ -54,8 +54,10 @@ class Parse {
     		int counter = 0;
 
     		int totallines = 0;
+    		int lineNumber = 0;
 
 			while ((line = br.readLine()) != null) {
+				lineNumber++;
 
 				if (line.contains("[source,java]")) {
 					source = true;
@@ -69,22 +71,25 @@ class Parse {
 					  //System.out.println("SOURCE OFF: " + line);
 					}
 				} 
-
-				if (line.trim().equals("++++")) {
-					ignore = !ignore;
-				}
-				
-
-				Pattern p = Pattern.compile(find);
-				Matcher m = p.matcher(line);
+				//System.out.println(line);
 
 				// Making sure we ignore headers
 				Pattern header  = Pattern.compile("^=+");
 				Matcher headerM = header.matcher(line); 
+				Pattern example  = Pattern.compile("^\\[(example|highlight)\\]");
+				Matcher exampleM = example.matcher(line); 
+
+				if (line.trim().equals("++++")) {
+					ignore = !ignore;
+				}
+
+
+				Pattern p = Pattern.compile(find);
+				Matcher m = p.matcher(line);
 
 				//if (line.contains("PVector") && !source && !ignore) {
-				if (m.find() && !headerM.find() && !source && !ignore) {
-					debug.write("------------------------------ORIGINAL------------------------------\n");
+				if (m.find() && !headerM.find() && !exampleM.find() && !source && !ignore) {
+					debug.write("------------------------------ORIGINAL------------------------------"+lineNumber+"\n");
 					debug.write(line + "\n");
 					debug.write("------------------------------CHANGED-------------------------------\n");
 					line = line.replaceAll(find,replace);

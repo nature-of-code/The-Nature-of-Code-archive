@@ -12,396 +12,96 @@
 -------------------------------
 01_vectors.asc
 -------------------------------
+------------------------------ORIGINAL------------------------------767
+If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the [klass]*PVector* class.  The [klass]*PVector* class is the template for making the location object and the velocity xobject.  So what are they doing inside of yet another object, the [klass]*Mover* object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <<chapter04_section1, Chapter 4>> we’ll write a class to describe a system of particles.  That ParticleSystem object will have as its data a list of Particle objects. . .and each Particle object will have as its data several [klass]*PVector* objects!
+------------------------------CHANGED-------------------------------
+If object-oriented programming is at all new to you, one aspect here may seem a bit confusing.  After all, we spent the beginning of this chapter discussing the [klass]*PVector* class.  The [klass]*PVector* class is the template for making the location object and the velocity xobject.  So what are they doing inside of yet another object, the [klass]*Mover* object?   In fact, this is just about the most normal thing ever.  An object is simply something that holds data (and functionality).  That data can be numbers (integers, floats, etc.) or other objects!  We’ll see this over and over again in this book.   For example, in <<chapter04_section1, Chapter 4>> we’ll write a class to describe a system of particles.  That [klass]*ParticleSystem* object will have as its data a list of Particle objects. . .and each Particle object will have as its data several [klass]*PVector* objects!
+------------------------------------------------------------------
+
 02_forces.asc
 -------------------------------
 03_oscillation.asc
 -------------------------------
 04_particles.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-In truth, we could use a simple array to manage our Particle objects.  Some particle systems might have a fixed number of particles, and arrays are magnificently efficient in those instances.  Processing also offers [function]*expand()*, [function]*contract()*, [function]*subset()*, [function]*splice()*, and other methods for resizing arrays.   However, for these examples, we’re going to take a more sophisticated approach and use the Java class ArrayList (found in the java.util package: http://download.oracle.com/javase/6/docs/api/java/util/ArrayList.html[ArrayList Documentation]).
+------------------------------ORIGINAL------------------------------126
+With the addition of the lifespan variable, we’ll also need one additional function —a function that can be queried (for a true or false answer) as to whether the particle is alive or dead.  This will come in handy when we are writing the ParticleSystem class, whose task will be to manage the list of particles themselves.  Writing this function is pretty easy; we just need to check and see if the value of lifespan is less than zero.  If it is we [var]*return true*, if not we [var]*return false*.
 ------------------------------CHANGED-------------------------------
-In truth, we could use a simple array to manage our Particle objects.  Some particle systems might have a fixed number of particles, and arrays are magnificently efficient in those instances.  Processing also offers [function]*expand()*, [function]*contract()*, [function]*subset()*, [function]*splice()*, and other methods for resizing arrays.   However, for these examples, we’re going to take a more sophisticated approach and use the Java class [klass]*ArrayList* (found in the java.util package: http://download.oracle.com/javase/6/docs/api/java/util/ArrayList.html[ArrayList Documentation]).
+With the addition of the lifespan variable, we’ll also need one additional function —a function that can be queried (for a true or false answer) as to whether the particle is alive or dead.  This will come in handy when we are writing the [klass]*ParticleSystem* class, whose task will be to manage the list of particles themselves.  Writing this function is pretty easy; we just need to check and see if the value of lifespan is less than zero.  If it is we [var]*return true*, if not we [var]*return false*.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-Using an ArrayList follows the same idea as using a standard array, but with different syntax. The following two code examples (which assume the existence of a generic Particle class) produce the same result: first with an array, and second with an ArrayList.    
-------------------------------CHANGED-------------------------------
-Using an [klass]*ArrayList* follows the same idea as using a standard array, but with different syntax. The following two code examples (which assume the existence of a generic Particle class) produce the same result: first with an array, and second with an [klass]*ArrayList*.    
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-The new ArrayList way (using generics!):
-------------------------------CHANGED-------------------------------
-The new [klass]*ArrayList* way (using generics!):
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-This last for loop looks pretty similar to our code that looped through a regular array.  We initialize a variable called i to 0 and count up by 1, accessing each element of the ArrayList until we get to the end.    However, if you use generics, i.e.
-------------------------------CHANGED-------------------------------
-This last for loop looks pretty similar to our code that looped through a regular array.  We initialize a variable called i to 0 and count up by 1, accessing each element of the [klass]*ArrayList* until we get to the end.    However, if you use generics, i.e.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-The code we’ve written above doesn’t take advantage of the ArrayList’s resizability, and it uses a fixed size of 10.   We need to design an example that fits with our particle system scenario, where we emit a continuous stream of Particle objects, adding one new particle with each cycle through [function]*draw()*.   We’ll skip rehashing the Particle class code here, as it doesn’t need to change.
-------------------------------CHANGED-------------------------------
-The code we’ve written above doesn’t take advantage of the [klass]*ArrayList*’s resizability, and it uses a fixed size of 10.   We need to design an example that fits with our particle system scenario, where we emit a continuous stream of Particle objects, adding one new particle with each cycle through [function]*draw()*.   We’ll skip rehashing the Particle class code here, as it doesn’t need to change.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-This is a somewhat extreme example (with flawed logic), but it proves the point.  In the above case, for each particle in the list, we add a new particle to the list (manipulating the [function]*size()* of the ArrayList).  This will result in an infinite loop as i can never increment past the size of the ArrayList.  
-------------------------------CHANGED-------------------------------
-This is a somewhat extreme example (with flawed logic), but it proves the point.  In the above case, for each particle in the list, we add a new particle to the list (manipulating the [function]*size()* of the [klass]*ArrayList*).  This will result in an infinite loop as i can never increment past the size of the [klass]*ArrayList*.  
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-While removing elements from the ArrayList during a loop doesn’t cause the program to crash (as it does with adding), the problem is almost more insidious in that it leaves no evidence.  To discover the problem we must first establish an important fact.  When an object is removed from the ArrayList, all elements are shifted one spot to the left.  Note the diagram below where particle C (index 2) is removed.  Particles A and B keep the same index, while particles D and E shift from 3 and 4 to 2 and 3, respectively.
-------------------------------CHANGED-------------------------------
-While removing elements from the [klass]*ArrayList* during a loop doesn’t cause the program to crash (as it does with adding), the problem is almost more insidious in that it leaves no evidence.  To discover the problem we must first establish an important fact.  When an object is removed from the [klass]*ArrayList*, all elements are shifted one spot to the left.  Note the diagram below where particle C (index 2) is removed.  Particles A and B keep the same index, while particles D and E shift from 3 and 4 to 2 and 3, respectively.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Let’s pretend we are [var]*i* looping through the ArrayList.
-------------------------------CHANGED-------------------------------
-Let’s pretend we are [var]*i* looping through the [klass]*ArrayList*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Notice the problem?  We never checked particle D!  When C was deleted from slot #2, D moved into slot #2, but i has already moved on to slot # 3.  This is not a disaster since particle D will get checked the next time around. Still, the expectation is that we are writing code to iterate through every single element of the ArrayList.   Skipping an element is unacceptable.
-------------------------------CHANGED-------------------------------
-Notice the problem?  We never checked particle D!  When C was deleted from slot #2, D moved into slot #2, but i has already moved on to slot # 3.  This is not a disaster since particle D will get checked the next time around. Still, the expectation is that we are writing code to iterate through every single element of the [klass]*ArrayList*.   Skipping an element is unacceptable.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-There are two solutions to this problem.   The first solution is to simply iterate through the ArrayList backwards.  If you are sliding elements from right to left as elements are removed, it’s impossible to skip an element by accident.  Here’s how the code would look:
-------------------------------CHANGED-------------------------------
-There are two solutions to this problem.   The first solution is to simply iterate through the [klass]*ArrayList* backwards.  If you are sliding elements from right to left as elements are removed, it’s impossible to skip an element by accident.  Here’s how the code would look:
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-_Hey, I’d like to iterate through this ArrayList.  Could you continue to give me the next element in the list one at a time until we get to the end?  And if I remove elements or move them around in the list while we’re iterating, will you make sure I don’t look at any elements twice or skip any by accident?_
-------------------------------CHANGED-------------------------------
-_Hey, I’d like to iterate through this [klass]*ArrayList*.  Could you continue to give me the next element in the list one at a time until we get to the end?  And if I remove elements or move them around in the list while we’re iterating, will you make sure I don’t look at any elements twice or skip any by accident?_
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-An ArrayList can produce an [klass]*Iterator* object for you.
-------------------------------CHANGED-------------------------------
-An [klass]*ArrayList* can produce an [klass]*Iterator* object for you.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-[example]*Example 4.2: ArrayList of particles with Iterator*
-------------------------------CHANGED-------------------------------
-[example]*Example 4.2: [klass]*ArrayList* of particles with Iterator*
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-For this new example, what we want to do instead is create an [klass]*ArrayList* to keep track of multiple instances of particle systems.  When the program starts (i.e. in [function]*setup()*), the ArrayList is empty.
-------------------------------CHANGED-------------------------------
-For this new example, what we want to do instead is create an [klass]*ArrayList* to keep track of multiple instances of particle systems.  When the program starts (i.e. in [function]*setup()*), the [klass]*ArrayList* is empty.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Whenever the mouse is pressed, a new ParticleSystem object is created and placed into the ArrayList.
-------------------------------CHANGED-------------------------------
+------------------------------ORIGINAL------------------------------648
 Whenever the mouse is pressed, a new ParticleSystem object is created and placed into the [klass]*ArrayList*.
+------------------------------CHANGED-------------------------------
+Whenever the mouse is pressed, a new [klass]*ParticleSystem* object is created and placed into the [klass]*ArrayList*.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-And in [function]*draw()*, instead of referencing a single ParticleSystem, we now look through all the systems in the ArrayList and call [function]*run()* on each of them.
+------------------------------ORIGINAL------------------------------657
+And in [function]*draw()*, instead of referencing a single ParticleSystem object, we now look through all the systems in the [klass]*ArrayList* and call [function]*run()* on each of them.
 ------------------------------CHANGED-------------------------------
-And in [function]*draw()*, instead of referencing a single ParticleSystem, we now look through all the systems in the [klass]*ArrayList* and call [function]*run()* on each of them.
+And in [function]*draw()*, instead of referencing a single [klass]*ParticleSystem* object, we now look through all the systems in the [klass]*ArrayList* and call [function]*run()* on each of them.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-Rewrite Example 4.4 so that each ParticleSystem doesn’t live forever.  When a ParticleSystem is empty (i.e. has no Particles left in its ArrayList) remove it from the ArrayList systems.
+------------------------------ORIGINAL------------------------------710
+This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our particle system.   The ParticleSystem constructor could then have some code to pick randomly from the three classes when filling the [klass]*ArrayList*.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
 ------------------------------CHANGED-------------------------------
-Rewrite Example 4.4 so that each ParticleSystem doesn’t live forever.  When a ParticleSystem is empty (i.e. has no Particles left in its [klass]*ArrayList*) remove it from the [klass]*ArrayList* systems.
+This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our particle system.   The [klass]*ParticleSystem* constructor could then have some code to pick randomly from the three classes when filling the [klass]*ArrayList*.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our Particle System.   The ParticleSystem constructor could then have some code to pick randomly from the three classes when filling the ArrayList.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
+------------------------------ORIGINAL------------------------------1363
+Well, it seems that we have a small problem.  [function]*applyForce()* is a method written inside the Particle class, but we don’t have any reference to the individual particles themselves, only the ParticleSystem object: the variable ps.
 ------------------------------CHANGED-------------------------------
-This is a nice solution: we have three different classes to describe the different kinds of pieces of confetti that could be part of our Particle System.   The ParticleSystem constructor could then have some code to pick randomly from the three classes when filling the [klass]*ArrayList*.  Note that this probabilistic method is the same one we employed in our random walk examples in the <<intro_section2, Introduction>>.
+Well, it seems that we have a small problem.  [function]*applyForce()* is a method written inside the Particle class, but we don’t have any reference to the individual particles themselves, only the [klass]*ParticleSystem* object: the variable ps.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-[highlight]*Problem #2:  How will the ArrayList know which objects are which type?*
+------------------------------ORIGINAL------------------------------1380
+Of course, if we call a new function on the ParticleSystem object in [function]*draw()*, well, we have to write that function in the ParticleSystem class.   Let’s describe the job that function needs to perform: receive a force as a [klass]*PVector* and apply that force to all the particles.
 ------------------------------CHANGED-------------------------------
-[highlight]*Problem #2:  How will the [klass]*ArrayList* know which objects are which type?*
+Of course, if we call a new function on the [klass]*ParticleSystem* object in [function]*draw()*, well, we have to write that function in the [klass]*ParticleSystem* class.   Let’s describe the job that function needs to perform: receive a force as a [klass]*PVector* and apply that force to all the particles.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-This is a pretty serious problem.  Remember, we were using generics to tell the ArrayList what type of objects we’re going to put inside it.  Are we suddenly going to need three different ArrayLists?
+------------------------------ORIGINAL------------------------------1393
+It almost seems silly to write this function.   What we’re saying is “apply a force to a particle system so that the system can apply that force to all of the individual particles.”   Nevertheless, it’s really quite reasonable.  After all, the ParticleSystem object is in charge of managing the particles, so if we want to talk to the particles, we’ve got to talk to them through their manager.  (Also, here’s a chance for the enhanced loop since we aren’t deleting particles!)
 ------------------------------CHANGED-------------------------------
-This is a pretty serious problem.  Remember, we were using generics to tell the [klass]*ArrayList* what type of objects we’re going to put inside it.  Are we suddenly going to need three different [klass]*ArrayList*s?
+It almost seems silly to write this function.   What we’re saying is “apply a force to a particle system so that the system can apply that force to all of the individual particles.”   Nevertheless, it’s really quite reasonable.  After all, the [klass]*ParticleSystem* object is in charge of managing the particles, so if we want to talk to the particles, we’ve got to talk to them through their manager.  (Also, here’s a chance for the enhanced loop since we aren’t deleting particles!)
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-This seems awfully inconvenient, given that we really just want one list to keep track of all the stuff in the ParticleSystem.  That can be made possible with polymorphism.  Polymorphism will allow us to consider objects of different types as the same type and store them in a single ArrayList.
+------------------------------ORIGINAL------------------------------1473
+. A function that passes the [klass]*Repeller* object into the ParticleSystem so that it can apply a force to each particle object.
 ------------------------------CHANGED-------------------------------
-This seems awfully inconvenient, given that we really just want one list to keep track of all the stuff in the ParticleSystem.  That can be made possible with polymorphism.  Polymorphism will allow us to consider objects of different types as the same type and store them in a single [klass]*ArrayList*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-With the concept of inheritance under our belts, we can imagine how we would program a diverse animal kingdom using ArrayLists—an array of dogs, an array of cats, of turtles, of kiwis, etc. frolicking about.
-------------------------------CHANGED-------------------------------
-With the concept of inheritance under our belts, we can imagine how we would program a diverse animal kingdom using [klass]*ArrayList*s—an array of dogs, an array of cats, of turtles, of kiwis, etc. frolicking about.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-This works great, but as our world expands to include many more animal species, we’re going to get stuck writing a lot of individual loops.  Is this really necessary?  After all, the creatures are all animals, and they all like to eat.  Why not just have one ArrayList of Animal objects and fill it with all different _kinds_ of Animals?
-------------------------------CHANGED-------------------------------
-This works great, but as our world expands to include many more animal species, we’re going to get stuck writing a lot of individual loops.  Is this really necessary?  After all, the creatures are all animals, and they all like to eat.  Why not just have one [klass]*ArrayList* of Animal objects and fill it with all different _kinds_ of Animals?
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-This is particularly useful when we have an array or ArrayList.   
-------------------------------CHANGED-------------------------------
-This is particularly useful when we have an array or [klass]*ArrayList*.   
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Notice how we have two separate lists, one for Particle objects and one for Confetti objects.  Every action we want to perform we have to do twice!   Polymorphism allows us to simplify the above by just making one ArrayList of Particle objects that contains both standard Particle objects as well as Confetti objects.  We don’t have to worry about which are which; this will all be taken care of for us!  (Also, note that the code for the main program and the classes has not changed so we aren’t including it here.  See the website for the full example.)
-------------------------------CHANGED-------------------------------
-Notice how we have two separate lists, one for Particle objects and one for Confetti objects.  Every action we want to perform we have to do twice!   Polymorphism allows us to simplify the above by just making one [klass]*ArrayList* of Particle objects that contains both standard Particle objects as well as Confetti objects.  We don’t have to worry about which are which; this will all be taken care of for us!  (Also, note that the code for the main program and the classes has not changed so we aren’t including it here.  See the website for the full example.)
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Expand the above example to include many Repellers (using an array or ArrayList).
-------------------------------CHANGED-------------------------------
-Expand the above example to include many Repellers (using an array or [klass]*ArrayList*).
+. A function that passes the [klass]*Repeller* object into the [klass]*ParticleSystem* so that it can apply a force to each particle object.
 ------------------------------------------------------------------
 
 05_physicslib.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-Let’s write a main tab that creates a new Box whenever the mouse is pressed and stores all the Box objects in an ArrayList.  (This is very similar to our approach in the particle system examples from Chapter 4.)
-------------------------------CHANGED-------------------------------
-Let’s write a main tab that creates a new Box whenever the mouse is pressed and stores all the Box objects in an [klass]*ArrayList*.  (This is very similar to our approach in the particle system examples from Chapter 4.)
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Now, when it comes time to display the shape in Processing, we can no longer just use [function]*rect()* or [function]*ellipse()*.  Since the shape is built out of custom vertices, we’ll want to use Processing’s [function]*beginShape()*, [function]*endShape()*, and [function]*vertex()* functions.   As we saw with the ChainShape, we could choose to store the pixel locations of the vertices in our own ArrayList for drawing.  However, it’s also useful to see how we can ask Box2D to report back to use the vertex locations.
-------------------------------CHANGED-------------------------------
-Now, when it comes time to display the shape in Processing, we can no longer just use [function]*rect()* or [function]*ellipse()*.  Since the shape is built out of custom vertices, we’ll want to use Processing’s [function]*beginShape()*, [function]*endShape()*, and [function]*vertex()* functions.   As we saw with the ChainShape, we could choose to store the pixel locations of the vertices in our own [klass]*ArrayList* for drawing.  However, it’s also useful to see how we can ask Box2D to report back to use the vertex locations.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Now, what if we want the string to hang from a fixed point?  We can lock one of the particles—the first, the last, the middle one, etc.  Here’s how we would access the first particle (in the ArrayList) and lock it.
-------------------------------CHANGED-------------------------------
-Now, what if we want the string to hang from a fixed point?  We can lock one of the particles—the first, the last, the middle one, etc.  Here’s how we would access the first particle (in the [klass]*ArrayList*) and lock it.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-And if we want to draw all the particles as being  connected with a line, along with a circle for the last particle, we can use [function]*beginShape()*, [function]*endShape()*, and [function]*vertex()*, accessing the particle locations from our ArrayList.
-------------------------------CHANGED-------------------------------
-And if we want to draw all the particles as being  connected with a line, along with a circle for the last particle, we can use [function]*beginShape()*, [function]*endShape()*, and [function]*vertex()*, accessing the particle locations from our [klass]*ArrayList*.
-------------------------------------------------------------------
-
 06_steering.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-In order to write the code for this, we’ll have to expand our Path class to have an ArrayList of points (rather than just two, a start and an end).
-------------------------------CHANGED-------------------------------
-In order to write the code for this, we’ll have to expand our Path class to have an [klass]*ArrayList* of points (rather than just two, a start and an end).
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a ParticleSystem class.   There, we stored a list of particles in an ArrayList.  We’ll do the same thing here: store a bunch of Vehicle objects in an ArrayList.
-------------------------------CHANGED-------------------------------
+------------------------------ORIGINAL------------------------------1268
 A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a ParticleSystem class.   There, we stored a list of particles in an [klass]*ArrayList*.  We’ll do the same thing here: store a bunch of Vehicle objects in an [klass]*ArrayList*.
+------------------------------CHANGED-------------------------------
+A group is certainly not a new concept. We’ve done this before—in Chapter 4, where we developed a framework for managing collections of particles in a [klass]*ParticleSystem* class.   There, we stored a list of particles in an [klass]*ArrayList*.  We’ll do the same thing here: store a bunch of Vehicle objects in an [klass]*ArrayList*.
 ------------------------------------------------------------------
 
-------------------------------ORIGINAL------------------------------
-This is the big leap beyond what we did before with particle systems.  Instead of having each element (particle or vehicle) operate on its own, we’re now saying, “Hey you, the vehicle! When it comes time for you to operate, you need to operate with an awareness of everyone else. So I’m going to go ahead and pass you the ArrayList of everyone else.”
-------------------------------CHANGED-------------------------------
-This is the big leap beyond what we did before with particle systems.  Instead of having each element (particle or vehicle) operate on its own, we’re now saying, “Hey you, the vehicle! When it comes time for you to operate, you need to operate with an awareness of everyone else. So I’m going to go ahead and pass you the [klass]*ArrayList* of everyone else.”
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Let’s begin to write the code.  As we just worked out, we’re writing a function called [function]*separate()* that receives an ArrayList of Vehicle objects as an argument.
-------------------------------CHANGED-------------------------------
-Let’s begin to write the code.  As we just worked out, we’re writing a function called [function]*separate()* that receives an [klass]*ArrayList* of Vehicle objects as an argument.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Notice how in the above code, we are not only checking if the distance is less than a desired separation (i.e. too close!), but also if the distance is greater than zero.  This is a little trick that makes sure we don’t ask a vehicle to separate from itself.   Remember, all the vehicles are in the ArrayList, so if you aren’t careful you’ll be comparing each vehicle to itself!   
-------------------------------CHANGED-------------------------------
-Notice how in the above code, we are not only checking if the distance is less than a desired separation (i.e. too close!), but also if the distance is greater than zero.  This is a little trick that makes sure we don’t ask a vehicle to separate from itself.   Remember, all the vehicles are in the [klass]*ArrayList*, so if you aren’t careful you’ll be comparing each vehicle to itself!   
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-It’s also worth taking the time to write a class called Flock, which will be virtually identical to the ParticleSystem class we wrote in Chapter 4 with only one tiny change:  When we call [function]*run()* on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire ArrayList of boids.
-------------------------------CHANGED-------------------------------
+------------------------------ORIGINAL------------------------------1760
 It’s also worth taking the time to write a class called Flock, which will be virtually identical to the ParticleSystem class we wrote in Chapter 4 with only one tiny change:  When we call [function]*run()* on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire [klass]*ArrayList* of boids.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-This technique is known as “bin-lattice spatial subdivision” and is outlined in more detail in (surprise, surprise) Reynolds’s 2000 paper, “Interaction with Groups of Autonomous Characters” (see: http://www.red3d.com/cwr/papers/2000/pip.pdf[Reynolds's 2000 Paper]).   How do we implement such an algorithm in Processing?  One way is to keep multiple ArrayLists.  One ArrayList would keep track of all the boids, just like in our flocking example.
 ------------------------------CHANGED-------------------------------
-This technique is known as “bin-lattice spatial subdivision” and is outlined in more detail in (surprise, surprise) Reynolds’s 2000 paper, “Interaction with Groups of Autonomous Characters” (see: http://www.red3d.com/cwr/papers/2000/pip.pdf[Reynolds's 2000 Paper]).   How do we implement such an algorithm in Processing?  One way is to keep multiple [klass]*ArrayList*s.  One [klass]*ArrayList* would keep track of all the boids, just like in our flocking example.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-In addition to that ArrayList, we store an additional reference to each Boid object in a two-dimensional ArrayList.  For each cell in the grid, there is an ArrayList that tracks the objects in that cell.
-------------------------------CHANGED-------------------------------
-In addition to that [klass]*ArrayList*, we store an additional reference to each Boid object in a two-dimensional [klass]*ArrayList*.  For each cell in the grid, there is an [klass]*ArrayList* that tracks the objects in that cell.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Let’s say our ArrayList of vehicles has one thousand vehicles in it.  We just made one thousand new PVector objects every single time through [function]*draw()*.  Now, on any ol’ laptop or desktop computer you’ve purchased in recent times, your sketch will likely not register a complaint, run slowly, or have any problems.  After all, you’ve got tons of RAM, and Java will be able to handle making a thousand or so temporary objects and dispose of them without much of a problem. 
-------------------------------CHANGED-------------------------------
-Let’s say our [klass]*ArrayList* of vehicles has one thousand vehicles in it.  We just made one thousand new PVector objects every single time through [function]*draw()*.  Now, on any ol’ laptop or desktop computer you’ve purchased in recent times, your sketch will likely not register a complaint, run slowly, or have any problems.  After all, you’ve got tons of RAM, and Java will be able to handle making a thousand or so temporary objects and dispose of them without much of a problem. 
+It’s also worth taking the time to write a class called Flock, which will be virtually identical to the [klass]*ParticleSystem* class we wrote in Chapter 4 with only one tiny change:  When we call [function]*run()* on each Boid object (as we did to each Particle object), we’ll pass in a reference to the entire [klass]*ArrayList* of boids.
 ------------------------------------------------------------------
 
 07_ca.asc
 -------------------------------
 08_fractals.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-Now that we have our KochLine class, we can get started on the main program.  We’ll need a data structure to keep track of what will eventually become many KochLine objects, and an ArrayList (see Chapter 4 for a review of ArrayLists) will do just fine.
-------------------------------CHANGED-------------------------------
-Now that we have our KochLine class, we can get started on the main program.  We’ll need a data structure to keep track of what will eventually become many KochLine objects, and an [klass]*ArrayList* (see Chapter 4 for a review of [klass]*ArrayList*s) will do just fine.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-In [function]*setup()*, we’ll want to create the ArrayList and add the first line segment to it, a line that stretches from 0 to the width of the sketch.
-------------------------------CHANGED-------------------------------
-In [function]*setup()*, we’ll want to create the [klass]*ArrayList* and add the first line segment to it, a line that stretches from 0 to the width of the sketch.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
- We are going to apply a similar technique here.  We have an ArrayList that keeps track of the current set of KochLine objects (at the start of the program, there is only one).  We will need a second ArrayList (let’s call it “next”) where we will place all the new KochLine objects that are generated from applying the Koch rules.   For every KochLine in the current ArrayList, four new KochLine objects are added to the next ArrayList.  When we’re done, the next ArrayList becomes the current one.
-------------------------------CHANGED-------------------------------
- We are going to apply a similar technique here.  We have an [klass]*ArrayList* that keeps track of the current set of KochLine objects (at the start of the program, there is only one).  We will need a second [klass]*ArrayList* (let’s call it “next”) where we will place all the new KochLine objects that are generated from applying the Koch rules.   For every KochLine in the current [klass]*ArrayList*, four new KochLine objects are added to the next [klass]*ArrayList*.  When we’re done, the next [klass]*ArrayList* becomes the current one.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Rewrite the Cantor set example using objects and an ArrayList.
-------------------------------CHANGED-------------------------------
-Rewrite the Cantor set example using objects and an [klass]*ArrayList*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-The tree structure can also be generated using the ArrayList technique demonstrated with the Koch curve.  Recreate the tree using a Branch object and an ArrayList to keep track of the branches.  Hint: you’ll want to keep track of the branch directions and lengths using vector math instead of Processing transformations.
-------------------------------CHANGED-------------------------------
-The tree structure can also be generated using the [klass]*ArrayList* technique demonstrated with the Koch curve.  Recreate the tree using a Branch object and an [klass]*ArrayList* to keep track of the branches.  Hint: you’ll want to keep track of the branch directions and lengths using vector math instead of Processing transformations.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Once you have the tree built with an ArrayList of Branch objects, animate the tree’s growth.  Can you draw leaves at the end of the branches?
-------------------------------CHANGED-------------------------------
-Once you have the tree built with an [klass]*ArrayList* of Branch objects, animate the tree’s growth.  Can you draw leaves at the end of the branches?
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-And once again, just as we did with the Game of Life and the Koch curve ArrayList examples, we will need an entirely separate String to keep track of the “next” generation.
-------------------------------CHANGED-------------------------------
-And once again, just as we did with the Game of Life and the Koch curve [klass]*ArrayList* examples, we will need an entirely separate String to keep track of the “next” generation.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Use an L-System as a set of instructions for creating objects stored in an ArrayList.  Use trigonometry and vector math to perform the rotations instead of matrix transformations (much like we did in the KochCurve example).
-------------------------------CHANGED-------------------------------
-Use an L-System as a set of instructions for creating objects stored in an [klass]*ArrayList*.  Use trigonometry and vector math to perform the rotations instead of matrix transformations (much like we did in the KochCurve example).
-------------------------------------------------------------------
-
 09_ga.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-If we’re going to create a population, we need a data structure to store a list of members of the population.   In most cases (such as our typing-monkey example), the number of elements in the population can be fixed, and so we use an array.  Later we’ll see examples that involve a growing/shrinking population and we’ll use an ArrayList.   But an array of what?   We need an object that stores the genetic information for a member of the population.  Let’s call it *_DNA_*.
+------------------------------ORIGINAL------------------------------1608
+So far, what we have is just a rehashing of our ParticleSystem example from Chapter 5.  We have an entity (Bloop) that moves around the window and a class (World) that manages a variable quantity of these entities.   To turn this into a system that evolves, we need to add two additional features to our world:
 ------------------------------CHANGED-------------------------------
-If we’re going to create a population, we need a data structure to store a list of members of the population.   In most cases (such as our typing-monkey example), the number of elements in the population can be fixed, and so we use an array.  Later we’ll see examples that involve a growing/shrinking population and we’ll use an [klass]*ArrayList*.   But an array of what?   We need an object that stores the genetic information for a member of the population.  Let’s call it *_DNA_*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Instead we can pick from the five options (ABCDE) according to their probabilities by filling an ArrayList with multiple instances of each parent.  In other words, let’s say you had a bucket of wooden letters—30 As, 40 Bs, 5 Cs, 15 Ds, and 10 Es. 
-------------------------------CHANGED-------------------------------
-Instead we can pick from the five options (ABCDE) according to their probabilities by filling an [klass]*ArrayList* with multiple instances of each parent.  In other words, let’s say you had a bucket of wooden letters—30 As, 40 Bs, 5 Cs, 15 Ds, and 10 Es. 
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-If you pick a random letter out of that bucket, there’s a 30% chance you’ll get an A, a 5% chance you’ll get a C, and so on.  For us, that bucket is an ArrayList, and each wooden letter is a potential parent.  We add each parent to the ArrayList N number of times where N is equal to its percentage score.
-------------------------------CHANGED-------------------------------
-If you pick a random letter out of that bucket, there’s a 30% chance you’ll get an A, a 5% chance you’ll get a C, and so on.  For us, that bucket is an [klass]*ArrayList*, and each wooden letter is a potential parent.  We add each parent to the [klass]*ArrayList* N number of times where N is equal to its percentage score.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-First thing we need are two random indices into the mating pool—random numbers between 0 and the size of the ArrayList.  
-------------------------------CHANGED-------------------------------
-First thing we need are two random indices into the mating pool—random numbers between 0 and the size of the [klass]*ArrayList*.  
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-There aren’t a lot of variables to the genetic algorithm itself. In fact, if you look at the previous example’s code, you’ll see only two global variables (not including the arrays and ArrayLists to store the population and mating pool).
-------------------------------CHANGED-------------------------------
-There aren’t a lot of variables to the genetic algorithm itself. In fact, if you look at the previous example’s code, you’ll see only two global variables (not including the arrays and [klass]*ArrayList*s to store the population and mating pool).
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by one hundred.  Objects can only be added to an ArrayList a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes floating point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.
-------------------------------CHANGED-------------------------------
-There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by one hundred.  Objects can only be added to an [klass]*ArrayList* a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes floating point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Assuming we make an ArrayList of Obstacles, we can then have each Rocket check to see if it has collided with an Obstacle and set a Boolean flag to be true if it does, adding a function to the Rocket class.
-------------------------------CHANGED-------------------------------
-Assuming we make an [klass]*ArrayList* of Obstacles, we can then have each Rocket check to see if it has collided with an Obstacle and set a Boolean flag to be true if it does, adding a function to the Rocket class.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-For this example, we’ll want to store the population of Bloops in an ArrayList, rather than an array, as we expect the population to grow and shrink according to how often Bloops die or are born.  We can store this ArrayList in a class called “World,” which will manage all the elements of the Bloops’ world.
-------------------------------CHANGED-------------------------------
-For this example, we’ll want to store the population of Bloops in an [klass]*ArrayList*, rather than an array, as we expect the population to grow and shrink according to how often Bloops die or are born.  We can store this [klass]*ArrayList* in a class called “World,” which will manage all the elements of the Bloops’ world.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Let’s assume we have an ArrayList of PVector locations for food, named “food.”  We could test each Bloop’s proximity to each food location.  If the Bloop is close enough, it eats the food (which is then removed from the world) and increases its health.
-------------------------------CHANGED-------------------------------
-Let’s assume we have an [klass]*ArrayList* of PVector locations for food, named “food.”  We could test each Bloop’s proximity to each food location.  If the Bloop is close enough, it eats the food (which is then removed from the world) and increases its health.
+So far, what we have is just a rehashing of our [klass]*ParticleSystem* example from Chapter 5.  We have an entity (Bloop) that moves around the window and a class (World) that manages a variable quantity of these entities.   To turn this into a system that evolves, we need to add two additional features to our world:
 ------------------------------------------------------------------
 
 10_nn.asc
 -------------------------------
-------------------------------ORIGINAL------------------------------
-Here’s our scenario.  Let’s say we have a Processing sketch with an ArrayList of targets and a single Vehicle.
-------------------------------CHANGED-------------------------------
-Here’s our scenario.  Let’s say we have a Processing sketch with an [klass]*ArrayList* of targets and a single Vehicle.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Let’s say that the Vehicle seeks all of the targets.   According to the principles of Chapter 6, we would next write a function that calculates a steering force towards each target, applying each force one at a time to the object’s acceleration.   Assuming the targets are an ArrayList of PVector objects, it would look something like:
-------------------------------CHANGED-------------------------------
-Let’s say that the Vehicle seeks all of the targets.   According to the principles of Chapter 6, we would next write a function that calculates a steering force towards each target, applying each force one at a time to the object’s acceleration.   Assuming the targets are an [klass]*ArrayList* of PVector objects, it would look something like:
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-The Network class can then manage an ArrayList of neurons, as well as have its own location (so that each Neuron is drawn relative to the Network’s center).  This is Particle Systems 101.  We have a single element (a Neuron) and a Network (a “system” of many Neurons).
-------------------------------CHANGED-------------------------------
-The Network class can then manage an [klass]*ArrayList* of neurons, as well as have its own location (so that each Neuron is drawn relative to the Network’s center).  This is Particle Systems 101.  We have a single element (a Neuron) and a Network (a “system” of many Neurons).
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-Presumably, we might think that the Network should store an ArrayList of Connection objects, just like it stores an ArrayList of Neurons.  While useful, in this case such an ArrayList is not necessary and is missing an important feature that we need.  Ultimately we plan to “feed forward" the neurons through the network, so the Neuron objects themselves must know to which Neurons they are connected in the “forward” direction.  In other words, each Neuron should have its own list of Connection objects.   When [var]*a* connects to [var]*b*, we want [var]*a* to store a reference of that connection so that it can pass its output to [var]*b* when the time comes.
-------------------------------CHANGED-------------------------------
-Presumably, we might think that the Network should store an [klass]*ArrayList* of Connection objects, just like it stores an [klass]*ArrayList* of Neurons.  While useful, in this case such an [klass]*ArrayList* is not necessary and is missing an important feature that we need.  Ultimately we plan to “feed forward" the neurons through the network, so the Neuron objects themselves must know to which Neurons they are connected in the “forward” direction.  In other words, each Neuron should have its own list of Connection objects.   When [var]*a* connects to [var]*b*, we want [var]*a* to store a reference of that connection so that it can pass its output to [var]*b* when the time comes.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-For this to work, we have to add an ArrayList of Connection objects to the Neuron class. Then we implement the [function]*addConnection()* function that stores the Connection in that ArrayList.
-------------------------------CHANGED-------------------------------
-For this to work, we have to add an [klass]*ArrayList* of Connection objects to the Neuron class. Then we implement the [function]*addConnection()* function that stores the Connection in that [klass]*ArrayList*.
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------
-The network, which manages all the neurons, can choose to which neurons it should apply that input.  In this case, we’ll do something simple and just feed a single input into the first neuron in the ArrayList, which happens to be the left-most one.
-------------------------------CHANGED-------------------------------
-The network, which manages all the neurons, can choose to which neurons it should apply that input.  In this case, we’ll do something simple and just feed a single input into the first neuron in the [klass]*ArrayList*, which happens to be the left-most one.
-------------------------------------------------------------------
-
 math.asc
 -------------------------------
 xx_1_furtherreading.asc
