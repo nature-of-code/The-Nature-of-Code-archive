@@ -1,74 +1,26 @@
-00_1_titlepage.asc
--------------------------------
-00_2_dedication.asc
--------------------------------
-00_3_creditscopyright.asc
--------------------------------
-00_4_acknowledgments.asc
--------------------------------
-00_5_preface.asc
--------------------------------
-00_6_intro.asc
--------------------------------
-01_vectors.asc
--------------------------------
-02_forces.asc
--------------------------------
-03_oscillation.asc
--------------------------------
-------------------------------ORIGINAL------------------------------499
-|frameCount	|frameCount / period	|TWO_PI * frameCount / period
-------------------------------CHANGED-------------------------------
-|frameCount	|frameCount / period	|[var]*TWO_PI* * frameCount / period
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------503
-|240	|2	|2 * TWO_PI (or 4* PI)
-------------------------------CHANGED-------------------------------
-|240	|2	|2 * [var]*TWO_PI* (or 4* PI)
-------------------------------------------------------------------
-
-------------------------------ORIGINAL------------------------------609
-[formula]*period = TWO_PI / angular velocity*
-------------------------------CHANGED-------------------------------
-[formula]*period = [var]*TWO_PI* / angular velocity*
-------------------------------------------------------------------
-
-04_particles.asc
--------------------------------
-------------------------------ORIGINAL------------------------------1003
-We know a particle has an x location somewhere between 0 and the width of the window.   What if we said: when the particle’s x location is 0, its rotation should be 0; when its x location is equal to the width, its rotation should be equal to TWO_PI?  Does this ring a bell?  Whenever we have a value with one range that we want to map to another range, we can use Processing’s [function]*map()* function!  (See <<intro_section6, Introduction>>.)
-------------------------------CHANGED-------------------------------
-We know a particle has an x location somewhere between 0 and the width of the window.   What if we said: when the particle’s x location is 0, its rotation should be 0; when its x location is equal to the width, its rotation should be equal to [var]*TWO_PI*?  Does this ring a bell?  Whenever we have a value with one range that we want to map to another range, we can use Processing’s [function]*map()* function!  (See <<intro_section6, Introduction>>.)
-------------------------------------------------------------------
-
-05_physicslib.asc
--------------------------------
-------------------------------ORIGINAL------------------------------1410
-Finally, the ability for a RevoluteJoint to spin can be constrained between two angles. (By default, it can rotate a full 360 degrees, or TWO_PI radians.)
-------------------------------CHANGED-------------------------------
-Finally, the ability for a RevoluteJoint to spin can be constrained between two angles. (By default, it can rotate a full 360 degrees, or [var]*TWO_PI* radians.)
-------------------------------------------------------------------
-
-06_steering.asc
--------------------------------
-------------------------------ORIGINAL------------------------------1975
-Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to TWO_PI and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.
-------------------------------CHANGED-------------------------------
-Sure, this is a totally ridiculous code snippet that you would never write.  But it illustrates a certain point.  If you are calculating the sine of pi ten thousand times, why not just calculate it once, save that value, and refer to it whenever necessary?  This is the principle behind sine and cosine lookup tables.   Instead of calling the sine and cosine functions in your code whenever you need them, you can build an array that stores the results of sine and cosine at angles between 0 to [var]*TWO_PI* and just look up the values when you need them. For example, here are two arrays that store the sine and cosine values for every angle, 0 to 359 degrees.
-------------------------------------------------------------------
-
-07_ca.asc
--------------------------------
-08_fractals.asc
--------------------------------
 09_ga.asc
 -------------------------------
-10_nn.asc
--------------------------------
-math.asc
--------------------------------
-xx_1_furtherreading.asc
--------------------------------
-xx_2_index.asc
--------------------------------
+------------------------------ORIGINAL------------------------------770
+There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by one hundred.  Objects can only be added to an [klass]*ArrayList* a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes floating point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.
+------------------------------CHANGED-------------------------------
+There are a couple of problems here.  First, we are adding elements to the mating pool N numbers of times, where N equals fitness multiplied by one hundred.  Objects can only be added to an [klass]*ArrayList* a whole number of times, and so A and B will both be added 80 times, giving them an equal probability of being selected.  Even with an improved solution that takes [var]*float*ing point probabilities into account, 80.1% is only a teeny tiny bit higher than 80%.  But getting 801 characters right is a whole lot better than 800 in the evolutionary scenario.  We really want to make that additional character count.   We want the fitness score for 801 characters to be  exponentially better than the score for 800.
+------------------------------------------------------------------
+
+------------------------------ORIGINAL------------------------------865
+All we need to do to evolve those parameters is to turn them into an array, so that the array can be used with all of the functions—[function]*crossover()*, [function]*mutate()*, etc.—found in the [klass]*DNA* class.  One common solution is to use an array of floating point numbers between 0 and 1.
+------------------------------CHANGED-------------------------------
+All we need to do to evolve those parameters is to turn them into an array, so that the array can be used with all of the functions—[function]*crossover()*, [function]*mutate()*, etc.—found in the [klass]*DNA* class.  One common solution is to use an array of [var]*float*ing point numbers between 0 and 1.
+------------------------------------------------------------------
+
+------------------------------ORIGINAL------------------------------944
+What’s great about this technique of dividing the genotype and phenotype into separate classes ([klass]*DNA* and [klass]*Rocket* for example) is that when it comes time to build all of the code, you’ll notice that the DNA class we developed earlier remains intact.   The only thing that changes is the array’s data type (float, [klass]*PVector*, etc.) and the expression of that data in the phenotype class.   
+------------------------------CHANGED-------------------------------
+What’s great about this technique of dividing the genotype and phenotype into separate classes ([klass]*DNA* and [klass]*Rocket* for example) is that when it comes time to build all of the code, you’ll notice that the DNA class we developed earlier remains intact.   The only thing that changes is the array’s data type ([var]*float*, [klass]*PVector*, etc.) and the expression of that data in the phenotype class.   
+------------------------------------------------------------------
+
+------------------------------ORIGINAL------------------------------1434
+The face’s DNA (genotype) is an array of floating point numbers between 0 and 1, with a single value for each property.
+------------------------------CHANGED-------------------------------
+The face’s DNA (genotype) is an array of [var]*float*ing point numbers between 0 and 1, with a single value for each property.
+------------------------------------------------------------------
+

@@ -13,8 +13,8 @@ class Parse {
 		//String find = "([^*/_\\[])ParticleSystem([^*])";
 		//String replace = "$1[klass]*ParticleSystem*$2";
 
-		String find = "([^*/_\\[])TWO_PI([^*])";
-		String replace = "$1[var]*TWO_PI*$2";
+		String find = "([^*/_\\[])float([^*])";
+		String replace = "$1[var]*float*$2";
 
 		String[] filenames;
 		if (args.length < 1) {
