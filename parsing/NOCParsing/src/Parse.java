@@ -19,7 +19,7 @@ class Parse {
 
 		String[] filenames;
 		if (args.length < 1) {
- 			filenames = listFileNames(path);
+			filenames = listFileNames(path);
 		} else {
 			filenames = args;
 		}
@@ -29,12 +29,12 @@ class Parse {
 		System.out.println("Find    " + find);
 		System.out.println("Replace " + replace);
 
- 		// Clearning the output file
-    	BufferedWriter clearDebug = new BufferedWriter(new FileWriter("debug.txt"));
-    	clearDebug.close();
-    	// Getting ready to append
-    	BufferedWriter debug = new BufferedWriter(new FileWriter("debug.txt", true));
-		
+		// Clearning the output file
+		BufferedWriter clearDebug = new BufferedWriter(new FileWriter("debug.txt"));
+		clearDebug.close();
+		// Getting ready to append
+		BufferedWriter debug = new BufferedWriter(new FileWriter("debug.txt", true));
+
 		for (int i = 0; i < filenames.length; i++) {
 			String filename = filenames[i];
 			String fullpath = path + filename;
@@ -43,21 +43,21 @@ class Parse {
 
 			// Reading the file
 			BufferedReader br = new BufferedReader(new FileReader(fullpath));
-	 		String line;
+			String line;
 
- 			// Clearning the output file
-    		BufferedWriter clear = new BufferedWriter(new FileWriter(output+filename));
-    		clear.close();
-    		// Getting ready to append
-    		BufferedWriter out = new BufferedWriter(new FileWriter(output+filename, true));
-		
-	    	boolean source = false;
-    		boolean ignore = false;
+			// Clearning the output file
+			BufferedWriter clear = new BufferedWriter(new FileWriter(output+filename));
+			clear.close();
+			// Getting ready to append
+			BufferedWriter out = new BufferedWriter(new FileWriter(output+filename, true));
 
-    		int counter = 0;
+			boolean source = false;
+			boolean ignore = false;
 
-    		int totallines = 0;
-    		int lineNumber = 0;
+			int counter = 0;
+
+			int totallines = 0;
+			int lineNumber = 0;
 
 			while ((line = br.readLine()) != null) {
 				lineNumber++;
@@ -70,8 +70,8 @@ class Parse {
 					counter++;
 					//System.out.println("Counting: " + counter);
 					if (counter == 2) {
-					  source = false;
-					  //System.out.println("SOURCE OFF: " + line);
+						source = false;
+						//System.out.println("SOURCE OFF: " + line);
 					}
 				} 
 				//System.out.println(line);
@@ -107,9 +107,9 @@ class Parse {
 			if (totallines != 0) System.out.println(filename + " " + totallines);
 			if (totallines == 0) {
 				File del = new File(output + filename);
-  				boolean success = del.delete();
-  				//if (success) System.out.println("Deleted: " + filename);
-  				//else System.out.println("problem deleting: " + filename);
+				boolean success = del.delete();
+				//if (success) System.out.println("Deleted: " + filename);
+				//else System.out.println("problem deleting: " + filename);
 			}
 		}
 		debug.close();
@@ -119,13 +119,13 @@ class Parse {
 
 	// This function returns all the files in a directory as an array of Strings  
 	public static String[] listFileNames(String dir) {
-  		File file = new File(dir);
-  		if (file.isDirectory()) {
-    		String names[] = file.list();
-    		return names;
-  	} else {
-    	// If it's not a directory
-    	return null;
-  	}
-}
+		File file = new File(dir);
+		if (file.isDirectory()) {
+			String names[] = file.list();
+			return names;
+		} else {
+			// If it's not a directory
+			return null;
+		}
+	}
 }
