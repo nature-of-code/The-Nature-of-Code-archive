@@ -22,7 +22,7 @@ class ParseMath {
 				System.out.println("Writing: " + name + ".mathml");
 				//System.out.println(name);
 				//System.out.println(mathml);
-				String file = output+name+".mathml";
+				String file = output + "mathml/" + name+".mathml";
 				BufferedWriter out = new BufferedWriter(new FileWriter(file));
 				out.write(mathml);
 				out.close();
@@ -31,7 +31,7 @@ class ParseMath {
 				Runtime runtime = Runtime.getRuntime();
 				String svgmath = "/Users/shiffman/Dropbox/writing/NOC_BOOK/SVGMath/SVGMath-0.3.3/math2svg.py";
 				String cmd = "python " + svgmath + " ";
-				cmd += "-o " + output + name + ".svg ";
+				cmd += "-o " + output + "svgs/" + name + ".svg ";
 				cmd += file;
 				
 				Process appProcess = runtime.exec(cmd);			
