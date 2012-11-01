@@ -7,7 +7,6 @@ class ParseMath {
 
 	public static void main(String[] args) throws IOException {
 
-
 		String path = "/Users/shiffman/Documents/The-Nature-of-Code/raw/chapters/math.asc";
 		String output = "/Users/shiffman/Documents/The-Nature-of-Code/parsing/output/";
 
