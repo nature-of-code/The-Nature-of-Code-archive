@@ -26,9 +26,7 @@ class ParseMathPNG {
 				String name = m.group(1);
 				String mathml = m.group(2);
 				
-				System.out.println("Writing: " + name + ".mathml");
-				//System.out.println(name);
-				//System.out.println(mathml);
+				//System.out.println("Writing: " + name + ".mathml");
 				String file = output + "mathml/" + name+".mathml";
 				BufferedWriter out = new BufferedWriter(new FileWriter(file));
 				out.write(mathml);
@@ -36,7 +34,7 @@ class ParseMathPNG {
 				
 				System.out.println("Writing: " + name + ".png");
 				Runtime runtime = Runtime.getRuntime();
-				String cmd = "curl -u mathml:tarsi3r -X POST -F \"mml_upload=@" + file + "\" -o " + name + ".png + " + stix;
+				String cmd = "curl -u mathml:tarsi3r -X POST -F mml_upload=@" + output + "mathml/" + name+".mathml -o " + output + "pngs/" + name + ".png " + stix;
 				
 				Process appProcess = runtime.exec(cmd);			
 				InputStream es = appProcess.getErrorStream();
@@ -44,6 +42,7 @@ class ParseMathPNG {
 				BufferedReader bres = new BufferedReader(new InputStreamReader(es));
 				BufferedReader bris = new BufferedReader(new InputStreamReader(is));
 				String bresout;
+
 				while ((bresout = bres.readLine()) != null) {
 					System.out.println(bresout);
 				}
@@ -53,11 +52,7 @@ class ParseMathPNG {
 					System.out.println(brisout);
 				}
 
-				
-				
 			}
-			//out.write(line + "\n");
-			//System.out.println(line);
 		}
 		
 	}
