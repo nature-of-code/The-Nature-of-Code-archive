@@ -87,6 +87,18 @@ strong em {
 }
 
 
+/* Page Numbering
+_____________________________________________________________________________ */
+
+div#front-matter {
+  page: frontmatter;
+}
+
+/* Reset page numbers at Chapter 1 */
+div#book-contents {
+  counter-reset: page 1;
+  page: main;
+}
 
 /* Define Left Headers and Footers
 _____________________________________________________________________________ */
@@ -105,7 +117,7 @@ _____________________________________________________________________________ */
     content: counter(page);
     padding-top: 2em;
     vertical-align: top;
-		color: #000000;//#404040;
+	color: #000000;//#404040;
   }
 }
 
