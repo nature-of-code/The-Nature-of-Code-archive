@@ -1,0 +1,27 @@
+
+FRONT: 
+
+THE NATURE OF CODE 
+
+THE PROGRAMMING BEHIND COMPUTER
+SIMULATIONS OF NATURAL SYSTEMS
+
+DANIEL SHIFFMAN
+
+
+SIDE:
+THE NATURE OF CODE 
+DANIEL SHIFFMAN
+
+
+BACK
+
+THE NATURE OF CODE
+
+Can we capture the unpredictable evolutionary and emergent properties of nature in software?
+
+Can understanding the mathematical principles behind our physical world world help us to create digital worlds?
+
+This book focuses on the programming strategies and techniques behind computer simulations of natural systems. We explore topics ranging from basic mathematics and physics concepts to more advanced simulations of complex systems.
+
+Subjects covered include forces, trigonometry, fractals, cellular automata, self-organization, and genetic algorithms.
