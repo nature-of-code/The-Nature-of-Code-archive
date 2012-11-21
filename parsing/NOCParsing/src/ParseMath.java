@@ -20,7 +20,7 @@ class ParseMath {
 				String mathml = m.group(2);
 
 				//System.out.println(name);
-				if (name.equals("tangentvelocityfrac")) {
+				if (name.equals("one")) {
 
 					System.out.println("Writing: " + name + ".mathml");
 					//System.out.println(name);
