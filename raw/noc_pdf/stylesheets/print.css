@@ -22,7 +22,7 @@ _____________________________________________________________________________ */
 }
 
 body {
-  font-size: 13px;
+	font-size: 9pt;
 	font-family: "ProximaNova-Regular";
 	margin: 0;
 	padding: 0;
@@ -233,6 +233,10 @@ h3 {
 	color: #000000;//#404040;
 	font-size: 17pt;
 	margin-top: 2em;
+}
+
+h3 + p {
+	page-break-after: avoid;
 }
 
 h4,h5 {
@@ -496,6 +500,7 @@ div.example * {
 /* Style functions */
 .function, .klass, .var, .mono, .formula{
     font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+    /*a little bit smaller than body?*/
     font-size: 8pt;//1em;
 	color: #00000;
 }
@@ -543,11 +548,18 @@ img {
 	width: 25%;
 }
 
-img.math {
+img.mathinline {
 	width: auto;
-	height: 8pt;
-	//vertical-align: text-bottom;
+	height: 13px;
+	vertical-align: text-bottom;
 }
+
+img.mathblock {
+	width: auto;
+	height: auto;
+	vertical-align: text-bottom;
+}
+
 
 .screenshot img {
 	width: 100%;
