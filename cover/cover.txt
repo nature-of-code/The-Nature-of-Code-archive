@@ -24,3 +24,5 @@ How can understanding the mathematical principles behind our physical world help
 This book focuses on a range of programming strategies and techniques behind computer simulations of natural systems, from basic concepts in mathematics and physics to Processing libraries that enable sophisticated visual results.
 
 Subjects covered include forces, trigonometry, fractals, cellular automata, self-organization, and genetic algorithms.
+
+http://natureofcode.com
