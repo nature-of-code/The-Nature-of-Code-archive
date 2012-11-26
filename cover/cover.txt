@@ -1,4 +1,3 @@
-
 FRONT: 
 
 THE NATURE OF CODE 
@@ -18,10 +17,10 @@ BACK
 
 THE NATURE OF CODE
 
-Can we capture the unpredictable evolutionary and emergent properties of nature in software?
+How can we capture the unpredictable evolutionary and emergent properties of nature in software?
 
-Can understanding the mathematical principles behind our physical world world help us to create digital worlds?
+How can understanding the mathematical principles behind our physical world help us to create digital worlds?
 
-This book focuses on the programming strategies and techniques behind computer simulations of natural systems. We explore topics ranging from basic mathematics and physics concepts to more advanced simulations of complex systems.
+This book focuses on a range of programming strategies and techniques behind computer simulations of natural systems, from basic concepts in mathematics and physics to Processing libraries that enable sophisticated visual results.
 
 Subjects covered include forces, trigonometry, fractals, cellular automata, self-organization, and genetic algorithms.
