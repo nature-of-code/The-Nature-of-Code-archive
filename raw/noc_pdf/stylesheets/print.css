@@ -94,13 +94,9 @@ div#frontmatter {
   page: frontmatter;
 }
 
-/* Reset page numbers at Chapter 1 */
-/*div#book-contents {
+div#contents {
   counter-reset: page 1;
-  page: 
-
-  main;
-}*/
+}
 
 /* Define Left Headers and Footers
 _____________________________________________________________________________ */
