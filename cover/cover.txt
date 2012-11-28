@@ -21,7 +21,6 @@ How can we capture the unpredictable evolutionary and emergent properties of nat
 
 How can understanding the mathematical principles behind our physical world help us to create digital worlds?
 
-This book focuses on a range of programming strategies and techniques behind computer simulations of natural systems, from basic concepts in mathematics and physics to advanced coding tools that enable sophisticated visual results. Using the open-source language Processing, readers will progress from creating inanimate objects to complex systems and intelligent moving objects, setting the foundation for further experiments in generative design.
-
+This book focuses on a range of programming strategies and techniques behind computer simulations of natural systems, from basic concepts in mathematics and physics to advanced generative algorithms that enable sophisticated visual results. Using the open-source language Processing, readers will progress from creating inanimate objects to complex systems and intelligent moving objects, setting the foundation for further experiments in simulation.
 
 http://natureofcode.com
