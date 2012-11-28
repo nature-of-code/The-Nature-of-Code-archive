@@ -8,15 +8,15 @@ _____________________________________________________________________________ */
 }
 
 @page :left {
-	margin-right: 0.875in;
-	margin-left: 0.625in;
+	margin-right: 1in;
+	margin-left: 0.75in;
 	//margin-right:0.75in;
 	//margin-left:0.75in;
 }
 
 @page :right {
-	margin-right: 0.625in;
-	margin-left: 0.875in;
+	margin-right: 0.75in;
+	margin-left: 1in;
 	//margin-right:0.75in;
 	//margin-left:0.75in;
 }
@@ -24,7 +24,6 @@ _____________________________________________________________________________ */
 body {
 	font-size: 9pt;
 	font-family: "ProximaNova-Regular";
-	margin: 0;
 	padding: 0;
 }
 
@@ -281,6 +280,8 @@ p {
 	color: #000000;//#404040;
 	line-height: 12pt;
 	letter-spacing:0.03em;
+	//margin-left: 0.25in;
+	//margin-right: 0.25in;
 }
 
 /* Tables
