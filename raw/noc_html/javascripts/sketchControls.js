@@ -3,20 +3,9 @@ $(function(){
   $('.reset').click(function() {
     var controls = $(this).closest('.sketch-controls');
     var pjsID = $(controls).prev().attr('id');
-    var sketch = document.getElementById(pjsID);
-
-    // Adapted from Processingjs lazyloading extension.
-    // https://github.com/processing-js/processing-js/blob/master/extensions/processing-lazyload.js
-    var processingSources = sketch.getAttribute('data-processing-sources');
-    var filenames = processingSources.split(' ');
-    for (var j = 0; j < filenames.length;) {
-      if (filenames[j]) { j++; }
-      else { filenames.splice(j, 1); }}
-    Processing.loadSketchFromSources(sketch, filenames);
-
+    removeSketch(pjsID, loadSketch)
     $(controls).find('.pause').data()['paused'] = 'false';
   });
-
   $('.pause').click(function() {
     var controls = $(this).closest('.sketch-controls');
     var pjsID = $(controls).prev().attr('id');
@@ -29,4 +18,30 @@ $(function(){
       $(this).data()['paused'] = 'true';
     }
   });
+
 });
+
+var removeSketch = function (pjsID, callback) {
+  var canvas = $("#"+pjsID);
+  Processing.removeInstance(pjsID);
+  callback({canvas:canvas[0]})
+}
+
+/**
+ * Load the sketch associated with a canvas, from source indicated by that canvas.
+ * @param {sketch} sketch An administrative sketch object
+ */
+var loadSketch = LazyLoading.loadSketch = function(sketch) {
+  if (sketch.canvas) {
+    // form an array of which files must be loaded for this sketch
+    var processingSources = sketch.canvas.getAttribute('data-processing-sources');
+    if(processingSources===null) { processingSources = sketch.canvas.getAttribute('data-src'); }
+    if(processingSources===null) { processingSources = sketch.canvas.getAttribute('datasrc'); }
+    var filenames = processingSources.split(' ');
+    for (var j = 0; j < filenames.length;) {
+      if (filenames[j]) { j++; }
+      else { filenames.splice(j, 1); }}
+    // make Processing.js load this sketch into its canvas
+    Processing.loadSketchFromSources(sketch.canvas, filenames);
+  }
+};

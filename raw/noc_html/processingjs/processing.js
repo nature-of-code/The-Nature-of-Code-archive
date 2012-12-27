@@ -9983,6 +9983,7 @@
     }
   };
   Processing.loadSketchFromSources = loadSketchFromSources;
+  Processing.removeInstance = removeInstance;
   Processing.disableInit = function() {
     if (isDOMPresent) document.removeEventListener("DOMContentLoaded", init, false)
   };
