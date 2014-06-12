@@ -1,4 +1,12 @@
-# The Nature of Code book project
+# The Nature of Code
+
+This repo is an archive of the raw materials for the first edition (1.0) of The Nature of Code book. I am now working on a 2.0 version.  The new repo is here:
+
+https://github.com/shiffman/The-Nature-of-Code
+
+Issues will remain open here for now, but will be closed as I make the corrections.  New issues should be filed in the new repo.
+
+# The Nature of Code book readme from days of yore
 
 Hello.  If you found your way here you have found the raw source material for my Nature of Code book.  The book is for sale in PDF and print forms at [natureofcode.com](http://www.natureofcode.com). There, you'll also find a free version of the book available as HTML.  
 
