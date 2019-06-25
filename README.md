@@ -1,10 +1,12 @@
 # The Nature of Code
 
-This repo is an archive of the raw materials for the first edition (1.0) of The Nature of Code book. I am now working on a 2.0 version.  The new repo is here:
+This repo is an archive of the raw materials for the first edition (1.0) of The Nature of Code book. I am now working on a 2.0 version.  Progress was made at the following repo:
 
-https://github.com/shiffman/The-Nature-of-Code
+https://github.com/nature-of-code/noc-book/
 
-Issues will remain open here for now, but will be closed as I make the corrections.  New issues should be filed in the new repo.
+But I never finished and am now working on the book here:
+
+https://github.com/nature-of-code/noc-book-2/
 
 # The Nature of Code book readme from days of yore
 
